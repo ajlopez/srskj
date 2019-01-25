@@ -23,7 +23,6 @@ import co.rsk.config.VmConfig;
 import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
 import co.rsk.peg.Bridge;
-import co.rsk.remasc.RemascContract;
 import co.rsk.vm.BitSet;
 import com.google.common.annotations.VisibleForTesting;
 import org.bouncycastle.util.encoders.Hex;
@@ -1423,7 +1422,7 @@ public class Program {
         }
 
         // Special initialization for Bridge and Remasc contracts
-        if (contract instanceof Bridge || contract instanceof RemascContract) {
+        if (contract instanceof Bridge) {
             // CREATE CALL INTERNAL TRANSACTION
             InternalTransaction internalTx = addInternalTx(null, getGasLimit(), senderAddress, contextAddress, endowment, EMPTY_BYTE_ARRAY, "call");
 

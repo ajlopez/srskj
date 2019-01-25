@@ -19,12 +19,10 @@ package org.ethereum.vm;
  */
 
 
-import co.rsk.config.RemascConfigFactory;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.RskAddress;
 import co.rsk.peg.Bridge;
 import co.rsk.peg.SamplePrecompiledContract;
-import co.rsk.remasc.RemascContract;
 import org.ethereum.config.BlockchainConfig;
 import org.ethereum.core.Block;
 import org.ethereum.core.Repository;
@@ -112,9 +110,6 @@ public class PrecompiledContracts {
         }
         if (address.equals(BIG_INT_MODEXP_ADDR_DW)) {
             return bigIntegerModexp;
-        }
-        if (address.equals(REMASC_ADDR_DW)) {
-            return new RemascContract(config, new RemascConfigFactory(RemascContract.REMASC_CONFIG).createRemascConfig(config.netName()), REMASC_ADDR);
         }
 
         return null;

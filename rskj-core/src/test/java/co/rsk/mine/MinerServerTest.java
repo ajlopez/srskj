@@ -27,7 +27,6 @@ import co.rsk.core.Coin;
 import co.rsk.core.DifficultyCalculator;
 import co.rsk.core.bc.BlockChainImpl;
 import co.rsk.crypto.Keccak256;
-import co.rsk.remasc.RemascTransaction;
 import co.rsk.validators.BlockUnclesValidationRule;
 import co.rsk.validators.BlockValidationRule;
 import co.rsk.validators.ProofOfWorkRule;
@@ -94,9 +93,7 @@ public class MinerServerTest extends ParameterizedNetworkUpgradeTest {
         Mockito.when(tx1.getEncoded()).thenReturn(new byte[32]);
 
         Mockito.when(repository.getNonce(tx1.getSender())).thenReturn(BigInteger.ZERO);
-        Mockito.when(repository.getNonce(RemascTransaction.REMASC_ADDRESS)).thenReturn(BigInteger.ZERO);
         Mockito.when(repository.getBalance(tx1.getSender())).thenReturn(Coin.valueOf(4200000L));
-        Mockito.when(repository.getBalance(RemascTransaction.REMASC_ADDRESS)).thenReturn(Coin.valueOf(4200000L));
 
         List<Transaction> txs = new ArrayList<>(Collections.singletonList(tx1));
 
@@ -133,10 +130,7 @@ public class MinerServerTest extends ParameterizedNetworkUpgradeTest {
 
         List<Transaction> blockTransactions = blockAtHeightOne.getTransactionsList();
         assertNotNull(blockTransactions);
-        assertEquals(2, blockTransactions.size());
-
-        Transaction remascTransaction = blockTransactions.get(1);
-        assertThat(remascTransaction, instanceOf(RemascTransaction.class));
+        assertEquals(1, blockTransactions.size());
     }
 
     @Test

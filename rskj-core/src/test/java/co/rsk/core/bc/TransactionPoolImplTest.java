@@ -21,7 +21,6 @@ package co.rsk.core.bc;
 import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.remasc.RemascTransaction;
 import co.rsk.test.builders.BlockBuilder;
 import org.ethereum.core.*;
 import org.ethereum.listener.TestCompositeEthereumListener;
@@ -593,16 +592,6 @@ public class TransactionPoolImplTest {
 
         Assert.assertTrue(transactionPool.getPendingTransactions().isEmpty());
         Assert.assertTrue(transactionPool.getQueuedTransactions().isEmpty());
-    }
-
-    @Test
-    public void checkRemascTxIsRejected() {
-        RemascTransaction tx = new RemascTransaction(10);
-
-        TransactionPoolAddResult result = transactionPool.addTransaction(tx);
-
-        Assert.assertFalse(result.transactionWasAdded());
-        result.ifTransactionWasNotAdded(msg -> Assert.assertEquals("transaction is a remasc transaction", msg));
     }
 
     @Test

@@ -25,7 +25,6 @@ import co.rsk.core.DifficultyCalculator;
 import co.rsk.core.RskAddress;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.core.bc.FamilyUtils;
-import co.rsk.remasc.RemascTransaction;
 import co.rsk.validators.BlockValidationRule;
 import org.apache.commons.collections4.CollectionUtils;
 import org.ethereum.core.*;
@@ -153,9 +152,6 @@ public class BlockToMineBuilder {
         logger.debug("getting transactions from pending state");
         List<Transaction> txs = minerUtils.getAllTransactions(transactionPool);
         logger.debug("{} transaction(s) collected from pending state", txs.size());
-
-        Transaction remascTx = new RemascTransaction(parent.getNumber() + 1);
-        txs.add(remascTx);
 
         Map<RskAddress, BigInteger> accountNonces = new HashMap<>();
 

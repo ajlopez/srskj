@@ -26,7 +26,6 @@ import co.rsk.core.bc.BlockExecutor;
 import co.rsk.crypto.Keccak256;
 import co.rsk.db.RepositoryImpl;
 import co.rsk.db.TrieStorePoolOnMemory;
-import co.rsk.remasc.RemascTransaction;
 import co.rsk.test.World;
 import co.rsk.test.builders.AccountBuilder;
 import org.ethereum.core.*;
@@ -192,10 +191,8 @@ public class TrieCopierTest {
     private static void addBlocks(World world, Blockchain blockchain, int nblocks) {
         for (int k = 0; k < nblocks; k++) {
             Transaction tx = TransactionFactoryHelper.createSampleTransaction(1, 2, 100, k);
-            Transaction rtx = new RemascTransaction(blockchain.getBestBlock().getNumber() + 1);
             List<Transaction> txs = new ArrayList<>();
             txs.add(tx);
-            txs.add(rtx);
 
             Block block = new BlockGenerator().createChildBlock(blockchain.getBestBlock(), txs);
             BlockExecutor blockExecutor = world.getBlockExecutor();

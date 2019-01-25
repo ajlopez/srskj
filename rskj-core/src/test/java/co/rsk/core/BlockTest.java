@@ -26,7 +26,6 @@ import co.rsk.peg.PegTestUtils;
 import org.ethereum.TestUtils;
 import org.ethereum.core.*;
 import org.bouncycastle.util.encoders.Hex;
-import co.rsk.remasc.RemascTransaction;
 import org.ethereum.crypto.ECKey;
 import org.ethereum.crypto.HashUtil;
 import org.ethereum.util.RLP;
@@ -43,7 +42,7 @@ public class BlockTest {
     private static final byte[] EMPTY_LIST_HASH = HashUtil.keccak256(RLP.encodeList());
 
     @Test
-    public void testParseRemascTransaction() {
+    public void testParseTransaction() {
         List<Transaction> txs = new ArrayList<>();
 
         Transaction txNotToRemasc = new Transaction(
@@ -65,9 +64,6 @@ public class BlockTest {
                 null);
         txToRemascThatIsNotTheLatestTx.sign(new ECKey().getPrivKeyBytes());
         txs.add(txToRemascThatIsNotTheLatestTx);
-
-        Transaction remascTx = new RemascTransaction(1);
-        txs.add(remascTx);
 
         Block block =  new Block(
                 PegTestUtils.createHash3().getBytes(),          // parent hash
@@ -94,7 +90,6 @@ public class BlockTest {
         Block parsedBlock = new Block(block.getEncoded());
         Assert.assertEquals(ImmutableTransaction.class, parsedBlock.getTransactionsList().get(0).getClass());
         Assert.assertEquals(ImmutableTransaction.class, parsedBlock.getTransactionsList().get(1).getClass());
-        Assert.assertEquals(RemascTransaction.class, parsedBlock.getTransactionsList().get(2).getClass());
     }
 
     @Test

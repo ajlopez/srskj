@@ -20,7 +20,6 @@
 package org.ethereum.listener;
 
 import co.rsk.core.Coin;
-import co.rsk.remasc.RemascTransaction;
 import org.ethereum.core.Block;
 import org.ethereum.core.Transaction;
 import org.ethereum.core.TransactionReceipt;
@@ -62,10 +61,6 @@ public class GasPriceTracker extends EthereumListenerAdapter {
     }
 
     public void onTransaction(Transaction tx) {
-        if (tx instanceof RemascTransaction) {
-            return;
-        }
-
         if (idx == -1) {
             idx = window.length - 1;
             filled = true;

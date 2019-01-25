@@ -24,7 +24,6 @@ import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
 import co.rsk.crypto.Keccak256;
 import co.rsk.panic.PanicProcessor;
-import co.rsk.remasc.RemascTransaction;
 import co.rsk.trie.Trie;
 import co.rsk.trie.TrieImpl;
 import org.ethereum.crypto.Keccak256Helper;
@@ -485,38 +484,10 @@ public class Block {
             RLPElement transactionRaw = txTransactions.get(i);
             Transaction tx = new ImmutableTransaction(transactionRaw.getRLPData());
 
-            if (isRemascTransaction(tx, i, txTransactions.size())) {
-                // It is the remasc transaction
-                tx = new RemascTransaction(transactionRaw.getRLPData());
-            }
             parsedTxs.add(tx);
         }
 
         return Collections.unmodifiableList(parsedTxs);
-    }
-
-    public static boolean isRemascTransaction(Transaction tx, int txPosition, int txsSize) {
-
-        return isLastTx(txPosition, txsSize) && checkRemascAddress(tx) && checkRemascTxZeroValues(tx);
-    }
-
-    private static boolean isLastTx(int txPosition, int txsSize) {
-        return txPosition == (txsSize - 1);
-    }
-
-    private static boolean checkRemascAddress(Transaction tx) {
-        return PrecompiledContracts.REMASC_ADDR.equals(tx.getReceiveAddress());
-    }
-
-    private static boolean checkRemascTxZeroValues(Transaction tx) {
-        if(null != tx.getData() || null != tx.getSignature()){
-            return false;
-        }
-
-        return Coin.ZERO.equals(tx.getValue()) &&
-                BigInteger.ZERO.equals(new BigInteger(1, tx.getGasLimit())) &&
-                Coin.ZERO.equals(tx.getGasPrice());
-
     }
 
     private void checkExpectedRoot(byte[] expectedRoot, byte[] calculatedRoot) {

@@ -21,7 +21,6 @@ package org.ethereum.db;
 
 import co.rsk.core.BlockDifficulty;
 import co.rsk.crypto.Keccak256;
-import co.rsk.remasc.Sibling;
 import org.ethereum.core.Block;
 import org.ethereum.crypto.HashUtil;
 
@@ -109,9 +108,4 @@ public class BlockStoreDummy implements BlockStore {
 
     @Override
     public List<BlockInformation> getBlocksInformationByNumber(long blockNumber) { return null; }
-
-    @Override
-    public Map<Long, List<Sibling>> getSiblingsFromBlockByHash(Keccak256 hash) {
-        return null;
-    }
 }

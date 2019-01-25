@@ -43,8 +43,6 @@ public class BlockValidatorBuilder {
 
     private BlockRootValidationRule blockRootValidationRule;
 
-    private RemascValidationRule remascValidationRule;
-
     private BlockParentNumberRule parentNumberRule;
 
     private BlockDifficultyRule difficultyRule;
@@ -107,11 +105,6 @@ public class BlockValidatorBuilder {
         return this;
     }
 
-    public BlockValidatorBuilder addRemascValidationRule() {
-        this.remascValidationRule = new RemascValidationRule();
-        return this;
-    }
-
     public BlockValidatorBuilder addParentNumberRule() {
         this.parentNumberRule = new BlockParentNumberRule();
         return this;
@@ -150,7 +143,7 @@ public class BlockValidatorBuilder {
 
     public BlockValidatorImpl build() {
         if (this.blockCompositeRule == null) {
-            this.blockCompositeRule = new BlockCompositeRule(this.txsMinGasPriceRule, this.blockUnclesValidationRule, this.blockRootValidationRule, this.remascValidationRule, this.blockTimeStampValidationRule);
+            this.blockCompositeRule = new BlockCompositeRule(this.txsMinGasPriceRule, this.blockUnclesValidationRule, this.blockRootValidationRule, this.blockTimeStampValidationRule);
         }
 
         if (this.blockParentCompositeRule == null) {

@@ -25,7 +25,6 @@ import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
 import co.rsk.core.bc.PendingState;
 import co.rsk.crypto.Keccak256;
-import co.rsk.remasc.RemascTransaction;
 import org.ethereum.config.BlockchainNetConfig;
 import org.ethereum.core.TransactionPool;
 import org.ethereum.core.Repository;
@@ -173,7 +172,7 @@ public class MinerUtils {
                     expectedNonce = originalRepo.getNonce(txSender);
                 }
 
-                if (!(tx instanceof RemascTransaction) && tx.getGasPrice().compareTo(minGasPrice) < 0) {
+                if (tx.getGasPrice().compareTo(minGasPrice) < 0) {
                     logger.warn("Rejected tx={} because of low gas account {}, removing tx from pending state.", hash, txSender);
 
                     txsToRemove.add(tx);

@@ -20,7 +20,6 @@
 package org.ethereum.db;
 
 import co.rsk.core.BlockDifficulty;
-import co.rsk.db.RemascCache;
 import org.ethereum.core.Block;
 
 import javax.annotation.Nonnull;
@@ -30,7 +29,7 @@ import java.util.List;
  * @author Roman Mandeleil
  * @since 08.01.2015
  */
-public interface BlockStore extends RemascCache {
+public interface BlockStore {
 
     /**
      * Gets the block hash by its index.

@@ -23,7 +23,6 @@ import co.rsk.config.TestSystemProperties;
 import co.rsk.core.BlockDifficulty;
 import co.rsk.crypto.Keccak256;
 import co.rsk.peg.simples.SimpleBlock;
-import co.rsk.remasc.RemascTransaction;
 import co.rsk.test.builders.BlockBuilder;
 import co.rsk.test.builders.BlockChainBuilder;
 import co.rsk.validators.BlockParentDependantValidationRule;
@@ -765,7 +764,6 @@ public class BlockValidatorTest {
         Block block = new BlockBuilder().parent(genesis).transactions(txs).build();
 
         BlockValidatorImpl validator = new BlockValidatorBuilder()
-                .addRemascValidationRule()
                 .build();
 
         Assert.assertFalse(validator.isValid(block));
@@ -785,13 +783,11 @@ public class BlockValidatorTest {
         List<Transaction> txs = new ArrayList<>();
         Transaction tx = new Transaction(config, "0000000000000000000000000000000000000006", BigInteger.ZERO, BigInteger.ZERO, BigInteger.valueOf(12L), BigInteger.TEN);
         tx.sign(new byte[]{});
-        txs.add(new RemascTransaction(BigInteger.ONE.longValue()));
         txs.add(tx);
 
         Block block = new BlockBuilder().parent(genesis).transactions(txs).build();
 
         BlockValidatorImpl validator = new BlockValidatorBuilder()
-                .addRemascValidationRule()
                 .build();
 
         Assert.assertFalse(validator.isValid(block));
@@ -806,10 +802,8 @@ public class BlockValidatorTest {
         Transaction tx = new Transaction(config, "0000000000000000000000000000000000000006", BigInteger.ZERO, BigInteger.ZERO, BigInteger.valueOf(12L), BigInteger.TEN);
         tx.sign(new byte[]{});
         txs.add(tx);
-        txs.add(new RemascTransaction(BigInteger.ONE.longValue()));
         Block block = new BlockBuilder().parent(genesis).transactions(txs).build();
         BlockValidatorImpl validator = new BlockValidatorBuilder()
-                .addRemascValidationRule()
                 .build();
 
         Assert.assertTrue(validator.isValid(block));

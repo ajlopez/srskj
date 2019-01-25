@@ -20,7 +20,6 @@ package co.rsk.net.messages;
 
 import co.rsk.core.BlockDifficulty;
 import co.rsk.net.Status;
-import co.rsk.remasc.RemascTransaction;
 import org.ethereum.core.*;
 import org.ethereum.util.RLP;
 import org.ethereum.util.RLPElement;
@@ -211,10 +210,6 @@ public enum MessageType {
             for (int k = 0; k < rlpTransactions.size(); k++) {
                 byte[] txdata = rlpTransactions.get(k).getRLPData();
                 Transaction tx = new ImmutableTransaction(txdata);
-
-                if (Block.isRemascTransaction(tx, k, rlpTransactions.size())) {
-                    tx = new RemascTransaction(txdata);
-                }
 
                 transactions.add(tx);
             }
