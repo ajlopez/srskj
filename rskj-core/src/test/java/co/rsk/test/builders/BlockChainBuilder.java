@@ -26,7 +26,6 @@ import co.rsk.core.RskAddress;
 import co.rsk.core.bc.*;
 import co.rsk.db.RepositoryImpl;
 import co.rsk.db.TrieStorePoolOnMemory;
-import co.rsk.peg.RepositoryBlockStore;
 import co.rsk.trie.TrieImpl;
 import co.rsk.trie.TrieStoreImpl;
 import co.rsk.validators.BlockValidator;
@@ -178,7 +177,6 @@ public class BlockChainBuilder {
             }
 
             Repository track = this.repository.startTracking();
-            new RepositoryBlockStore(config, track, PrecompiledContracts.BRIDGE_ADDR);
             track.commit();
 
             this.genesis.setStateRoot(this.repository.getRoot());

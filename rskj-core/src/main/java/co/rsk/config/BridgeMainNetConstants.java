@@ -3,8 +3,6 @@ package co.rsk.config;
 import co.rsk.bitcoinj.core.BtcECKey;
 import co.rsk.bitcoinj.core.Coin;
 import co.rsk.bitcoinj.core.NetworkParameters;
-import co.rsk.peg.AddressBasedAuthorizer;
-import co.rsk.peg.Federation;
 import com.google.common.collect.Lists;
 import org.ethereum.crypto.ECKey;
 import org.bouncycastle.util.encoders.Hex;
@@ -44,17 +42,6 @@ public class BridgeMainNetConstants extends BridgeConstants {
                 federator12PublicKey, federator13PublicKey, federator14PublicKey
         );
 
-        // Currently set to:
-        // Wednesday, January 3, 2018 12:00:00 AM GMT-03:00
-        Instant genesisFederationAddressCreatedAt = Instant.ofEpochMilli(1514948400l);
-        
-        genesisFederation = new Federation(
-                genesisFederationPublicKeys,
-                genesisFederationAddressCreatedAt,
-                1L,
-                getBtcParams()
-        );
-
         btc2RskMinimumAcceptableConfirmations = 100;
         btc2RskMinimumAcceptableConfirmationsOnRsk = 1000;
         rsk2BtcMinimumAcceptableConfirmations = 4000;
@@ -73,20 +60,10 @@ public class BridgeMainNetConstants extends BridgeConstants {
                 "0441945e4e272936106f6200b36162f3510e8083535c15e175ac82deaf828da955b85fd72b7534f2a34cedfb45fa63b728cc696a2bd3c5d39ec799ec2618e9aa9f"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
 
-        federationChangeAuthorizer = new AddressBasedAuthorizer(
-                federationChangeAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.MAJORITY
-        );
-
         // Key generated with GenNodeKey using generator 'auth-lock-whitelist'
         List<ECKey> lockWhitelistAuthorizedKeys = Arrays.stream(new String[]{
                 "041a2449e9d63409c5a8ea3a21c4109b1a6634ee88fd57176d45ea46a59713d5e0b688313cf252128a3e49a0b2effb4b413e5a2525a6fa5894d059f815c9d9efa6"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
-
-        lockWhitelistChangeAuthorizer = new AddressBasedAuthorizer(
-                lockWhitelistAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.ONE
-        );
 
         federationActivationAge = 18500L;
 
@@ -98,11 +75,6 @@ public class BridgeMainNetConstants extends BridgeConstants {
                 "0484c66f75548baf93e322574adac4e4579b6a53f8d11fab640e14c90118e6983ef24b0de349a3e88f72e81e771ae1c897cef446fd7f4da71778c532aee3b6c41b",
                 "04bb6435dc1ea12da843ebe213893d136c1624acd681fff82551498ae00bf28e9323164b00daf925fa75177463b8254a2aae8a1713e4d851a84ea369c193e9ce51"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
-
-        feePerKbChangeAuthorizer = new AddressBasedAuthorizer(
-                feePerKbAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.MAJORITY
-        );
 
         genesisFeePerKb = Coin.MILLICOIN.multiply(5);
     }

@@ -65,9 +65,4 @@ public class RegTestGenesisConfig extends GenesisConfig {
     public RegTestGenesisConfig() {
         super(new RegTestConstants());
     }
-
-    @Override
-    public boolean areBridgeTxsFree() {
-        return true;
-    }
 }

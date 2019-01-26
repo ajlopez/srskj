@@ -71,10 +71,6 @@ public class TestNetBeforeBridgeSyncConfig extends GenesisConfig {
         super(new TestNetConstants());
     }
 
-    @Override
-    public boolean areBridgeTxsFree() {
-        return true;
-    }
 
     @Override
     public boolean isRskip85() { return true; }

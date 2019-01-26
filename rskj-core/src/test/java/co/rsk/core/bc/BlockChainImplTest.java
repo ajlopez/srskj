@@ -117,8 +117,6 @@ public class BlockChainImplTest {
         Repository repository = blockChain.getRepository();
 
         Assert.assertArrayEquals(genesis.getStateRoot(), repository.getRoot());
-
-        Assert.assertEquals(new BigInteger("21000000000000000000000000"), repository.getBalance(PrecompiledContracts.BRIDGE_ADDR).asBigInteger());
     }
 
 
@@ -144,8 +142,6 @@ public class BlockChainImplTest {
         Repository repository = blockChain.getRepository();
 
         Assert.assertArrayEquals(genesis.getStateRoot(), repository.getRoot());
-
-        Assert.assertEquals(new BigInteger("21000000000000000000000000"), repository.getBalance(PrecompiledContracts.BRIDGE_ADDR).asBigInteger());
     }
 
     @Test
@@ -175,8 +171,6 @@ public class BlockChainImplTest {
         Repository repository = blockChain.getRepository();
 
         Assert.assertArrayEquals(genesis.getStateRoot(), repository.getRoot());
-
-        Assert.assertEquals(new BigInteger("21000000000000000000000000"), repository.getBalance(PrecompiledContracts.BRIDGE_ADDR).asBigInteger());
     }
 
     @Test

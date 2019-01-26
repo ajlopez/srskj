@@ -39,8 +39,6 @@ public interface BlockchainConfig {
      */
     BlockDifficulty calcDifficulty(BlockHeader curBlock, BlockHeader parent);
 
-    boolean areBridgeTxsFree();
-
     boolean isRskip90();
     
     boolean isRskip85();

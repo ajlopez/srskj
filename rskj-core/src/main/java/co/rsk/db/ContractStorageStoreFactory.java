@@ -32,10 +32,6 @@ public class ContractStorageStoreFactory {
 
     public TrieStore getTrieStore(byte[] address) {
         synchronized (ContractStorageStoreFactory.class) {
-            if (addressIsDedicated(address)) {
-                return this.pool.getInstanceFor(getStorageNameForAddress(address));
-            }
-
             TrieStore unifiedStore = this.pool.getInstanceFor(getUnifiedStorageName());
 
             String addressName = getStorageNameForAddress(address);
@@ -57,15 +53,5 @@ public class ContractStorageStoreFactory {
 
     private static String getStorageNameForAddress(byte[] address) {
         return "details-storage/" + toHexString(address);
-    }
-
-    private static boolean addressIsDedicated(byte[] address) {
-        if (address == null || address.length != 20) {
-            return false;
-        }
-
-        RskAddress addr = new RskAddress(address);
-
-        return addr.equals(PrecompiledContracts.REMASC_ADDR) || addr.equals(PrecompiledContracts.BRIDGE_ADDR);
     }
 }

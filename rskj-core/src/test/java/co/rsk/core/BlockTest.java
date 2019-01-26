@@ -22,7 +22,6 @@ package co.rsk.core;
 import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.core.bc.BlockChainImpl;
 import co.rsk.crypto.Keccak256;
-import co.rsk.peg.PegTestUtils;
 import org.ethereum.TestUtils;
 import org.ethereum.core.*;
 import org.bouncycastle.util.encoders.Hex;
@@ -54,16 +53,6 @@ public class BlockTest {
                 null);
         txNotToRemasc.sign(new ECKey().getPrivKeyBytes());
         txs.add(txNotToRemasc);
-
-        Transaction txToRemascThatIsNotTheLatestTx = new Transaction(
-                BigInteger.ZERO.toByteArray(),
-                BigInteger.ONE.toByteArray(),
-                BigInteger.valueOf(21000).toByteArray(),
-                PrecompiledContracts.REMASC_ADDR.getBytes(),
-                BigInteger.valueOf(1000).toByteArray(),
-                null);
-        txToRemascThatIsNotTheLatestTx.sign(new ECKey().getPrivKeyBytes());
-        txs.add(txToRemascThatIsNotTheLatestTx);
 
         Block block =  new Block(
                 PegTestUtils.createHash3().getBytes(),          // parent hash

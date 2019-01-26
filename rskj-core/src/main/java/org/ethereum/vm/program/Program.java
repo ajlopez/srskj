@@ -22,7 +22,6 @@ package org.ethereum.vm.program;
 import co.rsk.config.VmConfig;
 import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
-import co.rsk.peg.Bridge;
 import co.rsk.vm.BitSet;
 import com.google.common.annotations.VisibleForTesting;
 import org.bouncycastle.util.encoders.Hex;
@@ -1419,21 +1418,6 @@ public class Program {
 
             stackPushOne();
             return;
-        }
-
-        // Special initialization for Bridge and Remasc contracts
-        if (contract instanceof Bridge) {
-            // CREATE CALL INTERNAL TRANSACTION
-            InternalTransaction internalTx = addInternalTx(null, getGasLimit(), senderAddress, contextAddress, endowment, EMPTY_BYTE_ARRAY, "call");
-
-            // Propagate the "local call" nature of the originating transaction down to the callee
-            internalTx.setLocalCallTransaction(this.transaction.isLocalCallTransaction());
-
-            Block executionBlock = new Block(getPrevHash().getData(), EMPTY_BYTE_ARRAY, getCoinbase().getLast20Bytes(), EMPTY_BYTE_ARRAY,
-                getDifficulty().getData(), getNumber().longValue(), getGasLimit().getData(), 0, getTimestamp().longValue(),
-                EMPTY_BYTE_ARRAY, EMPTY_BYTE_ARRAY, EMPTY_BYTE_ARRAY, new ArrayList<>(), new ArrayList<>(), null);
-
-            contract.init(internalTx, executionBlock, track, this.invoke.getBlockStore(), null, null);
         }
 
         long requiredGas = contract.getGasForData(data);

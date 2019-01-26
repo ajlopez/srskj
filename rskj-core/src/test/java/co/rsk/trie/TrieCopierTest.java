@@ -160,26 +160,6 @@ public class TrieCopierTest {
         Assert.assertNull(store2.retrieve(state8));
     }
 
-    @Test
-    public void copyBlockchainHeightTwoContractStates() {
-        TrieStore store = new TrieStoreImpl(new HashMapDB().setClearOnClose(false));
-        TrieStore store2 = new TrieStoreImpl(new HashMapDB().setClearOnClose(false));
-        Repository repository = new RepositoryImpl(new TrieImpl(store, true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
-        World world = new World(repository);
-
-        Blockchain blockchain = createBlockchain(world);
-
-        addBlocks(world, blockchain, 100);
-
-        byte[] state99 = blockchain.getBlockByNumber(99).getStateRoot();
-
-        TrieCopier.trieContractStateCopy(store2, blockchain, 99, 100, world.getRepository(), PrecompiledContracts.REMASC_ADDR);
-
-        Repository repository99 = repository.getSnapshotTo(state99);
-        AccountState accountState99 = repository99.getAccountState(PrecompiledContracts.REMASC_ADDR);
-        Assert.assertNotNull(store2.retrieve(accountState99.getStateRoot()));
-    }
-
     private static Blockchain createBlockchain(World world) {
         // add accounts with balance to genesis state
         new AccountBuilder(world).name("account1").balance(new Coin(BigInteger.valueOf(10000000))).build();

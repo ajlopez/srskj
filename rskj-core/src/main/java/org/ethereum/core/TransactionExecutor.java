@@ -487,13 +487,7 @@ public class TransactionExecutor {
         // Transfer fees to miner
         Coin summaryFee = summary.getFee();
 
-        //TODO: REMOVE THIS WHEN THE LocalBLockTests starts working with REMASC
-        if(enableRemasc) {
-            logger.trace("Adding fee to remasc contract account");
-            track.addBalance(PrecompiledContracts.REMASC_ADDR, summaryFee);
-        } else {
-            track.addBalance(coinbase, summaryFee);
-        }
+        track.addBalance(coinbase, summaryFee);
 
         this.paidFees = summaryFee;
 

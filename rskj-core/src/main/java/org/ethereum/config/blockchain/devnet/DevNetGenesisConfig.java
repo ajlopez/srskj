@@ -67,9 +67,4 @@ public class DevNetGenesisConfig extends GenesisConfig {
         super(new DevNetConstants());
     }
 
-    @Override
-    public boolean areBridgeTxsFree() {
-        return true;
-    }
-
 }

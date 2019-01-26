@@ -21,8 +21,6 @@ package co.rsk.config;
 import co.rsk.bitcoinj.core.BtcECKey;
 import co.rsk.bitcoinj.core.Coin;
 import co.rsk.bitcoinj.core.NetworkParameters;
-import co.rsk.peg.AddressBasedAuthorizer;
-import co.rsk.peg.Federation;
 import org.ethereum.crypto.ECKey;
 import org.bouncycastle.util.encoders.Hex;
 
@@ -47,13 +45,6 @@ public class BridgeTestNetConstants extends BridgeConstants {
         // Currently set to: Monday, October 8, 2018 12:00:00 AM GMT-03:00
         Instant genesisFederationAddressCreatedAt = Instant.ofEpochMilli(1538967600l);
 
-        genesisFederation = new Federation(
-                genesisFederationPublicKeys,
-                genesisFederationAddressCreatedAt,
-                1L,
-                getBtcParams()
-        );
-
         btc2RskMinimumAcceptableConfirmations = 10;
         btc2RskMinimumAcceptableConfirmationsOnRsk = 10;
         rsk2BtcMinimumAcceptableConfirmations = 10;
@@ -72,20 +63,10 @@ public class BridgeTestNetConstants extends BridgeConstants {
             "047e707e4f67655c40c539363fb435d89574b8fe400971ba0290de9c2adbb2bd4e1e5b35a2188b9409ff2cc102292616efc113623483056bb8d8a02bf7695670ea"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
 
-        federationChangeAuthorizer = new AddressBasedAuthorizer(
-                federationChangeAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.MAJORITY
-        );
-
         // Passphrases are kept private
         List<ECKey> lockWhitelistAuthorizedKeys = Arrays.stream(new String[]{
             "04bf7e3bca7f7c58326382ed9c2516a8773c21f1b806984bb1c5c33bd18046502d97b28c0ea5b16433fbb2b23f14e95b36209f304841e814017f1ede1ecbdcfce3"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
-
-        lockWhitelistChangeAuthorizer = new AddressBasedAuthorizer(
-                lockWhitelistAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.ONE
-        );
 
         federationActivationAge = 60L;
 
@@ -97,11 +78,6 @@ public class BridgeTestNetConstants extends BridgeConstants {
             "045ef89e4a5645dc68895dbc33b4c966c3a0a52bb837ecdd2ba448604c4f47266456d1191420e1d32bbe8741f8315fde4d1440908d400e5998dbed6549d499559b",
             "0455db9b3867c14e84a6f58bd2165f13bfdba0703cb84ea85788373a6a109f3717e40483aa1f8ef947f435ccdf10e530dd8b3025aa2d4a7014f12180ee3a301d27"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
-
-        feePerKbChangeAuthorizer = new AddressBasedAuthorizer(
-                feePerKbAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.MAJORITY
-        );
 
         genesisFeePerKb = Coin.MILLICOIN;
     }

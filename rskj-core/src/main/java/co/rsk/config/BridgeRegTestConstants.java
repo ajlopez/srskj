@@ -21,8 +21,6 @@ package co.rsk.config;
 import co.rsk.bitcoinj.core.BtcECKey;
 import co.rsk.bitcoinj.core.Coin;
 import co.rsk.bitcoinj.core.NetworkParameters;
-import co.rsk.peg.AddressBasedAuthorizer;
-import co.rsk.peg.Federation;
 import com.google.common.collect.Lists;
 import org.ethereum.crypto.ECKey;
 import org.ethereum.crypto.HashUtil;
@@ -50,15 +48,6 @@ public class BridgeRegTestConstants extends BridgeConstants {
         federatorPrivateKeys = Lists.newArrayList(federator0PrivateKey, federator1PrivateKey, federator2PrivateKey);
         List<BtcECKey> federatorPublicKeys = federatorPrivateKeys.stream().map(key -> BtcECKey.fromPublicOnly(key.getPubKey())).collect(Collectors.toList());
 
-        Instant genesisFederationCreatedAt = ZonedDateTime.parse("2016-01-01T00:00:00Z").toInstant();
-
-        genesisFederation = new Federation(
-                federatorPublicKeys,
-                genesisFederationCreatedAt,
-                1L,
-                getBtcParams()
-        );
-
         btc2RskMinimumAcceptableConfirmations = 3;
         btc2RskMinimumAcceptableConfirmationsOnRsk = 5;
         rsk2BtcMinimumAcceptableConfirmations = 3;
@@ -79,11 +68,6 @@ public class BridgeRegTestConstants extends BridgeConstants {
             "04aff62315e9c18004392a5d9e39496ff5794b2d9f43ab4e8ade64740d7fdfe896969be859b43f26ef5aa4b5a0d11808277b4abfa1a07cc39f2839b89cc2bc6b4c"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
 
-        federationChangeAuthorizer = new AddressBasedAuthorizer(
-                federationChangeAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.MAJORITY
-        );
-
         federationActivationAge = 10L;
 
         fundsMigrationAgeSinceActivationBegin = 15L;
@@ -94,20 +78,10 @@ public class BridgeRegTestConstants extends BridgeConstants {
             "04641fb250d7ca7a1cb4f530588e978013038ec4294d084d248869dd54d98873e45c61d00ceeaeeb9e35eab19fa5fbd8f07cb8a5f0ddba26b4d4b18349c09199ad"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
 
-        lockWhitelistChangeAuthorizer = new AddressBasedAuthorizer(
-                lockWhitelistAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.ONE
-        );
-
         // Key generated with GenNodeKey using generator 'auth-fee-per-kb'
         List<ECKey> feePerKbAuthorizedKeys = Arrays.stream(new String[]{
                 "0430c7d0146029db553d60cf11e8d39df1c63979ee2e4cd1e4d4289a5d88cfcbf3a09b06b5cbc88b5bfeb4b87a94cefab81c8d44655e7e813fc3e18f51cfe7e8a0"
         }).map(hex -> ECKey.fromPublicOnly(Hex.decode(hex))).collect(Collectors.toList());
-
-        feePerKbChangeAuthorizer = new AddressBasedAuthorizer(
-                feePerKbAuthorizedKeys,
-                AddressBasedAuthorizer.MinimumRequiredCalculation.MAJORITY
-        );
 
         genesisFeePerKb = Coin.MILLICOIN;
     }

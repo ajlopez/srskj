@@ -20,7 +20,6 @@
 package org.ethereum.config.blockchain;
 
 import co.rsk.core.BlockDifficulty;
-import co.rsk.peg.Federation;
 import org.ethereum.config.Constants;
 import org.ethereum.core.BlockHeader;
 
@@ -48,11 +47,6 @@ public class GenesisConfig extends AbstractConfig {
         public int getDurationLimit() {
             return 13;
         }
-    }
-
-    @Override
-    public Federation getGenesisFederation() {
-        return getConstants().getBridgeConstants().getGenesisFederation();
     }
 
     @Override

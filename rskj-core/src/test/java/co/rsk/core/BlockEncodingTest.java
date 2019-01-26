@@ -19,7 +19,6 @@
 package co.rsk.core;
 
 import co.rsk.core.bc.BlockChainImpl;
-import co.rsk.peg.PegTestUtils;
 import org.ethereum.TestUtils;
 import org.ethereum.core.Block;
 import org.ethereum.core.Bloom;

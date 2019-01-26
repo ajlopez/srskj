@@ -42,7 +42,6 @@ public class RegTestConfig extends AbstractNetConfig {
 
     public static RegTestConfig getFromConfig(HardForkActivationConfig hardForkActivationConfig, List<BtcECKey> genesisFederatorsPublicKeys) {
         RegTestConfig customConfig = getHardForkConfig(hardForkActivationConfig);
-        customConfig.setGenesisFederationPublicKeys(genesisFederatorsPublicKeys);
         return customConfig;
     }
 

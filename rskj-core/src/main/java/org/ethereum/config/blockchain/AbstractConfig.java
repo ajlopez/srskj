@@ -117,11 +117,6 @@ public abstract class AbstractConfig implements BlockchainConfig, BlockchainNetC
     protected abstract BigInteger getCalcDifficultyMultiplier(BlockHeader curBlock, BlockHeader parent);
 
     @Override
-    public boolean areBridgeTxsFree() {
-        return false;
-    }
-
-    @Override
     public boolean isRskip90() {
         return false;
     }

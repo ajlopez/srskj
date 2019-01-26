@@ -21,8 +21,6 @@ package co.rsk.rpc.modules.eth;
 import co.rsk.bitcoinj.store.BlockStoreException;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.ReversibleTransactionExecutor;
-import co.rsk.peg.BridgeState;
-import co.rsk.peg.BridgeSupport;
 import co.rsk.rpc.ExecutionBlockRetriever;
 import org.ethereum.core.Block;
 import org.ethereum.core.Blockchain;
@@ -79,24 +77,6 @@ public class EthModule
     @Override
     public String[] accounts() {
         return ethModuleWallet.accounts();
-    }
-
-    public Map<String, Object> bridgeState() throws IOException, BlockStoreException {
-        Block block = blockchain.getBestBlock();
-        Repository repository = blockchain.getRepository().getSnapshotTo(block.getStateRoot()).startTracking();
-
-        BridgeSupport bridgeSupport = new BridgeSupport(
-                config,
-                repository,
-                null,
-                PrecompiledContracts.BRIDGE_ADDR,
-                block);
-
-        byte[] result = bridgeSupport.getStateForDebugging();
-
-        BridgeState state = BridgeState.create(config.getBlockchainConfig().getCommonConstants().getBridgeConstants(), result);
-
-        return state.stateToMap();
     }
 
     public String call(Web3.CallArguments args, String bnOrId) {

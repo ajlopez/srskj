@@ -25,11 +25,6 @@ import org.ethereum.core.BlockHeader;
 public class TestNetDifficultyDropEnabledConfig extends TestNetBeforeBridgeSyncConfig {
 
     @Override
-    public boolean areBridgeTxsFree() {
-        return false;
-    }
-
-    @Override
     public BlockDifficulty calcDifficulty(BlockHeader currentBlockHeader, BlockHeader parentBlockHeader) {
         long tenMinutesInSeconds = 600;
         // If more than 10 minutes, reset to minimum difficulty

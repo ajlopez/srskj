@@ -71,25 +71,12 @@ public class TxValidatorIntrinsicGasLimitValidatorTest {
                 config.getBlockchainConfig().getCommonConstants().getChainId());
         tx3.sign(new ECKey().getPrivKeyBytes());
 
-        Transaction tx4 = new Transaction(BigInteger.ZERO.toByteArray(),
-                BigInteger.ZERO.toByteArray(),
-                BigInteger.ZERO.toByteArray(),
-                PrecompiledContracts.BRIDGE_ADDR.getBytes(),
-                BigInteger.ZERO.toByteArray(),
-                null,
-                config.getBlockchainConfig().getCommonConstants().getChainId());
-        BridgeRegTestConstants bridgeRegTestConstants = BridgeRegTestConstants.getInstance();
-        tx4.sign(bridgeRegTestConstants.getFederatorPrivateKeys().get(0).getPrivKeyBytes());
-
         TxValidatorIntrinsicGasLimitValidator tvigpv = new TxValidatorIntrinsicGasLimitValidator(config);
 
         Assert.assertTrue(tvigpv.validate(tx1, new AccountState(), null, null, Long.MAX_VALUE, false).transactionIsValid());
         Assert.assertTrue(tvigpv.validate(tx2, new AccountState(), null, null, Long.MAX_VALUE, false).transactionIsValid());
         Assert.assertTrue(tvigpv.validate(tx3, new AccountState(), null, null, Long.MAX_VALUE, false).transactionIsValid());
-        Assert.assertTrue(tvigpv.validate(tx4, new AccountState(), null, null, Long.MAX_VALUE, false).transactionIsValid());
     }
-
-
 
     @Test
     public void invalidIntrinsicGasPrice() {

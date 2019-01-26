@@ -48,10 +48,6 @@ public interface Web3EthModule {
         return getEthModule().compileSolidity(contract);
     }
 
-    default Map<String, Object> eth_bridgeState() throws Exception {
-        return getEthModule().bridgeState();
-    }
-
     EthModule getEthModule();
 
     String eth_protocolVersion();

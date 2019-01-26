@@ -21,7 +21,6 @@ package org.ethereum.vm;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.RskAddress;
-import co.rsk.peg.Bridge;
 import co.rsk.peg.SamplePrecompiledContract;
 import org.ethereum.config.BlockchainConfig;
 import org.ethereum.core.Block;
@@ -53,17 +52,11 @@ public class PrecompiledContracts {
     public static final String IDENTITY_ADDR_STR = "0000000000000000000000000000000000000004";
     public static final String BIG_INT_MODEXP_ADDR = "0000000000000000000000000000000000000005";
     public static final String SAMPLE_ADDR_STR = "0000000000000000000000000000000001000005";
-    public static final String BRIDGE_ADDR_STR = "0000000000000000000000000000000001000006";
-    public static final String REMASC_ADDR_STR = "0000000000000000000000000000000001000008";
 
-    public static final RskAddress BRIDGE_ADDR = new RskAddress(BRIDGE_ADDR_STR);
     public static final RskAddress IDENTITY_ADDR = new RskAddress(IDENTITY_ADDR_STR);
-    public static final RskAddress REMASC_ADDR = new RskAddress(REMASC_ADDR_STR);
     public static final RskAddress SAMPLE_ADDR = new RskAddress(SAMPLE_ADDR_STR);
 
-    public static final DataWord BRIDGE_ADDR_DW = new DataWord(BRIDGE_ADDR.getBytes());
     public static final DataWord IDENTITY_ADDR_DW = new DataWord(IDENTITY_ADDR.getBytes());
-    public static final DataWord REMASC_ADDR_DW  = new DataWord(REMASC_ADDR.getBytes());
     public static final DataWord SAMPLE_ADDR_DW = new DataWord(SAMPLE_ADDR.getBytes());
     public static final DataWord ECRECOVER_ADDR_DW = new DataWord(ECRECOVER_ADDR);
     public static final DataWord RIPEMPD160_ADDR_DW = new DataWord(RIPEMPD160_ADDR);
@@ -104,9 +97,6 @@ public class PrecompiledContracts {
         // RSKIP-93 removes this contract completely
         if (address.equals(SAMPLE_ADDR_DW) && !blockchainConfig.isRskip93()) {
             return sample;
-        }
-        if (address.equals(BRIDGE_ADDR_DW)) {
-            return new Bridge(config, BRIDGE_ADDR);
         }
         if (address.equals(BIG_INT_MODEXP_ADDR_DW)) {
             return bigIntegerModexp;

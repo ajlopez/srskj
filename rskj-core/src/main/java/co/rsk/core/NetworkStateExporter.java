@@ -96,7 +96,7 @@ public class NetworkStateExporter {
         BigInteger nonce = accountInformation.getNonce(addr);
         accountNode.put("nonce", nonce.toString());
         Iterator<DataWord> contractKeys = accountInformation.getStorageKeys(addr);
-        if (contractKeys.hasNext() && !PrecompiledContracts.REMASC_ADDR.equals(addr)) {
+        if (contractKeys.hasNext()) {
             accountNode.set("contract", createContractNode(accountNode, accountInformation, addr, contractKeys));
         }
         return accountNode;

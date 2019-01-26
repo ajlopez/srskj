@@ -19,13 +19,9 @@
 package co.rsk.blockchain.utils;
 
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.BlockDifficulty;
-import co.rsk.core.Coin;
-import co.rsk.core.DifficultyCalculator;
-import co.rsk.core.RskAddress;
+import co.rsk.core.*;
 import co.rsk.core.bc.BlockChainImpl;
 import co.rsk.mine.MinimumGasPriceCalculator;
-import co.rsk.peg.PegTestUtils;
 import co.rsk.peg.simples.SimpleBlock;
 import co.rsk.peg.simples.SimpleRskTransaction;
 import co.rsk.trie.Trie;

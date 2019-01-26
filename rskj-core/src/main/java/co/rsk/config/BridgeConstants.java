@@ -20,13 +20,9 @@ package co.rsk.config;
 
 import co.rsk.bitcoinj.core.Coin;
 import co.rsk.bitcoinj.core.NetworkParameters;
-import co.rsk.peg.AddressBasedAuthorizer;
-import co.rsk.peg.Federation;
 
 public class BridgeConstants {
     protected String btcParamsString;
-
-    protected Federation genesisFederation;
 
     protected int btc2RskMinimumAcceptableConfirmations;
     protected int btc2RskMinimumAcceptableConfirmationsOnRsk;
@@ -45,12 +41,6 @@ public class BridgeConstants {
     protected long fundsMigrationAgeSinceActivationBegin;
     protected long fundsMigrationAgeSinceActivationEnd;
 
-    protected AddressBasedAuthorizer federationChangeAuthorizer;
-
-    protected AddressBasedAuthorizer lockWhitelistChangeAuthorizer;
-
-    protected AddressBasedAuthorizer feePerKbChangeAuthorizer;
-
     protected Coin genesisFeePerKb;
 
     public NetworkParameters getBtcParams() {
@@ -60,8 +50,6 @@ public class BridgeConstants {
     public String getBtcParamsString() {
         return btcParamsString;
     }
-
-    public Federation getGenesisFederation() { return genesisFederation; }
 
     public int getBtc2RskMinimumAcceptableConfirmations() {
         return btc2RskMinimumAcceptableConfirmations;
@@ -92,12 +80,6 @@ public class BridgeConstants {
     public long getFundsMigrationAgeSinceActivationEnd() {
         return fundsMigrationAgeSinceActivationEnd;
     }
-
-    public AddressBasedAuthorizer getFederationChangeAuthorizer() { return federationChangeAuthorizer; }
-
-    public AddressBasedAuthorizer getLockWhitelistChangeAuthorizer() { return lockWhitelistChangeAuthorizer; }
-
-    public AddressBasedAuthorizer getFeePerKbChangeAuthorizer() { return feePerKbChangeAuthorizer; }
 
     public Coin getGenesisFeePerKb() { return genesisFeePerKb; }
 }

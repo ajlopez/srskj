@@ -45,7 +45,6 @@ public class DevNetConfig extends AbstractNetConfig {
 
     public static DevNetConfig getFromConfig(HardForkActivationConfig hardForkActivationConfig, List<BtcECKey> genesisFederatorsPublicKeys) {
         DevNetConfig customConfig = getHardForkConfig(hardForkActivationConfig);
-        customConfig.setGenesisFederationPublicKeys(genesisFederatorsPublicKeys);
         return customConfig;
     }
 

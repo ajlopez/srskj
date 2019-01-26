@@ -24,7 +24,6 @@ import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
 import co.rsk.crypto.Keccak256;
 import co.rsk.panic.PanicProcessor;
-import co.rsk.peg.BridgeUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.bouncycastle.util.BigIntegers;
 import org.bouncycastle.util.encoders.Hex;
@@ -211,11 +210,6 @@ public class Transaction {
     // "return (this.isContractCreation() ? GasCost.TRANSACTION_CREATE_CONTRACT : GasCost.TRANSACTION)
     //         + zeroVals * GasCost.TX_ZERO_DATA + nonZeroes * GasCost.TX_NO_ZERO_DATA;"
     public long transactionCost(Block block, BlockchainNetConfig netConfig) {
-        // Federators txs to the bridge are free during system setup
-        if (BridgeUtils.isFreeBridgeTx(this, block.getNumber(), netConfig)) {
-            return 0;
-        }
-
         long nonZeroes = this.nonZeroDataBytes();
         long zeroVals = ArrayUtils.getLength(this.getData()) - nonZeroes;
 

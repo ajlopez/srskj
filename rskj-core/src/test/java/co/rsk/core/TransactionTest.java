@@ -170,13 +170,6 @@ public class TransactionTest {
                 "                    '0x00' : '0x0400' " +
                 "                } " +
                 "            }, " +
-                "            '" + PrecompiledContracts.REMASC_ADDR_STR + "' : { " +
-                "                'balance' : '0x67EB', " +
-                "                'code' : '0x', " +
-                "                'nonce' : '0x00', " +
-                "                'storage' : { " +
-                "                } " +
-                "            }, " +
                 "            'a94f5374fce5edbc8e2a8697c15331677e6ebf0b' : { " +
                 "                'balance' : '0x0DE0B6B3A7621175', " +
                 "                'code' : '0x', " +
@@ -337,11 +330,4 @@ public class TransactionTest {
         Transaction tx = new Transaction(config, "cd2a3d9f938e13cd947ec05abc7fe734df8dd826", BigInteger.ONE, BigInteger.TEN, BigInteger.ONE, BigInteger.valueOf(21000L));
         Assert.assertFalse(tx.isContractCreation());
     }
-
-    @Test
-    public void isNotContractCreationWhenReceiveAddressIsBridgeAddress() {
-        Transaction tx = new Transaction(config, PrecompiledContracts.BRIDGE_ADDR_STR, BigInteger.ONE, BigInteger.TEN, BigInteger.ONE, BigInteger.valueOf(21000L));
-        Assert.assertFalse(tx.isContractCreation());
-    }
-
 }

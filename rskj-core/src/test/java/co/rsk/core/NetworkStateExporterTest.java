@@ -93,11 +93,6 @@ public class NetworkStateExporterTest {
         repository.createAccount(remascSender);
         repository.increaseNonce(remascSender);
 
-        repository.createAccount(PrecompiledContracts.REMASC_ADDR);
-        repository.addBalance(PrecompiledContracts.REMASC_ADDR, Coin.valueOf(10L));
-        repository.increaseNonce(PrecompiledContracts.REMASC_ADDR);
-
-
         Map result = writeAndReadJson(repository);
         Assert.assertEquals(3, result.keySet().size());
 
@@ -110,11 +105,6 @@ public class NetworkStateExporterTest {
         Assert.assertEquals(2, address2Value.keySet().size());
         Assert.assertEquals("10",address2Value.get("balance"));
         Assert.assertEquals("2",address2Value.get("nonce"));
-
-        Map remascValue = (Map) result.get(PrecompiledContracts.REMASC_ADDR_STR);
-        Assert.assertEquals(2, remascValue.keySet().size());
-        Assert.assertEquals("10",remascValue.get("balance"));
-        Assert.assertEquals("1",remascValue.get("nonce"));
     }
 
     @Test
