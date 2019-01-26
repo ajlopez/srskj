@@ -11,6 +11,10 @@ Copy of RskJ from commit 755d1e2adee83df0955b0f5ed2c21dc4e997e103
 - Remove Spring Framework
 - Rewrite RLP
 - Rewrite Ethereum Virtual Machine
+- Rewrite long synchronization
+- Implement warp synchronization
+- Rewrite log logic
+
 
 ## Original About
 RskJ is a Java implementation of the RSK node. For more information about RSK, visit [www.rsk.co](http://www.rsk.co). The [RSK white paper](https://uploads.strikinglycdn.com/files/90847694-70f0-4668-ba7f-dd0c6b0b00a1/RootstockWhitePaperv9-Overview.pdf) provides a complete conceptual overview of the platform.
