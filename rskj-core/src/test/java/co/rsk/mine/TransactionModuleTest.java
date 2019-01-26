@@ -110,7 +110,7 @@ public class TransactionModuleTest {
         String tx = sendTransaction(web3, repository);
 
         Assert.assertEquals(1, blockchain.getBestBlock().getNumber());
-        Assert.assertEquals(2, blockchain.getBestBlock().getTransactionsList().size());
+        Assert.assertEquals(1, blockchain.getBestBlock().getTransactionsList().size());
 
         Transaction txInBlock = getTransactionFromBlockWhichWasSend(blockchain, tx);
 
@@ -141,7 +141,7 @@ public class TransactionModuleTest {
             Transaction txInBlock = getTransactionFromBlockWhichWasSend(blockchain, tx);
 
             Assert.assertEquals(i, blockchain.getBestBlock().getNumber());
-            Assert.assertEquals(2, blockchain.getBestBlock().getTransactionsList().size());
+            Assert.assertEquals(1, blockchain.getBestBlock().getTransactionsList().size());
             Assert.assertEquals(tx, txInBlock.getHash().toJsonString());
         }
     }
@@ -164,7 +164,7 @@ public class TransactionModuleTest {
         String txHash = sendRawTransaction(web3);
 
         Assert.assertEquals(1, blockchain.getBestBlock().getNumber());
-        Assert.assertEquals(2, blockchain.getBestBlock().getTransactionsList().size());
+        Assert.assertEquals(1, blockchain.getBestBlock().getTransactionsList().size());
 
         Transaction txInBlock = getTransactionFromBlockWhichWasSend(blockchain, txHash);
 

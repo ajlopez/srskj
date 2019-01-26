@@ -753,63 +753,6 @@ public class BlockValidatorTest {
     }
 
     @Test
-    public void noRemascTx() {
-        BlockGenerator blockGenerator = new BlockGenerator();
-        Block genesis = blockGenerator.getGenesisBlock();
-
-        List<Transaction> txs = new ArrayList<>();
-        Transaction tx = new Transaction(config, "0000000000000000000000000000000000000006", BigInteger.ZERO, BigInteger.ZERO, BigInteger.valueOf(12L), BigInteger.TEN);
-        tx.sign(new byte[]{});
-        txs.add(tx);
-        Block block = new BlockBuilder().parent(genesis).transactions(txs).build();
-
-        BlockValidatorImpl validator = new BlockValidatorBuilder()
-                .build();
-
-        Assert.assertFalse(validator.isValid(block));
-
-        block = new BlockBuilder().parent(genesis).transactions(null).build();
-        Assert.assertFalse(validator.isValid(block));
-
-        block = new BlockBuilder().parent(genesis).transactions(new ArrayList<>()).build();
-        Assert.assertFalse(validator.isValid(block));
-    }
-
-    @Test
-    public void remascTxNotInLastPosition() {
-        BlockGenerator blockGenerator = new BlockGenerator();
-        Block genesis = blockGenerator.getGenesisBlock();
-
-        List<Transaction> txs = new ArrayList<>();
-        Transaction tx = new Transaction(config, "0000000000000000000000000000000000000006", BigInteger.ZERO, BigInteger.ZERO, BigInteger.valueOf(12L), BigInteger.TEN);
-        tx.sign(new byte[]{});
-        txs.add(tx);
-
-        Block block = new BlockBuilder().parent(genesis).transactions(txs).build();
-
-        BlockValidatorImpl validator = new BlockValidatorBuilder()
-                .build();
-
-        Assert.assertFalse(validator.isValid(block));
-    }
-
-    @Test
-    public void remascTx() {
-        BlockGenerator blockGenerator = new BlockGenerator();
-        Block genesis = blockGenerator.getGenesisBlock();
-
-        List<Transaction> txs = new ArrayList<>();
-        Transaction tx = new Transaction(config, "0000000000000000000000000000000000000006", BigInteger.ZERO, BigInteger.ZERO, BigInteger.valueOf(12L), BigInteger.TEN);
-        tx.sign(new byte[]{});
-        txs.add(tx);
-        Block block = new BlockBuilder().parent(genesis).transactions(txs).build();
-        BlockValidatorImpl validator = new BlockValidatorBuilder()
-                .build();
-
-        Assert.assertTrue(validator.isValid(block));
-    }
-
-    @Test
     public void blockInTheFuture() {
         BlockGenerator blockGenerator = new BlockGenerator();
         Block genesis = blockGenerator.getGenesisBlock();

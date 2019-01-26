@@ -89,12 +89,8 @@ public class NetworkStateExporterTest {
         repository.increaseNonce(addr2);
         repository.increaseNonce(addr2);
 
-        RskAddress remascSender = RskAddress.nullAddress();
-        repository.createAccount(remascSender);
-        repository.increaseNonce(remascSender);
-
         Map result = writeAndReadJson(repository);
-        Assert.assertEquals(3, result.keySet().size());
+        Assert.assertEquals(2, result.keySet().size());
 
         Map address1Value = (Map) result.get(address1String);
         Assert.assertEquals(2, address1Value.keySet().size());

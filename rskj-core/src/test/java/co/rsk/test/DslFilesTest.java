@@ -257,14 +257,6 @@ public class DslFilesTest {
     }
 
     @Test
-    public void runContracts06Resource() throws FileNotFoundException, DslProcessorException {
-        DslParser parser = DslParser.fromResource("dsl/contracts06.txt");
-        World world = new World();
-        WorldDslProcessor processor = new WorldDslProcessor(world);
-        processor.processCommands(parser);
-    }
-
-    @Test
     public void runLogs01Resource() throws FileNotFoundException, DslProcessorException {
         DslParser parser = DslParser.fromResource("dsl/logs01.txt");
         World world = new World();
