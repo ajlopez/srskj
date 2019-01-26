@@ -5,6 +5,8 @@ Copy of RskJ from commit 755d1e2adee83df0955b0f5ed2c21dc4e997e103
 ## To Do
 
 - Rewrite Repository and Transaction execution
+- Remove ContractDetails
+- One trie for contract states
 - Allow alternative Proof of Work
 - Remove Spring Framework
 - Remove Jackson
@@ -12,8 +14,11 @@ Copy of RskJ from commit 755d1e2adee83df0955b0f5ed2c21dc4e997e103
 - Rewrite Ethereum Virtual Machine
 - Rewrite long synchronization
 - Implement warp synchronization
-- Rewrite log logic
+- Rewrite logs logic
 - Improve DSL code tests
+- Immutable DataWord
+- Rewrite Web3 implementations
+- Refactor god objects
 
 ## Done
 
