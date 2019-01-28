@@ -77,62 +77,7 @@ public class MinerServerTest extends ParameterizedNetworkUpgradeTest {
         blockStore = factory.getBlockStore();
         transactionPool = factory.getTransactionPool();
     }
-
-    @Test
-    public void buildBlockToMineCheckThatLastTransactionIsForREMASC() {
-        EthereumImpl ethereumImpl = Mockito.mock(EthereumImpl.class);
-        Repository repository = Mockito.mock(Repository.class);
-        Mockito.when(repository.getSnapshotTo(Mockito.any())).thenReturn(repository);
-        Mockito.when(repository.getRoot()).thenReturn(this.repository.getRoot());
-        Mockito.when(repository.startTracking()).thenReturn(repository);
-
-        Transaction tx1 = Tx.create(config, 0, 21000, 100, 0, 0, 0);
-        byte[] s1 = new byte[32];
-        s1[0] = 0;
-        Mockito.when(tx1.getHash()).thenReturn(new Keccak256(s1));
-        Mockito.when(tx1.getEncoded()).thenReturn(new byte[32]);
-
-        Mockito.when(repository.getNonce(tx1.getSender())).thenReturn(BigInteger.ZERO);
-        Mockito.when(repository.getBalance(tx1.getSender())).thenReturn(Coin.valueOf(4200000L));
-
-        List<Transaction> txs = new ArrayList<>(Collections.singletonList(tx1));
-
-        TransactionPool localTransactionPool = Mockito.mock(TransactionPool.class);
-        Mockito.when(localTransactionPool.getPendingTransactions()).thenReturn(txs);
-
-        BlockUnclesValidationRule unclesValidationRule = Mockito.mock(BlockUnclesValidationRule.class);
-        Mockito.when(unclesValidationRule.isValid(Mockito.any())).thenReturn(true);
-        MinerClock clock = new MinerClock(true, Clock.systemUTC());
-        MinerServerImpl minerServer = new MinerServerImpl(
-                config,
-                ethereumImpl,
-                this.blockchain,
-                null,
-                new ProofOfWorkRule(config).setFallbackMiningEnabled(false),
-                new BlockToMineBuilder(
-                        ConfigUtils.getDefaultMiningConfig(),
-                        repository,
-                        blockStore,
-                        localTransactionPool,
-                        difficultyCalculator,
-                        new GasLimitCalculator(config),
-                        unclesValidationRule,
-                        config,
-                        null,
-                        clock
-                ),
-                clock,
-                ConfigUtils.getDefaultMiningConfig()
-        );
-
-        minerServer.buildBlockToMine(blockchain.getBestBlock(), false);
-        Block blockAtHeightOne = minerServer.getBlocksWaitingforPoW().entrySet().iterator().next().getValue();
-
-        List<Transaction> blockTransactions = blockAtHeightOne.getTransactionsList();
-        assertNotNull(blockTransactions);
-        assertEquals(1, blockTransactions.size());
-    }
-
+    
     @Test
     public void submitBitcoinBlockTwoTags() {
         EthereumImpl ethereumImpl = Mockito.mock(EthereumImpl.class);

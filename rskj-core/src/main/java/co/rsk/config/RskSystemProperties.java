@@ -65,9 +65,6 @@ public class RskSystemProperties extends SystemProperties {
     private static final String MINER_COINBASE_SECRET_CONFIG = "miner.coinbase.secret";
     private static final int CHUNK_SIZE = 192;
 
-    //TODO: REMOVE THIS WHEN THE LocalBLockTests starts working with REMASC
-    private boolean remascEnabled = true;
-
     private MessageRecorder messageRecorder;
 
     private List<ModuleDescription> moduleDescriptions;
@@ -231,21 +228,6 @@ public class RskSystemProperties extends SystemProperties {
     public int soLingerTime() {
         return configFromFiles.getInt("rpc.providers.web.http.linger_time");
 
-    }
-
-    //TODO: REMOVE THIS WHEN THE LocalBLockTests starts working with REMASC
-    public boolean isRemascEnabled() {
-        return remascEnabled;
-    }
-
-    //TODO: REMOVE THIS WHEN THE LocalBLockTests starts working with REMASC
-    public void disableRemasc() {
-        this.remascEnabled = false;
-    }
-
-    //TODO: REMOVE THIS WHEN THE LocalBLockTests starts working with REMASC
-    public void enableRemasc() {
-        this.remascEnabled = true;
     }
 
     public long peerDiscoveryMessageTimeOut() {

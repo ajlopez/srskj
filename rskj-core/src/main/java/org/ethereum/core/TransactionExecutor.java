@@ -70,7 +70,6 @@ public class TransactionExecutor {
     private final PrecompiledContracts precompiledContracts;
     private final BlockchainNetConfig netConfig;
     private final boolean playVm;
-    private final boolean enableRemasc;
     private final boolean vmTrace;
     private final String databaseDir;
     private final String vmTraceDir;
@@ -102,7 +101,7 @@ public class TransactionExecutor {
 
     public TransactionExecutor(Transaction tx, int txindex, RskAddress coinbase, Repository track, BlockStore blockStore, ReceiptStore receiptStore,
                                ProgramInvokeFactory programInvokeFactory, Block executionBlock, EthereumListener listener, long gasUsedInTheBlock,
-                               VmConfig vmConfig, BlockchainNetConfig blockchainConfig, boolean playVm, boolean remascEnabled,
+                               VmConfig vmConfig, BlockchainNetConfig blockchainConfig, boolean playVm,
                                boolean vmTrace, PrecompiledContracts precompiledContracts, String databaseDir, String vmTraceDir, boolean vmTraceCompressed) {
         this.tx = tx;
         this.txindex = txindex;
@@ -119,7 +118,6 @@ public class TransactionExecutor {
         this.precompiledContracts = precompiledContracts;
         this.netConfig = blockchainConfig;
         this.playVm = playVm;
-        this.enableRemasc = remascEnabled;
         this.vmTrace = vmTrace;
         this.databaseDir = databaseDir;
         this.vmTraceDir = vmTraceDir;
@@ -144,6 +142,7 @@ public class TransactionExecutor {
         BigInteger curBlockGasLimit = new BigInteger(1, executionBlock.getGasLimit());
 
         boolean cumulativeGasReached = txGasLimit.add(BigInteger.valueOf(gasUsedInTheBlock)).compareTo(curBlockGasLimit) > 0;
+
         if (cumulativeGasReached) {
             execError(String.format("Too much gas used in this block: Require: %s Got: %s",
                     curBlockGasLimit.longValue() - toBI(tx.getGasLimit()).longValue(),

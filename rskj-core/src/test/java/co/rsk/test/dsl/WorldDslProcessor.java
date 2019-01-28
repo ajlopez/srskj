@@ -248,7 +248,6 @@ public class WorldDslProcessor {
                                                                config.getVmConfig(),
                                                                config.getBlockchainConfig(),
                                                                config.playVM(),
-                                                               config.isRemascEnabled(),
                                                                config.vmTrace(),
                                                                new PrecompiledContracts(config),
                                                                config.databaseDir(),
