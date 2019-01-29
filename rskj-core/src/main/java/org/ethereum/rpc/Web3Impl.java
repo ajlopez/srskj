@@ -22,6 +22,7 @@ import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
 import co.rsk.core.bc.AccountInformationProvider;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.metrics.HashRateCalculator;
 import co.rsk.mine.MinerClient;

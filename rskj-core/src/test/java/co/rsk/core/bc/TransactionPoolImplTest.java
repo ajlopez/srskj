@@ -44,13 +44,13 @@ public class TransactionPoolImplTest {
     private static final TestSystemProperties config = new TestSystemProperties();
 
     private TransactionPoolImpl transactionPool;
-    private BlockChainImpl blockChain;
+    private Blockchain blockChain;
 
     @Before
     public void setUp() {
         RskTestFactory factory = new RskTestFactory();
         blockChain = factory.getBlockchain();
-        Block genesis = BlockChainImplTest.getGenesisBlock(blockChain);
+        Block genesis = BlockchainTest.getGenesisBlock(blockChain);
         blockChain.setStatus(genesis, genesis.getCumulativeDifficulty());
         transactionPool = new TransactionPoolImpl(config, factory.getRepository(), null, null, new ProgramInvokeFactoryImpl(), new TestCompositeEthereumListener(), 10, 100);
         // don't call start to avoid creating threads

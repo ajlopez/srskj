@@ -18,13 +18,13 @@
 
 package co.rsk.net;
 
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.net.messages.*;
 import co.rsk.net.sync.SyncConfiguration;
 import org.ethereum.core.Block;
 import org.ethereum.core.BlockHeader;
 import org.ethereum.core.BlockIdentifier;
-import org.ethereum.core.Blockchain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.bouncycastle.util.encoders.Hex;

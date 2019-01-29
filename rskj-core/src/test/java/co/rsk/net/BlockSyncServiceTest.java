@@ -20,10 +20,10 @@ package co.rsk.net;
 
 import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.TestSystemProperties;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.sync.SyncConfiguration;
 import co.rsk.test.builders.BlockChainBuilder;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -21,6 +21,7 @@ package co.rsk.net;
 import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.BlockDifficulty;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.net.messages.*;
 import co.rsk.net.simples.SimpleBlockProcessor;

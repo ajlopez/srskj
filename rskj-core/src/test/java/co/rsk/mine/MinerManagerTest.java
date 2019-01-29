@@ -23,7 +23,7 @@ import co.rsk.config.TestSystemProperties;
 import co.rsk.core.DifficultyCalculator;
 import co.rsk.core.RskImpl;
 import co.rsk.core.SnapshotManager;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.validators.BlockValidationRule;
 import co.rsk.validators.ProofOfWorkRule;
 import org.awaitility.Awaitility;
@@ -49,7 +49,7 @@ import java.util.concurrent.Callable;
 public class MinerManagerTest {
 
     private static final TestSystemProperties config = new TestSystemProperties();
-    private BlockChainImpl blockchain;
+    private Blockchain blockchain;
     private TransactionPool transactionPool;
     private Repository repository;
     private BlockStore blockStore;

@@ -20,9 +20,9 @@ package co.rsk.rpc.modules.eth;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Wallet;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.mine.MinerClient;
 import co.rsk.mine.MinerServer;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.TransactionPool;
 import org.ethereum.db.TransactionInfo;
 import org.ethereum.rpc.TypeConverter;

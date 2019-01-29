@@ -22,7 +22,7 @@ package org.ethereum.core.genesis;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.RskAddress;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.validators.BlockValidator;
 import org.apache.commons.lang3.StringUtils;
@@ -79,9 +79,9 @@ public class BlockChainLoader {
         this.blockValidator = blockValidator;
     }
 
-    public BlockChainImpl loadBlockchain() {
+    public Blockchain loadBlockchain() {
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockChainImpl blockchain = new BlockChainImpl(
+        Blockchain blockchain = new Blockchain(
                 repository,
                 blockStore,
                 receiptStore,

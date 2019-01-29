@@ -42,7 +42,7 @@ import java.util.Set;
 public class BlockUtilsTest {
     @Test
     public void blockInSomeBlockChain() {
-        BlockChainImpl blockChain = new BlockChainBuilder().build();
+        Blockchain blockChain = new BlockChainBuilder().build();
 
         Block genesis = new BlockGenerator().getGenesisBlock();
         genesis.setStateRoot(blockChain.getRepository().getRoot());
@@ -67,7 +67,7 @@ public class BlockUtilsTest {
 
     @Test
     public void unknowAncestorsHashes() {
-        BlockChainImpl blockChain = new BlockChainBuilder().build();
+        Blockchain blockChain = new BlockChainBuilder().build();
         BlockStore store = new BlockStore();
 
         Block genesis = new BlockGenerator().getGenesisBlock();
@@ -120,7 +120,7 @@ public class BlockUtilsTest {
         BlockChainBuilder blockChainBuilder = new BlockChainBuilder();
         BlockGenerator blockGenerator = new BlockGenerator();
         Genesis genesis = blockGenerator.getGenesisBlock();
-        BlockChainImpl blockChain = blockChainBuilder.setGenesis(genesis).build();
+        Blockchain blockChain = blockChainBuilder.setGenesis(genesis).build();
         BlockStore store = new BlockStore();
 
         genesis.setStateRoot(blockChain.getRepository().getRoot());

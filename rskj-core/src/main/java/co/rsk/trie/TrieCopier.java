@@ -19,11 +19,11 @@
 package co.rsk.trie;
 
 import co.rsk.core.RskAddress;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.db.ContractDetailsImpl;
 import org.ethereum.core.AccountState;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.Repository;
 
 import java.util.List;

@@ -19,7 +19,7 @@
 package co.rsk.core;
 
 import co.rsk.config.RskSystemProperties;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.TransactionPoolImpl;
 import co.rsk.metrics.HashRateCalculator;
 import co.rsk.mine.*;
@@ -42,7 +42,6 @@ import co.rsk.scoring.PunishmentParameters;
 import co.rsk.validators.ProofOfWorkRule;
 import org.ethereum.config.SystemProperties;
 import org.ethereum.config.net.RegTestConfig;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.Repository;
 import org.ethereum.core.TransactionPool;
 import org.ethereum.core.genesis.BlockChainLoader;
@@ -244,7 +243,7 @@ public class RskFactory {
     }
 
     @Bean
-    public BlockChainImpl getBlockchain(BlockChainLoader blockChainLoader) {
+    public Blockchain getBlockchain(BlockChainLoader blockChainLoader) {
         return blockChainLoader.loadBlockchain();
     }
 

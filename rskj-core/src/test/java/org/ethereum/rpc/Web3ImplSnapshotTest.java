@@ -22,7 +22,7 @@ import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.ConfigUtils;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.DifficultyCalculator;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockChainStatus;
 import co.rsk.mine.*;
 import co.rsk.rpc.modules.debug.DebugModule;
@@ -36,7 +36,6 @@ import co.rsk.rpc.modules.txpool.TxPoolModuleImpl;
 import co.rsk.validators.BlockValidationRule;
 import co.rsk.validators.ProofOfWorkRule;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.rpc.Simples.SimpleEthereum;
 import org.ethereum.util.RskTestFactory;
 import org.junit.Assert;
@@ -53,7 +52,7 @@ public class Web3ImplSnapshotTest {
 
     private static final TestSystemProperties config = new TestSystemProperties();
     private RskTestFactory factory;
-    private BlockChainImpl blockchain;
+    private Blockchain blockchain;
 
     @Before
     public void setUp() {

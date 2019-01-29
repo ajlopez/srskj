@@ -19,6 +19,7 @@
 package co.rsk.net;
 
 import co.rsk.blockchain.utils.BlockGenerator;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.messages.BlockMessage;
 import co.rsk.net.messages.NewBlockHashMessage;
 import co.rsk.net.simples.SimpleAsyncNode;
@@ -27,7 +28,6 @@ import co.rsk.net.utils.SyncUtils;
 import co.rsk.test.World;
 import co.rsk.test.builders.BlockChainBuilder;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.junit.Assert;
 import org.junit.Test;
 

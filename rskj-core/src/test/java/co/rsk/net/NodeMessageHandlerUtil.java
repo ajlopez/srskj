@@ -2,13 +2,13 @@ package co.rsk.net;
 
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.DifficultyCalculator;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.sync.SyncConfiguration;
 import co.rsk.scoring.PeerScoringManager;
 import co.rsk.test.World;
 import co.rsk.validators.BlockValidationRule;
 import co.rsk.validators.DummyBlockValidationRule;
 import co.rsk.validators.ProofOfWorkRule;
-import org.ethereum.core.Blockchain;
 import org.ethereum.net.server.ChannelManager;
 import org.ethereum.net.server.ChannelManagerImpl;
 import org.ethereum.rpc.Simples.SimpleChannelManager;

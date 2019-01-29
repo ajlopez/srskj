@@ -20,7 +20,7 @@ package co.rsk.net;
 
 import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.simples.SimpleMessageChannel;
 import co.rsk.net.sync.SyncConfiguration;
 import co.rsk.test.builders.BlockBuilder;
@@ -55,7 +55,7 @@ public class NodeBlockProcessorUnclesTest {
 
     @Test
     public void addBlockWithTwoKnownUncles() throws UnknownHostException {
-        BlockChainImpl blockChain = new BlockChainBuilder().build();
+        Blockchain blockChain = new BlockChainBuilder().build();
         NodeBlockProcessor processor = createNodeBlockProcessor(blockChain);
 
         Block genesis = blockChain.getBestBlock();
@@ -86,7 +86,7 @@ public class NodeBlockProcessorUnclesTest {
 
     @Test
     public void addBlockWithTwoUnknownUncles() throws UnknownHostException {
-        BlockChainImpl blockChain = new BlockChainBuilder().build();
+        Blockchain blockChain = new BlockChainBuilder().build();
         NodeBlockProcessor processor = createNodeBlockProcessor(blockChain);
 
         Block genesis = processor.getBlockchain().getBestBlock();
@@ -140,7 +140,7 @@ public class NodeBlockProcessorUnclesTest {
         Assert.assertTrue(sender.getGetBlockMessagesHashes().contains(block1.getHash()));
     }
 
-    private static NodeBlockProcessor createNodeBlockProcessor(BlockChainImpl blockChain) {
+    private static NodeBlockProcessor createNodeBlockProcessor(Blockchain blockChain) {
         Block genesis = new BlockGenerator().getGenesisBlock();
         genesis.setStateRoot(blockChain.getRepository().getRoot());
         genesis.flushRLP();

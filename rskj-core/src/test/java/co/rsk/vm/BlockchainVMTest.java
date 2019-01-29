@@ -22,6 +22,7 @@ import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.test.World;
 import org.ethereum.core.*;
 import org.ethereum.crypto.ECKey;

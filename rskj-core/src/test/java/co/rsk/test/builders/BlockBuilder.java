@@ -20,7 +20,7 @@ package co.rsk.test.builders;
 
 import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.test.World;
 import org.ethereum.core.Block;
@@ -38,7 +38,7 @@ import java.util.List;
  * Created by ajlopez on 8/6/2016.
  */
 public class BlockBuilder {
-    private BlockChainImpl blockChain;
+    private Blockchain blockChain;
     private final BlockGenerator blockGenerator;
     private Block parent;
     private long difficulty;
@@ -55,11 +55,11 @@ public class BlockBuilder {
         this(world.getBlockChain(), new BlockGenerator());
     }
 
-    public BlockBuilder(BlockChainImpl blockChain) {
+    public BlockBuilder(Blockchain blockChain) {
         this(blockChain, new BlockGenerator());
     }
 
-    public BlockBuilder(BlockChainImpl blockChain, BlockGenerator blockGenerator) {
+    public BlockBuilder(Blockchain blockChain, BlockGenerator blockGenerator) {
         this.blockChain = blockChain;
         this.blockGenerator = blockGenerator;
         // sane defaults

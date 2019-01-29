@@ -18,8 +18,8 @@
 
 package co.rsk.core;
 
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.NodeBlockProcessor;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.TransactionPool;
 import org.ethereum.facade.EthereumImpl;
 import org.ethereum.listener.CompositeEthereumListener;

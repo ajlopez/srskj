@@ -21,6 +21,7 @@ package org.ethereum.core;
 
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.RskAddress;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import org.ethereum.config.blockchain.GenesisConfig;
 import org.ethereum.config.net.MainNetConfig;

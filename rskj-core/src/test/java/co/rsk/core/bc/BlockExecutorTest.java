@@ -162,7 +162,7 @@ public class BlockExecutorTest {
         Assert.assertEquals(21000, result.getPaidFees().asBigInteger().intValueExact());
 
         Assert.assertNotNull(result.getReceiptsRoot());
-        Assert.assertArrayEquals(BlockChainImpl.calcReceiptsTrie(result.getTransactionReceipts()), result.getReceiptsRoot());
+        Assert.assertArrayEquals(Blockchain.calcReceiptsTrie(result.getTransactionReceipts()), result.getReceiptsRoot());
 
         Assert.assertFalse(Arrays.equals(repository.getRoot(), result.getStateRoot()));
 
@@ -255,7 +255,7 @@ public class BlockExecutorTest {
         Assert.assertEquals(42000, result.getPaidFees().asBigInteger().intValueExact());
 
         Assert.assertNotNull(result.getReceiptsRoot());
-        Assert.assertArrayEquals(BlockChainImpl.calcReceiptsTrie(result.getTransactionReceipts()), result.getReceiptsRoot());
+        Assert.assertArrayEquals(Blockchain.calcReceiptsTrie(result.getTransactionReceipts()), result.getReceiptsRoot());
         Assert.assertFalse(Arrays.equals(repository.getRoot(), result.getStateRoot()));
 
         Assert.assertNotNull(result.getLogsBloom());
@@ -622,7 +622,7 @@ public class BlockExecutorTest {
     }
 
     public static TestObjects generateBlockWithOneTransaction() {
-        BlockChainImpl blockchain = new BlockChainBuilder().build();
+        Blockchain blockchain = new BlockChainBuilder().build();
         Repository repository = blockchain.getRepository();
 
         Repository track = repository.startTracking();
@@ -662,7 +662,7 @@ public class BlockExecutorTest {
 
         List<BlockHeader> uncles = new ArrayList<>();
 
-        Block genesis = BlockChainImplTest.getGenesisBlock(blockchain);
+        Block genesis = BlockchainTest.getGenesisBlock(blockchain);
         genesis.setStateRoot(repository.getRoot());
         Block block = new BlockGenerator().createChildBlock(genesis, txs, uncles, 1, null);
 
@@ -776,7 +776,7 @@ public class BlockExecutorTest {
         Assert.assertEquals(Coin.valueOf(21000), result.getPaidFees());
 
         Assert.assertNotNull(result.getReceiptsRoot());
-        Assert.assertArrayEquals(BlockChainImpl.calcReceiptsTrie(result.getTransactionReceipts()), result.getReceiptsRoot());
+        Assert.assertArrayEquals(Blockchain.calcReceiptsTrie(result.getTransactionReceipts()), result.getReceiptsRoot());
 
         Assert.assertFalse(Arrays.equals(repository.getRoot(), result.getStateRoot()));
 
@@ -800,7 +800,7 @@ public class BlockExecutorTest {
 
     public static TestObjects generateBlockWithOneStrangeTransaction(int strangeTransactionType) {
 
-        BlockChainImpl blockchain = new BlockChainBuilder().build();
+        Blockchain blockchain = new BlockChainBuilder().build();
         Repository repository = blockchain.getRepository();
 
         Repository track = repository.startTracking();
@@ -840,7 +840,7 @@ public class BlockExecutorTest {
 
         List<BlockHeader> uncles = new ArrayList<>();
 
-        Block genesis = BlockChainImplTest.getGenesisBlock(blockchain);
+        Block genesis = BlockchainTest.getGenesisBlock(blockchain);
         genesis.setStateRoot(repository.getRoot());
         Block block = new BlockGenerator().createChildBlock(genesis, txs, uncles, 1, null);
 

@@ -21,6 +21,7 @@ package co.rsk.net.eth;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.bc.BlockChainStatus;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.net.*;
 import co.rsk.net.messages.BlockMessage;

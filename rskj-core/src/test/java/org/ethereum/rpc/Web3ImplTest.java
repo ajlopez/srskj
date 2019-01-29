@@ -21,7 +21,7 @@ package org.ethereum.rpc;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.*;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.TransactionPoolImpl;
 import co.rsk.mine.MinerClient;
 import co.rsk.mine.MinerServer;
@@ -220,7 +220,7 @@ public class Web3ImplTest {
     @Test
     public void getBalanceWithAccountAndBlockWithTransaction() throws Exception {
         World world = new World();
-        BlockChainImpl blockChain = world.getBlockChain();
+        Blockchain blockChain = world.getBlockChain();
         TransactionPool transactionPool = new TransactionPoolImpl(config, world.getRepository(), blockChain.getBlockStore(), null, null, null, 10, 100);
         Account acc1 = new AccountBuilder(world).name("acc1").balance(Coin.valueOf(10000000)).build();
         Account acc2 = new AccountBuilder(world).name("acc2").build();
@@ -414,7 +414,7 @@ public class Web3ImplTest {
         ReceiptStore receiptStore = new ReceiptStoreImpl(new HashMapDB());
         World world = new World(receiptStore);
 
-        BlockChainImpl blockChain = world.getBlockChain();
+        Blockchain blockChain = world.getBlockChain();
         TransactionPool transactionPool = new TransactionPoolImpl(config, world.getRepository(), blockChain.getBlockStore(), null, null, null, 10, 100);
         transactionPool.processBest(blockChain.getBestBlock());
         Web3Impl web3 = createWeb3(world, transactionPool, receiptStore);
@@ -1184,7 +1184,7 @@ public class Web3ImplTest {
         BigInteger nonce = BigInteger.ONE;
         ReceiptStore receiptStore = new ReceiptStoreImpl(new HashMapDB());
         World world = new World(receiptStore);
-        BlockChainImpl blockChain = world.getBlockChain();
+        Blockchain blockChain = world.getBlockChain();
         TransactionPool transactionPool = new TransactionPoolImpl(config, world.getRepository(), blockChain.getBlockStore(), null, null, null, 10, 100);
         Web3Impl web3 = createWeb3(world, transactionPool, receiptStore);
 
@@ -1280,7 +1280,7 @@ public class Web3ImplTest {
     }
 
     private Web3Impl createWeb3(Ethereum eth, World world, ReceiptStore receiptStore) {
-        BlockChainImpl blockChain = world.getBlockChain();
+        Blockchain blockChain = world.getBlockChain();
         TransactionPool transactionPool = new TransactionPoolImpl(config, world.getRepository(), blockChain.getBlockStore(), null, null, null, 10, 100);
         return createWeb3(eth, world, transactionPool, receiptStore);
     }
@@ -1290,7 +1290,7 @@ public class Web3ImplTest {
     }
 
     private Web3Impl createWeb3(World world, BlockProcessor blockProcessor, ReceiptStore receiptStore) {
-        BlockChainImpl blockChain = world.getBlockChain();
+        Blockchain blockChain = world.getBlockChain();
         TransactionPool transactionPool = new TransactionPoolImpl(config, world.getRepository(), blockChain.getBlockStore(), null, null, null, 10, 100);
         return createWeb3(Web3Mocks.getMockEthereum(), blockChain, transactionPool, blockChain.getBlockStore(), blockProcessor, new SimpleConfigCapabilities(), receiptStore);
     }

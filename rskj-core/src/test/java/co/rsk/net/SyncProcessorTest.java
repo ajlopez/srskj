@@ -6,6 +6,7 @@ import co.rsk.core.BlockDifficulty;
 import co.rsk.core.Coin;
 import co.rsk.core.DifficultyCalculator;
 import co.rsk.core.bc.BlockExecutor;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.messages.*;
 import co.rsk.net.simples.SimpleMessageChannel;
 import co.rsk.net.sync.DownloadingBodiesSyncState;

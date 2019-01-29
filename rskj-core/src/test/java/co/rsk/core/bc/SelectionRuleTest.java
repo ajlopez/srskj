@@ -2,7 +2,6 @@ package co.rsk.core.bc;
 
 import co.rsk.blockchain.utils.BlockGenerator;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.util.RskTestFactory;
 import org.junit.Test;
 
@@ -43,7 +42,7 @@ public class SelectionRuleTest {
         //Low hash is proved in smallerBlockHashTest
     }
 
-    private static BlockChainImpl createBlockchain() {
+    private static Blockchain createBlockchain() {
         RskTestFactory factory = new RskTestFactory();
         return factory.getBlockchain();
     }

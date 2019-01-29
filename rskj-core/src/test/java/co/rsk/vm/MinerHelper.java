@@ -20,7 +20,7 @@ package co.rsk.vm;
 
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.mine.GasLimitCalculator;
 import co.rsk.panic.PanicProcessor;
 import org.ethereum.core.*;
@@ -137,7 +137,7 @@ public class MinerHelper {
     public void completeBlock(Block newBlock, Block parent) {
         processBlock(newBlock, parent);
 
-        newBlock.getHeader().setReceiptsRoot(BlockChainImpl.calcReceiptsTrie(txReceipts));
+        newBlock.getHeader().setReceiptsRoot(Blockchain.calcReceiptsTrie(txReceipts));
         newBlock.getHeader().setStateRoot(latestStateRootHash);
         newBlock.getHeader().setGasUsed(totalGasUsed);
 

@@ -20,11 +20,11 @@ package co.rsk.net;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.bc.BlockUtils;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.net.messages.GetBlockMessage;
 import co.rsk.net.sync.SyncConfiguration;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.ImportResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -220,8 +220,8 @@ public class BlockSyncService {
 
     /**
      * getParentsNotInBlockchain returns all the ancestors of the block (including the block itself) that are not
-     * on the blockchain. It should be part of BlockChainImpl but is here because
-     * BlockChain is coupled with the old org.ethereum.db.BlockStore.
+     * on the blockchain. It should be part of Blockchain but is here because
+     * Blockchain is coupled with the old org.ethereum.db.BlockStore.
      *
      * @param block the base block.
      * @return A list with the blocks sorted by ascending block number (the base block would be the last element).
@@ -241,8 +241,8 @@ public class BlockSyncService {
 
     /**
      * getBlockFromStoreOrBlockchain retrieves a block from the store if it's available,
-     * or else from the blockchain. It should be part of BlockChainImpl but is here because
-     * BlockChain is coupled with the old org.ethereum.db.BlockStore.
+     * or else from the blockchain. It should be part of Blockchain but is here because
+     * Blockchain is coupled with the old org.ethereum.db.BlockStore.
      */
     @CheckForNull
     public Block getBlockFromStoreOrBlockchain(@Nonnull final byte[] hash) {

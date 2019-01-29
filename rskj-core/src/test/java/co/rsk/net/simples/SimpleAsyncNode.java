@@ -20,6 +20,7 @@ package co.rsk.net.simples;
 
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.DifficultyCalculator;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.*;
 import co.rsk.net.messages.Message;
 import co.rsk.net.sync.SyncConfiguration;
@@ -27,7 +28,6 @@ import co.rsk.scoring.PeerScoringManager;
 import co.rsk.test.World;
 import co.rsk.test.builders.BlockChainBuilder;
 import co.rsk.validators.DummyBlockValidationRule;
-import org.ethereum.core.Blockchain;
 import org.ethereum.rpc.Simples.SimpleChannelManager;
 import org.ethereum.util.RskMockFactory;
 import org.junit.Assert;

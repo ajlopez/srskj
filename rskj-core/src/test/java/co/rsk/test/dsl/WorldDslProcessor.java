@@ -21,7 +21,7 @@ package co.rsk.test.dsl;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.net.NodeBlockProcessor;
 import co.rsk.test.World;
@@ -175,7 +175,7 @@ public class WorldDslProcessor {
     }
 
     private void processBlockConnectCommand(DslCommand cmd) {
-        BlockChainImpl blockChain = world.getBlockChain();
+        Blockchain blockChain = world.getBlockChain();
         int nblocks = cmd.getArity();
 
         for (int k = 0; k < nblocks; k++) {

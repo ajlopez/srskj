@@ -19,10 +19,9 @@
 package co.rsk.blockchain;
 
 import co.rsk.blockchain.utils.BlockGenerator;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.test.World;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.ImportResult;
 import org.junit.Assert;
 import org.junit.Test;
@@ -192,7 +191,7 @@ public class BlockchainTest {
     }
 
 
-    private static BlockChainImpl createBlockchain() {
+    private static Blockchain createBlockchain() {
         World world = new World();
 
         return world.getBlockChain();

@@ -5,7 +5,7 @@ import co.rsk.config.RskSystemProperties;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.test.builders.AccountBuilder;
 import co.rsk.test.builders.BlockBuilder;
 import co.rsk.test.builders.TransactionBuilder;
@@ -25,7 +25,7 @@ import java.math.BigInteger;
  */
 public class ContractRunner {
     private final Repository repository;
-    private final BlockChainImpl blockchain;
+    private final Blockchain blockchain;
     private final BlockStore blockStore;
     private final ReceiptStore receiptStore;
 
@@ -40,7 +40,7 @@ public class ContractRunner {
     }
 
     private ContractRunner(Repository repository,
-                           BlockChainImpl blockchain,
+                           Blockchain blockchain,
                            BlockStore blockStore,
                            ReceiptStore receiptStore) {
         this.blockchain = blockchain;

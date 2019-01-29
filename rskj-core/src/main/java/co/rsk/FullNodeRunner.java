@@ -23,6 +23,7 @@ import co.rsk.blocks.FileBlockRecorder;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Rsk;
 import co.rsk.core.RskImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.mine.MinerClient;
 import co.rsk.mine.MinerServer;
 import co.rsk.mine.TxBuilder;

@@ -5,8 +5,8 @@ import co.rsk.config.ConfigUtils;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.DifficultyCalculator;
-import co.rsk.core.bc.BlockChainImpl;
-import co.rsk.core.bc.BlockChainImplTest;
+import co.rsk.core.bc.Blockchain;
+import co.rsk.core.bc.BlockchainTest;
 import co.rsk.net.NodeBlockProcessor;
 import co.rsk.test.builders.BlockChainBuilder;
 import co.rsk.validators.BlockUnclesValidationRule;
@@ -36,7 +36,7 @@ import java.time.Clock;
  * Created by SerAdmin on 1/3/2018.
  */
 public class MainNetMinerTest {
-    private BlockChainImpl blockchain;
+    private Blockchain blockchain;
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
@@ -66,8 +66,8 @@ public class MainNetMinerTest {
     @Test
     public void submitBitcoinBlockProofOfWorkNotGoodEnough() {
         /* We need a low target */
-        BlockChainImpl blockchain = new BlockChainBuilder().build();
-        Genesis gen = (Genesis) BlockChainImplTest.getGenesisBlock(blockchain);
+        Blockchain blockchain = new BlockChainBuilder().build();
+        Genesis gen = (Genesis) BlockchainTest.getGenesisBlock(blockchain);
         gen.getHeader().setDifficulty(new BlockDifficulty(BigInteger.valueOf(Long.MAX_VALUE)));
         blockchain.setStatus(gen, gen.getCumulativeDifficulty());
 
@@ -127,7 +127,7 @@ public class MainNetMinerTest {
         // medium minimum difficulty (this is not the mainnet nor the regnet)
         ////////////////////////////////////////////////////////////////////
         /* We need a low, but not too low, target */
-        Genesis gen = (Genesis) BlockChainImplTest.getGenesisBlock(blockchain);
+        Genesis gen = (Genesis) BlockchainTest.getGenesisBlock(blockchain);
         gen.getHeader().setDifficulty(new BlockDifficulty(BigInteger.valueOf(300000)));
         blockchain.setStatus(gen, gen.getCumulativeDifficulty());
 

@@ -18,13 +18,13 @@
 
 package co.rsk.net;
 
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.messages.BodyResponseMessage;
 import co.rsk.net.messages.NewBlockHashMessage;
 import co.rsk.net.simples.SimpleAsyncNode;
 import co.rsk.net.sync.SyncConfiguration;
 import co.rsk.net.utils.SyncUtils;
 import co.rsk.test.builders.BlockChainBuilder;
-import org.ethereum.core.Blockchain;
 import org.junit.Assert;
 import org.junit.Test;
 

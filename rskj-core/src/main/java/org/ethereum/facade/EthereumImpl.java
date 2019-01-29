@@ -20,6 +20,7 @@
 package org.ethereum.facade;
 
 import co.rsk.core.Coin;
+import co.rsk.core.bc.Blockchain;
 import org.ethereum.core.*;
 import org.ethereum.listener.CompositeEthereumListener;
 import org.ethereum.listener.EthereumListener;

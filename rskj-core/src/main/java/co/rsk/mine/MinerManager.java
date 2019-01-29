@@ -18,7 +18,7 @@
 
 package co.rsk.mine;
 
-import org.ethereum.core.Blockchain;
+import co.rsk.core.bc.Blockchain;
 
 /**
  * Created by ajlopez on 15/04/2017.

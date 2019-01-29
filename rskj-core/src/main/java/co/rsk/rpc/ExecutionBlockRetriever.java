@@ -18,10 +18,10 @@
 
 package co.rsk.rpc;
 
+import co.rsk.core.bc.Blockchain;
 import co.rsk.mine.BlockToMineBuilder;
 import co.rsk.mine.MinerServer;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.rpc.exception.JsonRpcInvalidParamException;
 import org.ethereum.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -18,10 +18,10 @@
 
 package co.rsk.core;
 
+import co.rsk.core.bc.Blockchain;
 import co.rsk.mine.MinerServer;
 import com.google.common.annotations.VisibleForTesting;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.TransactionPool;
 import org.ethereum.db.BlockStore;
 

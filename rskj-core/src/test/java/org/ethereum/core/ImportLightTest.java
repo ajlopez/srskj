@@ -22,7 +22,7 @@ package org.ethereum.core;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.RskAddress;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.core.bc.TransactionPoolImpl;
 import co.rsk.db.RepositoryImpl;
@@ -50,7 +50,7 @@ import java.util.HashMap;
  */
 public class ImportLightTest {
 
-    public static BlockChainImpl createBlockchain(Genesis genesis) {
+    public static Blockchain createBlockchain(Genesis genesis) {
         TestSystemProperties config = new TestSystemProperties();
         config.setBlockchainConfig(new GenesisConfig(new GenesisConfig.GenesisConstants() {
             @Override
@@ -72,7 +72,7 @@ public class ImportLightTest {
         TransactionPoolImpl transactionPool = new TransactionPoolImpl(config, repository, null, receiptStore, null, listener, 10, 100);
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockChainImpl blockchain = new BlockChainImpl(
+        Blockchain blockchain = new Blockchain(
                 repository,
                 blockStore,
                 receiptStore,

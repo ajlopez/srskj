@@ -19,11 +19,11 @@
 package co.rsk.rpc.modules.evm;
 
 import co.rsk.core.SnapshotManager;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.mine.MinerClient;
 import co.rsk.mine.MinerClock;
 import co.rsk.mine.MinerManager;
 import co.rsk.mine.MinerServer;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.TransactionPool;
 import org.ethereum.rpc.exception.JsonRpcInvalidParamException;
 import org.slf4j.Logger;

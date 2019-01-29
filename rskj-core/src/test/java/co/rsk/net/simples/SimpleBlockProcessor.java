@@ -18,6 +18,7 @@
 
 package co.rsk.net.simples;
 
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.net.BlockNodeInformation;
 import co.rsk.net.BlockProcessResult;
@@ -26,7 +27,6 @@ import co.rsk.net.MessageChannel;
 import co.rsk.net.messages.NewBlockHashesMessage;
 import org.ethereum.core.Block;
 import org.ethereum.core.BlockHeader;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.ImportResult;
 
 import java.time.Duration;

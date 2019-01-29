@@ -23,6 +23,7 @@ import co.rsk.config.RskSystemProperties;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.bc.BlockExecutor;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.db.RepositoryImpl;
 import co.rsk.db.TrieStorePoolOnMemory;

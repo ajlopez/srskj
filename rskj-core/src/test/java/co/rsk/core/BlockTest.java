@@ -20,7 +20,7 @@ package co.rsk.core;
 
 
 import co.rsk.blockchain.utils.BlockGenerator;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import org.ethereum.TestUtils;
 import org.ethereum.core.*;
@@ -28,7 +28,6 @@ import org.bouncycastle.util.encoders.Hex;
 import org.ethereum.crypto.ECKey;
 import org.ethereum.crypto.HashUtil;
 import org.ethereum.util.RLP;
-import org.ethereum.vm.PrecompiledContracts;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -68,7 +67,7 @@ public class BlockTest {
                 new byte[0],                    // mixHash
                 new byte[]{0},         // provisory nonce
                 HashUtil.EMPTY_TRIE_HASH,       // receipts root
-                BlockChainImpl.calcTxTrie(txs), // transaction root
+                Blockchain.calcTxTrie(txs), // transaction root
                 HashUtil.EMPTY_TRIE_HASH,    //EMPTY_TRIE_HASH,   // state root
                 txs,                            // transaction list
                 null,  // uncle list

@@ -2,6 +2,7 @@ package co.rsk.net;
 
 import co.rsk.core.DifficultyCalculator;
 import co.rsk.core.bc.BlockChainStatus;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.messages.*;
 import co.rsk.net.sync.*;
 import co.rsk.scoring.EventType;
@@ -11,7 +12,6 @@ import com.google.common.annotations.VisibleForTesting;
 import org.ethereum.core.Block;
 import org.ethereum.core.BlockHeader;
 import org.ethereum.core.BlockIdentifier;
-import org.ethereum.core.Blockchain;
 import org.ethereum.crypto.HashUtil;
 import org.ethereum.net.server.ChannelManager;
 import org.ethereum.validator.DependentBlockHeaderRule;

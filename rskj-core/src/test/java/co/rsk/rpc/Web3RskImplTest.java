@@ -20,6 +20,7 @@ package co.rsk.rpc;
 
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.*;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.rpc.modules.debug.DebugModule;
 import co.rsk.rpc.modules.debug.DebugModuleImpl;
@@ -31,7 +32,6 @@ import co.rsk.rpc.modules.personal.PersonalModuleWalletEnabled;
 import co.rsk.rpc.modules.txpool.TxPoolModule;
 import co.rsk.rpc.modules.txpool.TxPoolModuleImpl;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.Transaction;
 import org.ethereum.crypto.HashUtil;
 import org.ethereum.db.BlockStore;

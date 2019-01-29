@@ -6,7 +6,7 @@ import co.rsk.core.Coin;
 import co.rsk.core.ReversibleTransactionExecutor;
 import co.rsk.core.RskAddress;
 import co.rsk.core.RskImpl;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.core.bc.TransactionPoolImpl;
 import co.rsk.db.RepositoryImpl;
@@ -43,7 +43,7 @@ import java.util.HashMap;
  */
 public class RskTestFactory {
     private final TestSystemProperties config;
-    private BlockChainImpl blockchain;
+    private Blockchain blockchain;
     private IndexedBlockStore blockStore;
     private TransactionPool transactionPool;
     private RepositoryImpl repository;
@@ -132,10 +132,10 @@ public class RskTestFactory {
         return programInvokeFactory;
     }
 
-    public BlockChainImpl getBlockchain() {
+    public Blockchain getBlockchain() {
         if (blockchain == null) {
             final ProgramInvokeFactoryImpl programInvokeFactory1 = new ProgramInvokeFactoryImpl();
-            blockchain = new BlockChainImpl(
+            blockchain = new Blockchain(
                     getRepository(),
                     getBlockStore(),
                     getReceiptStore(),

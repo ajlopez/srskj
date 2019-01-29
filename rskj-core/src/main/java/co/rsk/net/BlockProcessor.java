@@ -18,10 +18,10 @@
 
 package co.rsk.net;
 
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.messages.NewBlockHashesMessage;
 import org.ethereum.core.Block;
 import org.ethereum.core.BlockHeader;
-import org.ethereum.core.Blockchain;
 
 import java.util.List;
 

@@ -107,7 +107,7 @@ public class BlockChainBuilder {
         return config;
     }
 
-    public BlockChainImpl build() {
+    public Blockchain build() {
         if (config == null){
             config = new TestSystemProperties();
         }
@@ -143,7 +143,7 @@ public class BlockChainBuilder {
         TransactionPoolImpl transactionPool = new TransactionPoolImpl(config, this.repository, this.blockStore, receiptStore, new ProgramInvokeFactoryImpl(), new TestCompositeEthereumListener(), 10, 100);
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockChainImpl blockChain = new BlockChainImpl(this.repository, this.blockStore, receiptStore, transactionPool, listener, blockValidator, false, 1, new BlockExecutor(this.repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        Blockchain blockChain = new Blockchain(this.repository, this.blockStore, receiptStore, transactionPool, listener, blockValidator, false, 1, new BlockExecutor(this.repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
                 txindex1,
                 block1.getCoinbase(),
@@ -227,7 +227,7 @@ public class BlockChainBuilder {
 
     public static Blockchain ofSize(int size, boolean mining, List<Account> accounts, List<Coin> balances) {
         BlockChainBuilder builder = new BlockChainBuilder();
-        BlockChainImpl blockChain = builder.build();
+        Blockchain blockChain = builder.build();
 
         BlockGenerator blockGenerator = new BlockGenerator();
         Block genesis = blockGenerator.getGenesisBlock();
@@ -257,7 +257,7 @@ public class BlockChainBuilder {
 
     public static Blockchain copy(Blockchain original) {
         BlockChainBuilder builder = new BlockChainBuilder();
-        BlockChainImpl blockChain = builder.build();
+        Blockchain blockChain = builder.build();
 
         long height = original.getStatus().getBestBlockNumber();
 

@@ -18,25 +18,21 @@
 
 package co.rsk.rpc.modules.eth;
 
-import co.rsk.bitcoinj.store.BlockStoreException;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.ReversibleTransactionExecutor;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.rpc.ExecutionBlockRetriever;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
-import org.ethereum.core.Repository;
 import org.ethereum.rpc.Web3;
 import org.ethereum.rpc.converters.CallArgumentsToByteArray;
 import org.ethereum.rpc.dto.CompilationResultDTO;
 import org.ethereum.rpc.exception.RskJsonRpcRequestException;
-import org.ethereum.vm.PrecompiledContracts;
 import org.ethereum.vm.program.ProgramResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.Map;
 
 import static org.ethereum.rpc.TypeConverter.toJsonHex;

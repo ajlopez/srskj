@@ -19,9 +19,9 @@
 package co.rsk.rpc;
 
 import co.rsk.config.TestSystemProperties;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.rpc.modules.personal.PersonalModule;
 import co.rsk.rpc.modules.personal.PersonalModuleWalletDisabled;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.TransactionPool;
 import org.ethereum.core.Repository;
 import org.ethereum.facade.Ethereum;

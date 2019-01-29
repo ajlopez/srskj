@@ -18,15 +18,12 @@
 
 package co.rsk.mine;
 
-import co.rsk.TestHelpers.Tx;
 import co.rsk.bitcoinj.core.*;
 import co.rsk.bitcoinj.params.RegTestParams;
 import co.rsk.config.ConfigUtils;
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.Coin;
 import co.rsk.core.DifficultyCalculator;
-import co.rsk.core.bc.BlockChainImpl;
-import co.rsk.crypto.Keccak256;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.validators.BlockUnclesValidationRule;
 import co.rsk.validators.BlockValidationRule;
 import co.rsk.validators.ProofOfWorkRule;
@@ -50,7 +47,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 /**
@@ -59,7 +55,7 @@ import static org.junit.Assert.*;
 public class MinerServerTest extends ParameterizedNetworkUpgradeTest {
 
     private final DifficultyCalculator difficultyCalculator;
-    private BlockChainImpl blockchain;
+    private Blockchain blockchain;
     private Repository repository;
     private BlockStore blockStore;
     private TransactionPool transactionPool;

@@ -25,6 +25,7 @@ import co.rsk.config.RskMiningConstants;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.net.BlockProcessor;
 import co.rsk.panic.PanicProcessor;
@@ -387,7 +388,7 @@ public class MinerServerImpl implements MinerServer {
      */
     @Override
     public void buildBlockToMine(@Nonnull Block newBlockParent, boolean createCompetitiveBlock) {
-        // See BlockChainImpl.calclBloom() if blocks has txs
+        // See Blockchain.calclBloom() if blocks has txs
         if (createCompetitiveBlock) {
             // Just for testing, mine on top of bestblock's parent
             newBlockParent = blockchain.getBlockByHash(newBlockParent.getParentHash().getBytes());

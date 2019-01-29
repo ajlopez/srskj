@@ -21,7 +21,7 @@ package co.rsk.mine;
 import co.rsk.config.ConfigUtils;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.*;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.TransactionPoolImpl;
 import co.rsk.rpc.ExecutionBlockRetriever;
 import co.rsk.rpc.Web3RskImpl;
@@ -74,7 +74,7 @@ public class TransactionModuleTest {
     @Test
     public void sendTransactionMustNotBeMined() {
         World world = new World();
-        BlockChainImpl blockchain = world.getBlockChain();
+        Blockchain blockchain = world.getBlockChain();
 
         Repository repository = world.getRepository();
 
@@ -97,7 +97,7 @@ public class TransactionModuleTest {
     @Test
     public void sendTransactionMustBeMined() {
         World world = new World();
-        BlockChainImpl blockchain = world.getBlockChain();
+        Blockchain blockchain = world.getBlockChain();
 
         Repository repository = blockchain.getRepository();
 
@@ -126,7 +126,7 @@ public class TransactionModuleTest {
 
         ReceiptStore receiptStore = new ReceiptStoreImpl(new HashMapDB());
         World world = new World(receiptStore);
-        BlockChainImpl blockchain = world.getBlockChain();
+        Blockchain blockchain = world.getBlockChain();
 
         Repository repository = blockchain.getRepository();
 
@@ -151,7 +151,7 @@ public class TransactionModuleTest {
 
         ReceiptStore receiptStore = new ReceiptStoreImpl(new HashMapDB());
         World world = new World(receiptStore);
-        BlockChainImpl blockchain = world.getBlockChain();
+        Blockchain blockchain = world.getBlockChain();
 
         Repository repository = blockchain.getRepository();
 
@@ -177,7 +177,7 @@ public class TransactionModuleTest {
 
         ReceiptStore receiptStore = new ReceiptStoreImpl(new HashMapDB());
         World world = new World(receiptStore);
-        BlockChainImpl blockchain = world.getBlockChain();
+        Blockchain blockchain = world.getBlockChain();
 
         Repository repository = blockchain.getRepository();
 
@@ -212,7 +212,7 @@ public class TransactionModuleTest {
         return web3.eth_sendRawTransaction(rawData);
     }
 
-    private Transaction getTransactionFromBlockWhichWasSend(BlockChainImpl blockchain, String tx) {
+    private Transaction getTransactionFromBlockWhichWasSend(Blockchain blockchain, String tx) {
         Transaction txInBlock = null;
 
         for (Transaction x : blockchain.getBestBlock().getTransactionsList()) {
@@ -251,7 +251,7 @@ public class TransactionModuleTest {
         return args;
     }
 
-    private Web3Impl createEnvironment(BlockChainImpl blockchain, ReceiptStore receiptStore, Repository repository, TransactionPool transactionPool, BlockStore blockStore, boolean mineInstant) {
+    private Web3Impl createEnvironment(Blockchain blockchain, ReceiptStore receiptStore, Repository repository, TransactionPool transactionPool, BlockStore blockStore, boolean mineInstant) {
 
         ConfigCapabilities configCapabilities = new SimpleConfigCapabilities();
         CompositeEthereumListener compositeEthereumListener = new CompositeEthereumListener();

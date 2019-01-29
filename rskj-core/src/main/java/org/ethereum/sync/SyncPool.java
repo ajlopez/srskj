@@ -20,10 +20,10 @@
 package org.ethereum.sync;
 
 import co.rsk.core.BlockDifficulty;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.NodeID;
 import org.bouncycastle.util.encoders.Hex;
 import org.ethereum.config.SystemProperties;
-import org.ethereum.core.Blockchain;
 import org.ethereum.listener.EthereumListener;
 import org.ethereum.net.NodeHandler;
 import org.ethereum.net.NodeManager;

@@ -74,7 +74,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  */
 
-public class BlockChainImpl implements Blockchain {
+public class Blockchain {
     private static final Logger logger = LoggerFactory.getLogger("blockchain");
     private static final PanicProcessor panicProcessor = new PanicProcessor();
 
@@ -97,15 +97,15 @@ public class BlockChainImpl implements Blockchain {
     private BlockRecorder blockRecorder;
     private boolean noValidation;
 
-    public BlockChainImpl(Repository repository,
-                          BlockStore blockStore,
-                          ReceiptStore receiptStore,
-                          TransactionPool transactionPool,
-                          EthereumListener listener,
-                          BlockValidator blockValidator,
-                          boolean flushEnabled,
-                          int flushNumberOfBlocks,
-                          BlockExecutor blockExecutor) {
+    public Blockchain(Repository repository,
+                      BlockStore blockStore,
+                      ReceiptStore receiptStore,
+                      TransactionPool transactionPool,
+                      EthereumListener listener,
+                      BlockValidator blockValidator,
+                      boolean flushEnabled,
+                      int flushNumberOfBlocks,
+                      BlockExecutor blockExecutor) {
         this.repository = repository;
         this.blockStore = blockStore;
         this.receiptStore = receiptStore;
@@ -117,12 +117,10 @@ public class BlockChainImpl implements Blockchain {
         this.transactionPool = transactionPool;
     }
 
-    @Override
     public Repository getRepository() {
         return repository;
     }
 
-    @Override
     public BlockStore getBlockStore() { return blockStore; }
 
     @VisibleForTesting
@@ -130,7 +128,6 @@ public class BlockChainImpl implements Blockchain {
         this.blockValidator = validator;
     }
 
-    @Override
     public long getSize() {
         return status.getBestBlock().getNumber() + 1;
     }
@@ -145,7 +142,6 @@ public class BlockChainImpl implements Blockchain {
      *      INVALID_BLOCK   the block has invalida data/state
      *      EXISTS  the block was already processed
      */
-    @Override
     public ImportResult tryToConnect(Block block) {
         this.lock.readLock().lock();
 
@@ -186,12 +182,10 @@ public class BlockChainImpl implements Blockchain {
         }
     }
 
-    @Override
     public void suspendProcess() {
         this.lock.writeLock().lock();
     }
 
-    @Override
     public void resumeProcess() {
         this.lock.writeLock().unlock();
     }
@@ -340,7 +334,6 @@ public class BlockChainImpl implements Blockchain {
         }
     }
 
-    @Override
     public BlockChainStatus getStatus() {
         return status;
     }
@@ -351,7 +344,6 @@ public class BlockChainImpl implements Blockchain {
      * @param block        The new best block
      * @param totalDifficulty   The total difficulty of the new blockchain
      */
-    @Override
     public void setStatus(Block block, BlockDifficulty totalDifficulty) {
         synchronized (accessLock) {
             status = new BlockChainStatus(block, totalDifficulty);
@@ -360,24 +352,20 @@ public class BlockChainImpl implements Blockchain {
         }
     }
 
-    @Override
     public Block getBlockByHash(byte[] hash) {
         return blockStore.getBlockByHash(hash);
     }
 
-    @Override
     public List<Block> getBlocksByNumber(long number) {
         return blockStore.getChainBlocksByNumber(number);
     }
 
-    @Override
     public List<BlockInformation> getBlocksInformationByNumber(long number) {
         synchronized (accessLock) {
             return this.blockStore.getBlocksInformationByNumber(number);
         }
     }
 
-    @Override
     public boolean hasBlockInSomeBlockchain(@Nonnull final byte[] hash) {
         final Block block = this.getBlockByHash(hash);
         return block != null && this.blockIsInIndex(block);
@@ -396,7 +384,6 @@ public class BlockChainImpl implements Blockchain {
         return blocks.stream().anyMatch(block::fastEquals);
     }
 
-    @Override
     public void removeBlocksByNumber(long number) {
         this.lock.writeLock().lock();
 
@@ -412,15 +399,12 @@ public class BlockChainImpl implements Blockchain {
         }
     }
 
-    @Override
     public Block getBlockByNumber(long number) { return blockStore.getChainBlockByNumber(number); }
 
-    @Override
     public void setBestBlock(Block block) {
         this.setStatus(block, status.getTotalDifficulty());
     }
 
-    @Override
     public Block getBestBlock() {
         return this.status.getBestBlock();
     }
@@ -435,7 +419,6 @@ public class BlockChainImpl implements Blockchain {
      * @param hash      the hash of the transaction
      * @return transaction info, null if the transaction does not exist
      */
-    @Override
     public TransactionInfo getTransactionInfo(byte[] hash) {
         TransactionInfo txInfo = receiptStore.get(hash);
 
@@ -449,22 +432,19 @@ public class BlockChainImpl implements Blockchain {
         return txInfo;
     }
 
-    @Override
     public BlockDifficulty getTotalDifficulty() {
         return status.getTotalDifficulty();
     }
 
-    @Override
     public void setTotalDifficulty(BlockDifficulty totalDifficulty) {
         setStatus(status.getBestBlock(), totalDifficulty);
     }
 
-    @Override @VisibleForTesting
+    @VisibleForTesting
     public byte[] getBestBlockHash() {
         return getBestBlock().getHash().getBytes();
     }
 
-    @Override
     public void setBlockRecorder(BlockRecorder blockRecorder) {
         this.blockRecorder = blockRecorder;
     }

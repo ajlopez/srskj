@@ -20,6 +20,7 @@ package co.rsk.rpc;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.NetworkStateExporter;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.metrics.HashRateCalculator;
 import co.rsk.mine.*;
 import co.rsk.net.BlockProcessor;

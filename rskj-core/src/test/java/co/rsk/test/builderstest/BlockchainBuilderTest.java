@@ -18,7 +18,7 @@
 
 package co.rsk.test.builderstest;
 
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.test.builders.BlockChainBuilder;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,11 +26,11 @@ import org.junit.Test;
 /**
  * Created by ajlopez on 8/7/2016.
  */
-public class BlockChainBuilderTest {
+public class BlockchainBuilderTest {
     @Test
     public void createBlockChain() {
         BlockChainBuilder builder = new BlockChainBuilder();
-        BlockChainImpl blockChain = builder.build();
+        Blockchain blockChain = builder.build();
 
         Assert.assertNotNull(blockChain);
         Assert.assertNotNull(blockChain.getRepository());

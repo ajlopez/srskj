@@ -20,7 +20,7 @@ package co.rsk.test.builders;
 
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.Coin;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import co.rsk.test.World;
 import org.ethereum.core.Account;
 import org.ethereum.core.Block;
@@ -35,7 +35,7 @@ public class AccountBuilder {
     private String name;
     private Coin balance;
     private byte[] code;
-    private BlockChainImpl blockChain;
+    private Blockchain blockChain;
 
     public AccountBuilder() {
     }
@@ -44,7 +44,7 @@ public class AccountBuilder {
         this(world.getBlockChain());
     }
 
-    public AccountBuilder(BlockChainImpl blockChain) {
+    public AccountBuilder(Blockchain blockChain) {
         this.blockChain = blockChain;
     }
 

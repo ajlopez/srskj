@@ -51,14 +51,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class BlockChainImplTest {
+public class BlockchainTest {
 
     private static final TestSystemProperties config = new TestSystemProperties();
 
     @Test
     public void addGenesisBlock() {
-        BlockChainImpl blockChain = createBlockChain();
-        Block genesis = BlockChainImplTest.getGenesisBlock(blockChain);
+        Blockchain blockChain = createBlockChain();
+        Block genesis = BlockchainTest.getGenesisBlock(blockChain);
 
         Assert.assertEquals(ImportResult.IMPORTED_BEST, blockChain.tryToConnect(genesis));
 
@@ -79,8 +79,8 @@ public class BlockChainImplTest {
     @Test
     public void onBestBlockTest() {
         BlockExecutorTest.SimpleEthereumListener listener = new BlockExecutorTest.SimpleEthereumListener();
-        BlockChainImpl blockChain = createBlockChain(listener);
-        Block genesis = BlockChainImplTest.getGenesisBlock(blockChain);
+        Blockchain blockChain = createBlockChain(listener);
+        Block genesis = BlockchainTest.getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis,0,2l);
         Block block1b = blockGenerator.createChildBlock(genesis,0,1l);
@@ -96,8 +96,8 @@ public class BlockChainImplTest {
     }
     @Test
     public void addGenesisBlockUsingRepository() {
-        BlockChainImpl blockChain = createBlockChain();
-        Block genesis = BlockChainImplTest.getGenesisBlock(blockChain);
+        Blockchain blockChain = createBlockChain();
+        Block genesis = BlockchainTest.getGenesisBlock(blockChain);
 
         Assert.assertEquals(ImportResult.IMPORTED_BEST, blockChain.tryToConnect(genesis));
 
@@ -122,8 +122,8 @@ public class BlockChainImplTest {
 
     @Test
     public void setStatusUsingRskGenesis() {
-        BlockChainImpl blockChain = createBlockChain();
-        Block genesis = BlockChainImplTest.getGenesisBlock(blockChain);
+        Blockchain blockChain = createBlockChain();
+        Block genesis = BlockchainTest.getGenesisBlock(blockChain);
 
         blockChain.setStatus(genesis, genesis.getCumulativeDifficulty());
         BlockChainStatus status = blockChain.getStatus();
@@ -146,8 +146,8 @@ public class BlockChainImplTest {
 
     @Test
     public void setStatusUsingRskGenesisAndOldSetMethods() {
-        BlockChainImpl blockChain = createBlockChain();
-        Block genesis = BlockChainImplTest.getGenesisBlock(blockChain);
+        Blockchain blockChain = createBlockChain();
+        Block genesis = BlockchainTest.getGenesisBlock(blockChain);
 
         blockChain.setBestBlock(genesis);
         blockChain.setTotalDifficulty(genesis.getCumulativeDifficulty());
@@ -175,7 +175,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addBlockOne() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -202,7 +202,7 @@ public class BlockChainImplTest {
 
     @Test
     public void nullBlockAsInvalidBlock() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
 
         Assert.assertEquals(ImportResult.IMPORTED_BEST, blockChain.tryToConnect(genesis));
@@ -211,7 +211,7 @@ public class BlockChainImplTest {
 
     @Test
     public void rejectBlockOneUsingBlockHeaderValidator() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -224,7 +224,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addInvalidBlockOneBadStateRoot() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -237,7 +237,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addInvalidBlockOneBadReceiptsRoot() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -250,7 +250,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addInvalidBlockOneBadLogsBloom() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -263,7 +263,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addInvalidBlockOneBadGasUsed() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -275,7 +275,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addInvalidBlockOneBadPaidFees() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -287,7 +287,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addInvalidBlockBadStateRoot() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -299,7 +299,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addInvalidBlockBadUnclesHash() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -312,7 +312,7 @@ public class BlockChainImplTest {
     @Test
     public void importNotBest() {
         BlockExecutorTest.SimpleEthereumListener listener = new BlockExecutorTest.SimpleEthereumListener();
-        BlockChainImpl blockChain = createBlockChain(listener);
+        Blockchain blockChain = createBlockChain(listener);
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis);
@@ -350,7 +350,7 @@ public class BlockChainImplTest {
 
     @Test
     public void getBlocksByNumber() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis,0,2);
@@ -376,7 +376,7 @@ public class BlockChainImplTest {
 
     @Test
     public void getBlockByNumber() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis);
@@ -419,7 +419,7 @@ public class BlockChainImplTest {
 
     @Test
     public void switchToOtherChain() throws InterruptedException {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis,0,2l);
@@ -450,7 +450,7 @@ public class BlockChainImplTest {
 
     @Test
     public void rejectSwitchToOtherChainUsingBlockHeaderValidation() throws InterruptedException {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis);
@@ -471,7 +471,7 @@ public class BlockChainImplTest {
 
     @Test
     public void switchToOtherChainInvalidBadBlockBadStateRoot() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis,0,2l);
@@ -487,7 +487,7 @@ public class BlockChainImplTest {
     }
 
     private void switchToOtherChainInvalidBadBlockBadReceiptsRootHelper(
-            BlockChainImpl blockChain, Block genesis,
+            Blockchain blockChain, Block genesis,
             Block firstBlock,
             Block secondBlock) {
         Block thirdBlock = new BlockGenerator().createChildBlock(firstBlock);
@@ -500,7 +500,7 @@ public class BlockChainImplTest {
 
     @Test
     public void switchToOtherChainInvalidBadBlockBadReceiptsRoot() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis);
@@ -517,7 +517,7 @@ public class BlockChainImplTest {
 
     @Test
     public void switchToOtherChainInvalidBadBlockBadLogsBloom() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis);
@@ -541,7 +541,7 @@ public class BlockChainImplTest {
 
     @Test
     public void switchToOtherChainInvalidBadGasUsed() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis,0,2);
@@ -558,7 +558,7 @@ public class BlockChainImplTest {
 
     @Test
     public void switchToOtherChainInvalidBadPaidFees() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis);
@@ -580,7 +580,7 @@ public class BlockChainImplTest {
 
     @Test
     public void switchToOtherChainByDifficulty() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis);
@@ -606,7 +606,7 @@ public class BlockChainImplTest {
 
     @Test
     public void rejectBlockWithoutParent() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block1 = blockGenerator.createChildBlock(genesis);
@@ -630,7 +630,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addAlreadyInChainBlock() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
 
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
@@ -654,14 +654,14 @@ public class BlockChainImplTest {
 
     @Test
     public void getUnknownBlockByHash() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
 
         Assert.assertNull(blockChain.getBlockByHash(new BlockGenerator().getBlock(1).getHash().getBytes()));
     }
 
     @Test
     public void getKnownBlocksByHash() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
 
@@ -682,7 +682,7 @@ public class BlockChainImplTest {
     @Test
     public void validateMinedBlockOne() {
         BlockExecutorTest.SimpleEthereumListener listener = new BlockExecutorTest.SimpleEthereumListener();
-        BlockChainImpl blockChain = createBlockChain(listener);
+        Blockchain blockChain = createBlockChain(listener);
         Block genesis = getGenesisBlock(blockChain);
         Block block = new BlockGenerator().createChildBlock(genesis);
 
@@ -694,7 +694,7 @@ public class BlockChainImplTest {
     @Test
     public void validateMinedBlockSeven() {
         BlockExecutorTest.SimpleEthereumListener listener = new BlockExecutorTest.SimpleEthereumListener();
-        BlockChainImpl blockChain = createBlockChain(listener);
+        Blockchain blockChain = createBlockChain(listener);
         Block genesis = getGenesisBlock(blockChain);
 
         BlockGenerator blockGenerator = new BlockGenerator();
@@ -719,7 +719,7 @@ public class BlockChainImplTest {
 
     @Test
     public void addSevenMinedBlocks() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Block genesis = getGenesisBlock(blockChain);
 
         BlockGenerator blockGenerator = new BlockGenerator();
@@ -743,14 +743,14 @@ public class BlockChainImplTest {
 
     @Test
     public void getUnknownTransactionInfoAsNull() {
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         Assert.assertNull(blockChain.getTransactionInfo(new byte[] { 0x01 }));
     }
 
     @Test
     public void getTransactionInfo() {
         BlockExecutorTest.TestObjects objects = BlockExecutorTest.generateBlockWithOneTransaction();
-        BlockChainImpl blockChain = createBlockChain(objects.getRepository(), new BlockExecutorTest.SimpleEthereumListener());
+        Blockchain blockChain = createBlockChain(objects.getRepository(), new BlockExecutorTest.SimpleEthereumListener());
 
         Assert.assertEquals(ImportResult.IMPORTED_BEST, blockChain.tryToConnect(objects.getParent()));
         Assert.assertEquals(ImportResult.IMPORTED_BEST, blockChain.tryToConnect(objects.getBlock()));
@@ -762,7 +762,7 @@ public class BlockChainImplTest {
     public void listenTransactionSummary() {
         BlockExecutorTest.TestObjects objects = BlockExecutorTest.generateBlockWithOneTransaction();
         BlockExecutorTest.SimpleEthereumListener listener = new BlockExecutorTest.SimpleEthereumListener();
-        BlockChainImpl blockChain = createBlockChain(objects.getRepository(), listener);
+        Blockchain blockChain = createBlockChain(objects.getRepository(), listener);
 
         Assert.assertEquals(ImportResult.IMPORTED_BEST, blockChain.tryToConnect(objects.getParent()));
         Assert.assertNull(listener.getLatestSummary());
@@ -774,7 +774,7 @@ public class BlockChainImplTest {
     @Test
     public void listenOnBlockWhenAddingBlock() {
         BlockExecutorTest.SimpleEthereumListener listener = new BlockExecutorTest.SimpleEthereumListener();
-        BlockChainImpl blockChain = createBlockChain(listener);
+        Blockchain blockChain = createBlockChain(listener);
 
         Block genesis = getGenesisBlock(blockChain);
         Block block1 = new BlockGenerator().createChildBlock(genesis);
@@ -790,7 +790,7 @@ public class BlockChainImplTest {
     @Test
     public void useBlockRecorder() {
         DummyBlockRecorder recorder = new DummyBlockRecorder();
-        BlockChainImpl blockChain = createBlockChain();
+        Blockchain blockChain = createBlockChain();
         blockChain.setBlockRecorder(recorder);
 
         Block genesis = getGenesisBlock(blockChain);
@@ -810,7 +810,7 @@ public class BlockChainImplTest {
         validatorBuilder.addBlockRootValidationRule().addBlockUnclesValidationRule(blockStore)
                 .addBlockTxsValidationRule(repository).addPrevMinGasPriceRule().addTxsMinGasPriceRule();
 
-        BlockChainImpl blockChain = createBlockChain(repository, blockStore, validatorBuilder.build());
+        Blockchain blockChain = createBlockChain(repository, blockStore, validatorBuilder.build());
 
         Block genesis = getGenesisBlock(blockChain);
 
@@ -841,7 +841,7 @@ public class BlockChainImplTest {
         validatorBuilder.blockStore(blockStore)
                 .addPrevMinGasPriceRule().addTxsMinGasPriceRule();
 
-        BlockChainImpl blockChain = createBlockChain(repository, blockStore, validatorBuilder.build());
+        Blockchain blockChain = createBlockChain(repository, blockStore, validatorBuilder.build());
 
         Repository track = repository.startTracking();
 
@@ -888,15 +888,15 @@ public class BlockChainImplTest {
         Assert.assertEquals(ImportResult.IMPORTED_BEST, blockChain.tryToConnect(block));
     }
 
-    public static BlockChainImpl createBlockChain() {
+    public static Blockchain createBlockChain() {
         return createBlockChain(null);
     }
 
-    public static BlockChainImpl createBlockChain(BlockExecutorTest.SimpleEthereumListener listener) {
+    public static Blockchain createBlockChain(BlockExecutorTest.SimpleEthereumListener listener) {
         return new BlockChainBuilder().setListener(listener).build();
     }
 
-    private static BlockChainImpl createBlockChain(Repository repository, BlockExecutorTest.SimpleEthereumListener listener) {
+    private static Blockchain createBlockChain(Repository repository, BlockExecutorTest.SimpleEthereumListener listener) {
         IndexedBlockStore blockStore = new IndexedBlockStore(new HashMap<>(), new HashMapDB(), null);
 
         BlockValidatorBuilder validatorBuilder = new BlockValidatorBuilder();
@@ -908,18 +908,18 @@ public class BlockChainImplTest {
         return createBlockChain(repository, blockStore, blockValidator, listener);
     }
 
-    private static BlockChainImpl createBlockChain(Repository repository, IndexedBlockStore blockStore, BlockValidatorImpl blockValidator) {
+    private static Blockchain createBlockChain(Repository repository, IndexedBlockStore blockStore, BlockValidatorImpl blockValidator) {
         return createBlockChain(repository, blockStore, blockValidator, null);
     }
 
-    private static BlockChainImpl createBlockChain(Repository repository, IndexedBlockStore blockStore, BlockValidatorImpl blockValidator, BlockExecutorTest.SimpleEthereumListener listener) {
+    private static Blockchain createBlockChain(Repository repository, IndexedBlockStore blockStore, BlockValidatorImpl blockValidator, BlockExecutorTest.SimpleEthereumListener listener) {
         KeyValueDataSource ds = new HashMapDB();
         ds.init();
         ReceiptStore receiptStore = new ReceiptStoreImpl(ds);
 
         TransactionPoolImpl transactionPool = new TransactionPoolImpl(config, repository, blockStore, receiptStore, null, listener, 10, 100);
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        return new BlockChainImpl(repository, blockStore, receiptStore, transactionPool, listener, blockValidator, false, 1, new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        return new Blockchain(repository, blockStore, receiptStore, transactionPool, listener, blockValidator, false, 1, new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
                 txindex1,
                 block1.getCoinbase(),
@@ -941,7 +941,7 @@ public class BlockChainImplTest {
         )));
     }
 
-    public static Block getGenesisBlock(BlockChainImpl blockChain) {
+    public static Block getGenesisBlock(Blockchain blockChain) {
         Repository repository = blockChain.getRepository();
 
         Genesis genesis = GenesisLoader.loadGenesis(config, "rsk-unittests.json", BigInteger.ZERO, true);
@@ -957,7 +957,7 @@ public class BlockChainImplTest {
         return genesis;
     }
 
-    private static BlockExecutor createExecutor(BlockChainImpl blockChain, BlockExecutorTest.SimpleEthereumListener listener) {
+    private static BlockExecutor createExecutor(Blockchain blockChain, BlockExecutorTest.SimpleEthereumListener listener) {
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
         return new BlockExecutor(blockChain.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,

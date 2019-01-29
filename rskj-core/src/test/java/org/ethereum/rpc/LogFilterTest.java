@@ -20,7 +20,7 @@ package org.ethereum.rpc;
 
 import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.core.RskAddress;
-import co.rsk.core.bc.BlockChainImpl;
+import co.rsk.core.bc.Blockchain;
 import org.ethereum.core.Block;
 import org.ethereum.util.RskTestFactory;
 import org.junit.Assert;
@@ -56,7 +56,7 @@ public class LogFilterTest {
 
     @Test
     public void eventAfterBlockWithEvent() {
-        BlockChainImpl blockchain = new RskTestFactory().getBlockchain();
+        Blockchain blockchain = new RskTestFactory().getBlockchain();
         Web3ImplLogsTest.addEmptyBlockToBlockchain(blockchain);
         Block block = blockchain.getBestBlock();
 
@@ -74,7 +74,7 @@ public class LogFilterTest {
 
     @Test
     public void twoEventsAfterTwoBlocksWithEventAndToLatestBlock() {
-        BlockChainImpl blockchain = new RskTestFactory().getBlockchain();
+        Blockchain blockchain = new RskTestFactory().getBlockchain();
         Web3ImplLogsTest.addEmptyBlockToBlockchain(blockchain);
         Block block = blockchain.getBestBlock();
 
@@ -93,7 +93,7 @@ public class LogFilterTest {
 
     @Test
     public void onlyOneEventAfterTwoBlocksWithEventAndFromLatestBlock() {
-        BlockChainImpl blockchain = new RskTestFactory().getBlockchain();
+        Blockchain blockchain = new RskTestFactory().getBlockchain();
         Web3ImplLogsTest.addEmptyBlockToBlockchain(blockchain);
         Block block = blockchain.getBestBlock();
 

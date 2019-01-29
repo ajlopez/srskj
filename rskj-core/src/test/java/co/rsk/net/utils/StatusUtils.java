@@ -1,7 +1,7 @@
 package co.rsk.net.utils;
 
+import co.rsk.core.bc.Blockchain;
 import co.rsk.net.Status;
-import org.ethereum.core.Blockchain;
 
 public class StatusUtils {
     public static Status fromBlockchain(Blockchain blockchain) {

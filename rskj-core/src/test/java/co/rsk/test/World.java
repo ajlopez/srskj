@@ -19,8 +19,8 @@
 package co.rsk.test;
 
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.bc.BlockChainImpl;
-import co.rsk.core.bc.BlockChainImplTest;
+import co.rsk.core.bc.Blockchain;
+import co.rsk.core.bc.BlockchainTest;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.crypto.Keccak256;
 import co.rsk.net.BlockNodeInformation;
@@ -41,7 +41,7 @@ import java.util.Map;
  * Created by ajlopez on 8/7/2016.
  */
 public class World {
-    private BlockChainImpl blockChain;
+    private Blockchain blockChain;
     private NodeBlockProcessor blockProcessor;
     private BlockExecutor blockExecutor;
     private Map<String, Block> blocks = new HashMap<>();
@@ -60,15 +60,15 @@ public class World {
         this(new BlockChainBuilder().setReceiptStore(receiptStore).build());
     }
 
-    public World(BlockChainImpl blockChain) {
+    public World(Blockchain blockChain) {
         this(blockChain, null);
     }
 
-    public World(BlockChainImpl blockChain, Genesis genesis) {
+    public World(Blockchain blockChain, Genesis genesis) {
         this.blockChain = blockChain;
 
         if (genesis == null) {
-            genesis = (Genesis) BlockChainImplTest.getGenesisBlock(blockChain);
+            genesis = (Genesis) BlockchainTest.getGenesisBlock(blockChain);
             this.blockChain.setStatus(genesis, genesis.getCumulativeDifficulty());
         }
 
@@ -112,7 +112,7 @@ public class World {
         return this.blockExecutor;
     }
 
-    public BlockChainImpl getBlockChain() { return this.blockChain; }
+    public Blockchain getBlockChain() { return this.blockChain; }
 
     public Block getBlockByName(String name) {
         return blocks.get(name);

@@ -19,11 +19,11 @@
 
 package org.ethereum.net.eth.handler;
 
+import co.rsk.core.bc.Blockchain;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.ethereum.config.SystemProperties;
 import org.ethereum.core.Block;
-import org.ethereum.core.Blockchain;
 import org.ethereum.core.TransactionReceipt;
 import org.ethereum.listener.CompositeEthereumListener;
 import org.ethereum.listener.EthereumListener;
