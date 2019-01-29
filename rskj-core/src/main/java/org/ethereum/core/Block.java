@@ -25,13 +25,11 @@ import co.rsk.core.RskAddress;
 import co.rsk.crypto.Keccak256;
 import co.rsk.panic.PanicProcessor;
 import co.rsk.trie.Trie;
-import co.rsk.trie.TrieImpl;
 import org.ethereum.crypto.Keccak256Helper;
 import org.ethereum.rpc.TypeConverter;
 import org.ethereum.util.RLP;
 import org.ethereum.util.RLPElement;
 import org.ethereum.util.RLPList;
-import org.ethereum.vm.PrecompiledContracts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.bouncycastle.util.Arrays;
@@ -701,10 +699,10 @@ public class Block {
 
     public static Trie getTxTrie(List<Transaction> transactions){
         if (transactions == null) {
-            return new TrieImpl();
+            return new Trie();
         }
 
-        Trie txsState = new TrieImpl();
+        Trie txsState = new Trie();
         for (int i = 0; i < transactions.size(); i++) {
             Transaction transaction = transactions.get(i);
             txsState = txsState.put(RLP.encodeInt(i), transaction.getEncoded());

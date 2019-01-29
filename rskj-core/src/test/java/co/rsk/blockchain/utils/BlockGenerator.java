@@ -25,7 +25,6 @@ import co.rsk.mine.MinimumGasPriceCalculator;
 import co.rsk.peg.simples.SimpleBlock;
 import co.rsk.peg.simples.SimpleRskTransaction;
 import co.rsk.trie.Trie;
-import co.rsk.trie.TrieImpl;
 import org.apache.commons.collections4.CollectionUtils;
 import org.bouncycastle.pqc.math.linearalgebra.ByteUtils;
 import org.bouncycastle.util.encoders.Hex;
@@ -115,7 +114,7 @@ public class BlockGenerator {
     }
 
     private byte[] generateRootHash(Map<RskAddress, InitialAddressState> premine){
-        Trie state = new TrieImpl(null, true);
+        Trie state = new Trie(null, true);
 
         for (RskAddress addr : premine.keySet()) {
             state = state.put(addr.getBytes(), premine.get(addr).getAccountState().getEncoded());

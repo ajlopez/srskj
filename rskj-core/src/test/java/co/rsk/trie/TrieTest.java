@@ -24,10 +24,10 @@ import org.junit.Test;
 /**
  * Created by ajlopez on 22/08/2016.
  */
-public class TrieImplTest {
+public class TrieTest {
     @Test
     public void bytesToKey() {
-        Assert.assertArrayEquals(new byte[] { 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00 }, TrieImpl.bytesToKey(new byte[] { (byte)0xaa }));
+        Assert.assertArrayEquals(new byte[] { 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00 }, Trie.bytesToKey(new byte[] { (byte)0xaa }));
     }
 }
 

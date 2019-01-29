@@ -23,7 +23,6 @@ import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
 import co.rsk.trie.Trie;
-import co.rsk.trie.TrieImpl;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.ByteStreams;
@@ -114,7 +113,7 @@ public class GenesisLoader {
     }
 
     private static byte[] generateRootHash(Map<RskAddress, InitialAddressState> premine){
-        Trie state = new TrieImpl(null, true);
+        Trie state = new Trie(null, true);
 
         for (RskAddress addr : premine.keySet()) {
             state = state.put(addr.getBytes(), premine.get(addr).getAccountState().getEncoded());
