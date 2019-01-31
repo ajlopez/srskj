@@ -677,7 +677,7 @@ public class Trie {
                 throw new EOFException();
             }
 
-            TrieStoreImpl store = TrieStoreImpl.deserialize(bytes, Short.BYTES + Keccak256Helper.DEFAULT_SIZE_BYTES, bytes.length - Short.BYTES - Keccak256Helper.DEFAULT_SIZE_BYTES, new HashMapDB());
+            TrieStore store = TrieStore.deserialize(bytes, Short.BYTES + Keccak256Helper.DEFAULT_SIZE_BYTES, bytes.length - Short.BYTES - Keccak256Helper.DEFAULT_SIZE_BYTES, new HashMapDB());
 
             Trie newTrie = store.retrieve(root);
 

@@ -50,9 +50,9 @@ public class TrieCopierTest {
     @Test
     public void copyTrie() {
         HashMapDB map1 = new HashMapDB();
-        TrieStoreImpl store1 = new TrieStoreImpl(map1);
+        TrieStore store1 = new TrieStore(map1);
         HashMapDB map2 = new HashMapDB();
-        TrieStoreImpl store2 = new TrieStoreImpl(map2);
+        TrieStore store2 = new TrieStore(map2);
 
         int nvalues = 10;
         byte[][] values = createValues(nvalues, 100);
@@ -78,9 +78,9 @@ public class TrieCopierTest {
     @Test
     public void copyThreeTries() {
         HashMapDB map1 = new HashMapDB();
-        TrieStoreImpl store1 = new TrieStoreImpl(map1);
+        TrieStore store1 = new TrieStore(map1);
         HashMapDB map2 = new HashMapDB();
-        TrieStoreImpl store2 = new TrieStoreImpl(map2);
+        TrieStore store2 = new TrieStore(map2);
 
         int nvalues = 30;
         byte[][] values = createValues(nvalues, 100);
@@ -131,8 +131,8 @@ public class TrieCopierTest {
 
     @Test
     public void copyBlockchainHeightTwoStates() {
-        TrieStore store = new TrieStoreImpl(new HashMapDB().setClearOnClose(false));
-        TrieStore store2 = new TrieStoreImpl(new HashMapDB().setClearOnClose(false));
+        TrieStore store = new TrieStore(new HashMapDB().setClearOnClose(false));
+        TrieStore store2 = new TrieStore(new HashMapDB().setClearOnClose(false));
         Repository repository = new RepositoryImpl(new Trie(store, true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
         World world = new World(repository);
 

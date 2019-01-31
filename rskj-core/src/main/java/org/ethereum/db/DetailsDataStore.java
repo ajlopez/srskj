@@ -22,7 +22,6 @@ package org.ethereum.db;
 import co.rsk.core.RskAddress;
 import co.rsk.db.ContractDetailsImpl;
 import co.rsk.trie.TrieStore;
-import co.rsk.trie.TrieStoreImpl;
 import org.ethereum.crypto.Keccak256Helper;
 import org.ethereum.datasource.KeyValueDataSource;
 import org.slf4j.Logger;
@@ -82,7 +81,7 @@ public class DetailsDataStore {
             if (details.getCode() != null && isDifferentCodeHash) {
                 byte[] oldCode = details.getCode();
                 String dataSourceName = ((ContractDetailsImpl) details).getDataSourceName();
-                TrieStoreImpl trieStore = (TrieStoreImpl) trieStorePool.getInstanceFor(dataSourceName);
+                TrieStore trieStore = (TrieStore) trieStorePool.getInstanceFor(dataSourceName);
                 trieStore.storeValue(Keccak256Helper.keccak256(oldCode), oldCode);
             }
         }
@@ -108,7 +107,7 @@ public class DetailsDataStore {
         if (cachedDetails != null && cachedDetails.getCode() != null) {
             byte[] oldCode = cachedDetails.getCode();
             String dataSourceName = ((ContractDetailsImpl) contractDetails).getDataSourceName();
-            TrieStoreImpl trieStore = (TrieStoreImpl) trieStorePool.getInstanceFor(dataSourceName);
+            TrieStore trieStore = (TrieStore) trieStorePool.getInstanceFor(dataSourceName);
             trieStore.storeValue(Keccak256Helper.keccak256(oldCode), oldCode);
         }
 

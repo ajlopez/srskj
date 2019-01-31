@@ -23,7 +23,7 @@ import co.rsk.config.RskSystemProperties;
 import co.rsk.core.DifficultyCalculator;
 import co.rsk.db.RepositoryImpl;
 import co.rsk.trie.Trie;
-import co.rsk.trie.TrieStoreImpl;
+import co.rsk.trie.TrieStore;
 import org.ethereum.core.Repository;
 import org.ethereum.core.Transaction;
 import org.ethereum.datasource.KeyValueDataSource;
@@ -66,7 +66,7 @@ public class CommonConfig {
         KeyValueDataSource detailsDS = makeDataSource("details", databaseDir);
 
         return new RepositoryImpl(
-                new Trie(new TrieStoreImpl(ds), true),
+                new Trie(new TrieStore(ds), true),
                 detailsDS,
                 new TrieStorePoolOnDisk(databaseDir),
                 memoryStorageLimit

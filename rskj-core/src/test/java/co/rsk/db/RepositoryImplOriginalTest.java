@@ -25,7 +25,6 @@ import co.rsk.core.Coin;
 import co.rsk.core.RskAddress;
 import co.rsk.trie.Trie;
 import co.rsk.trie.TrieStore;
-import co.rsk.trie.TrieStoreImpl;
 import org.ethereum.core.Genesis;
 import org.ethereum.core.Repository;
 import org.ethereum.crypto.HashUtil;
@@ -725,7 +724,7 @@ public class RepositoryImplOriginalTest {
 
     @Test // testing for snapshot
     public void test20() {
-        TrieStore store = new TrieStoreImpl(new HashMapDB());
+        TrieStore store = new TrieStore(new HashMapDB());
         Repository repository = new RepositoryImpl(new Trie(store, true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
         byte[] root = repository.getRoot();
 
@@ -776,7 +775,7 @@ public class RepositoryImplOriginalTest {
 
     @Test // testing for snapshot
     public void testMultiThread() throws InterruptedException {
-        TrieStore store = new TrieStoreImpl(new HashMapDB());
+        TrieStore store = new TrieStore(new HashMapDB());
         final Repository repository = new RepositoryImpl(new Trie(store, true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
 
         final DataWord cowKey1 = new DataWord("c1");

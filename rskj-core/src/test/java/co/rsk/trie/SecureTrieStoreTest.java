@@ -31,12 +31,12 @@ import static org.mockito.Mockito.*;
 public class SecureTrieStoreTest {
 
     private HashMapDB map;
-    private TrieStoreImpl store;
+    private TrieStore store;
 
     @Before
     public void setUp() {
         this.map = spy(new HashMapDB());
-        this.store = new TrieStoreImpl(map);
+        this.store = new TrieStore(map);
     }
 
     @Test

@@ -17,9 +17,7 @@
  */
 package co.rsk.db;
 
-import co.rsk.core.RskAddress;
 import co.rsk.trie.TrieStore;
-import org.ethereum.vm.PrecompiledContracts;
 
 import static org.ethereum.util.ByteUtil.toHexString;
 
@@ -34,24 +32,11 @@ public class ContractStorageStoreFactory {
         synchronized (ContractStorageStoreFactory.class) {
             TrieStore unifiedStore = this.pool.getInstanceFor(getUnifiedStorageName());
 
-            String addressName = getStorageNameForAddress(address);
-
-            if (this.pool.existsInstanceFor(addressName)) {
-                TrieStore dedicatedStore = this.pool.getInstanceFor(addressName);
-                unifiedStore.copyFrom(dedicatedStore);
-                this.pool.closeInstanceFor(addressName);
-                this.pool.destroyInstanceFor(addressName);
-            }
-
             return unifiedStore;
         }
     }
 
     private static String getUnifiedStorageName() {
         return "contracts-storage";
-    }
-
-    private static String getStorageNameForAddress(byte[] address) {
-        return "details-storage/" + toHexString(address);
     }
 }

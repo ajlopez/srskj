@@ -197,15 +197,8 @@ public class ContractDetailsImpl implements ContractDetails {
         byte[] root = rlpStorage.getRLPData();
         byte[] external = rlpIsExternalStorage.getRLPData();
 
-        if (external != null && external.length > 0 && external[0] == 1) {
-            Keccak256 snapshotHash = new Keccak256(root);
-            this.trie = this.newTrie().getSnapshotTo(snapshotHash);
-        } else {
-            Trie newTrie = this.newTrie();
-            Trie tempTrie = (Trie) Trie.deserialize(root);
-            newTrie.getStore().copyFrom(tempTrie.getStore());
-            this.trie = newTrie.getSnapshotTo(tempTrie.getHash());
-        }
+        Keccak256 snapshotHash = new Keccak256(root);
+        this.trie = this.newTrie().getSnapshotTo(snapshotHash);
 
         this.code = (rlpCode.getRLPData() == null) ? EMPTY_BYTE_ARRAY : rlpCode.getRLPData();
         this.codeHash = Keccak256Helper.keccak256(code);
@@ -416,7 +409,7 @@ public class ContractDetailsImpl implements ContractDetails {
         }
 
         logger.trace("reopening contract details data source");
-        TrieStoreImpl newStore = (TrieStoreImpl) trieStorePool.getInstanceFor(getDataSourceName());
+        TrieStore newStore = (TrieStore) trieStorePool.getInstanceFor(getDataSourceName());
         Trie newTrie = newStore.retrieve(this.trie.getHash().getBytes());
         this.trie = newTrie;
         this.closed = false;

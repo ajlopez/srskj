@@ -29,7 +29,6 @@ import co.rsk.db.RepositoryImpl;
 import co.rsk.db.TrieStorePoolOnMemory;
 import co.rsk.trie.Trie;
 import co.rsk.trie.TrieStore;
-import co.rsk.trie.TrieStoreImpl;
 import co.rsk.validators.DummyBlockValidator;
 import org.ethereum.config.blockchain.GenesisConfig;
 import org.ethereum.datasource.HashMapDB;
@@ -61,7 +60,7 @@ public class ImportLightTest {
         IndexedBlockStore blockStore = new IndexedBlockStore(new HashMap<>(), new HashMapDB(), null);
 
         TrieStore.Pool pool = new TrieStorePoolOnMemory();
-        Repository repository = new RepositoryImpl(new Trie(new TrieStoreImpl(new HashMapDB()), true), new HashMapDB(), pool, config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), pool, config.detailsInMemoryStorageLimit());
 
         CompositeEthereumListener listener = new TestCompositeEthereumListener();
 

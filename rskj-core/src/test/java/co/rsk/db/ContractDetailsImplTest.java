@@ -21,7 +21,6 @@ package co.rsk.db;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.trie.Trie;
 import co.rsk.trie.TrieStore;
-import co.rsk.trie.TrieStoreImpl;
 import org.ethereum.datasource.HashMapDB;
 import org.ethereum.db.ContractDetails;
 import org.ethereum.vm.DataWord;
@@ -546,7 +545,7 @@ public class ContractDetailsImplTest {
     @Test
     public void syncStorageInDetailsWithTrieInMemory() {
         HashMapDB store = new HashMapDB();
-        Trie trie = new Trie(new TrieStoreImpl(store), false);
+        Trie trie = new Trie(new TrieStore(store), false);
         byte[] accountAddress = randomAddress();
         ContractDetailsImpl details = new ContractDetailsImpl(accountAddress, trie, null, new TrieStorePoolOnMemory(() -> store), config.detailsInMemoryStorageLimit());
 
@@ -560,7 +559,7 @@ public class ContractDetailsImplTest {
     @Test
     public void usingSameExternalStorage() {
         HashMapDB store = new HashMapDB();
-        Trie trie = new Trie(new TrieStoreImpl(store), false);
+        Trie trie = new Trie(new TrieStore(store), false);
         byte[] accountAddress = randomAddress();
         ContractDetailsImpl details = new ContractDetailsImpl(accountAddress, trie, null, new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
 
@@ -639,7 +638,7 @@ public class ContractDetailsImplTest {
     @Test
     public void syncStorageAndGetKeyValues() {
         HashMapDB store = new HashMapDB();
-        Trie trie = new Trie(new TrieStoreImpl(store), false);
+        Trie trie = new Trie(new TrieStore(store), false);
         byte[] accountAddress = randomAddress();
         ContractDetailsImpl details = new ContractDetailsImpl(accountAddress, trie, null, new TrieStorePoolOnMemory(() -> store), config.detailsInMemoryStorageLimit());
 
@@ -683,7 +682,7 @@ public class ContractDetailsImplTest {
 
         HashMapDB externalStorage = new HashMapDB();
 
-        ContractDetailsImpl original = new ContractDetailsImpl(address, new Trie(new TrieStoreImpl(externalStorage), true), code, new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit(
+        ContractDetailsImpl original = new ContractDetailsImpl(address, new Trie(new TrieStore(externalStorage), true), code, new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit(
         ));
 
         for (int i = 0; i < IN_MEMORY_STORAGE_LIMIT + 10; i++) {
@@ -723,7 +722,7 @@ public class ContractDetailsImplTest {
 
         HashMapDB externalStorage = new HashMapDB();
 
-        ContractDetailsImpl original = new ContractDetailsImpl(address, new Trie(new TrieStoreImpl(externalStorage), true), code, new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        ContractDetailsImpl original = new ContractDetailsImpl(address, new Trie(new TrieStore(externalStorage), true), code, new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
 
         for (int i = 0; i < IN_MEMORY_STORAGE_LIMIT - 1; i++) {
             DataWord key = randomDataWord();
@@ -929,7 +928,7 @@ public class ContractDetailsImplTest {
     private ContractDetailsImpl buildContractDetails(HashMapDB store) {
         return new ContractDetailsImpl(
                 null,
-                new Trie(new TrieStoreImpl(store), true),
+                new Trie(new TrieStore(store), true),
                 null,
                 new TrieStorePoolOnMemory(),
                 config.detailsInMemoryStorageLimit()

@@ -18,7 +18,7 @@ import co.rsk.net.sync.SyncConfiguration;
 import co.rsk.test.builders.AccountBuilder;
 import co.rsk.test.builders.TransactionBuilder;
 import co.rsk.trie.Trie;
-import co.rsk.trie.TrieStoreImpl;
+import co.rsk.trie.TrieStore;
 import co.rsk.validators.DummyBlockValidator;
 import org.ethereum.core.*;
 import org.ethereum.datasource.HashMapDB;
@@ -217,7 +217,7 @@ public class RskTestFactory {
     public Repository getRepository() {
         if (repository == null) {
             HashMapDB stateStore = new HashMapDB();
-            repository = new RepositoryImpl(new Trie(new TrieStoreImpl(stateStore), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+            repository = new RepositoryImpl(new Trie(new TrieStore(stateStore), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
         }
 
         return repository;

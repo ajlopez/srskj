@@ -30,15 +30,15 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 /**
  * Created by ajlopez on 08/01/2017.
  */
-public class TrieStoreImplTest {
+public class TrieStoreTest {
 
     private HashMapDB map;
-    private TrieStoreImpl store;
+    private TrieStore store;
 
     @Before
     public void setUp() {
         this.map = spy(new HashMapDB());
-        this.store = new TrieStoreImpl(map);
+        this.store = new TrieStore(map);
     }
 
     @Test
@@ -214,7 +214,7 @@ public class TrieStoreImplTest {
 
         byte[] bytes = store.serialize();
 
-        TrieStoreImpl newStore = TrieStoreImpl.deserialize(bytes);
+        TrieStore newStore = TrieStore.deserialize(bytes);
 
         Assert.assertNotNull(newStore);
 

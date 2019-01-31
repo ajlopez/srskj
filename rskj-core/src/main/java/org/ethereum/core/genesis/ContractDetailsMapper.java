@@ -22,7 +22,7 @@ package org.ethereum.core.genesis;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.db.ContractDetailsImpl;
 import co.rsk.trie.Trie;
-import co.rsk.trie.TrieStoreImpl;
+import co.rsk.trie.TrieStore;
 import org.ethereum.datasource.HashMapDB;
 import org.ethereum.db.ContractDetails;
 import org.ethereum.vm.DataWord;
@@ -44,7 +44,7 @@ public class ContractDetailsMapper {
 
         contractDetails = new ContractDetailsImpl(
                 null,
-                new Trie(new TrieStoreImpl(new HashMapDB()), true),
+                new Trie(new TrieStore(new HashMapDB()), true),
                 null,
                 null,
                 config.detailsInMemoryStorageLimit()
