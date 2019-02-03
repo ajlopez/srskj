@@ -22,7 +22,7 @@ import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.blocks.DummyBlockRecorder;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.db.RepositoryImpl;
 import co.rsk.db.TrieStorePoolOnMemory;
 import co.rsk.test.builders.BlockBuilder;
@@ -946,7 +946,7 @@ public class BlockchainTest {
 
         Genesis genesis = GenesisLoader.loadGenesis(config, "rsk-unittests.json", BigInteger.ZERO, true);
 
-        for (RskAddress addr : genesis.getPremine().keySet()) {
+        for (Address addr : genesis.getPremine().keySet()) {
             repository.createAccount(addr);
             repository.addBalance(addr, genesis.getPremine().get(addr).getAccountState().getBalance());
         }

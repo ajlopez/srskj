@@ -19,7 +19,7 @@
 package co.rsk.core.bc;
 
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.core.*;
 import org.ethereum.util.ByteUtil;
 import org.ethereum.vm.DataWord;
@@ -50,42 +50,42 @@ public class PendingState implements AccountInformationProvider {
     }
 
     @Override
-    public Coin getBalance(RskAddress addr) {
+    public Coin getBalance(Address addr) {
         return postExecutionReturn(executedRepository -> executedRepository.getBalance(addr));
     }
 
     @Override
-    public DataWord getStorageValue(RskAddress addr, DataWord key) {
+    public DataWord getStorageValue(Address addr, DataWord key) {
         return postExecutionReturn(executedRepository -> executedRepository.getStorageValue(addr, key));
     }
 
     @Override
-    public byte[] getStorageBytes(RskAddress addr, DataWord key) {
+    public byte[] getStorageBytes(Address addr, DataWord key) {
         return postExecutionReturn(executedRepository -> executedRepository.getStorageBytes(addr, key));
     }
 
     @Override
-    public Iterator<DataWord> getStorageKeys(RskAddress addr) {
+    public Iterator<DataWord> getStorageKeys(Address addr) {
         return postExecutionReturn(executedRepository -> executedRepository.getStorageKeys(addr));
     }
 
     @Override
-    public int getStorageKeysCount(RskAddress addr) {
+    public int getStorageKeysCount(Address addr) {
         return postExecutionReturn(executedRepository -> executedRepository.getStorageKeysCount(addr));
     }
 
     @Override
-    public byte[] getCode(RskAddress addr) {
+    public byte[] getCode(Address addr) {
         return postExecutionReturn(executedRepository -> executedRepository.getCode(addr));
     }
 
     @Override
-    public boolean isContract(RskAddress addr) {
+    public boolean isContract(Address addr) {
         return postExecutionReturn(executedRepository -> executedRepository.isContract(addr));
     }
 
     @Override
-    public BigInteger getNonce(RskAddress addr) {
+    public BigInteger getNonce(Address addr) {
         BigInteger nextNonce = pendingRepository.getNonce(addr);
         Optional<BigInteger> maxNonce = this.pendingTransactions.getTransactionsWithSender(addr).stream()
                 .map(Transaction::getNonceAsInteger)
@@ -114,7 +114,7 @@ public class PendingState implements AccountInformationProvider {
         Comparator<Transaction> gasPriceComparator = reverseOrder(Comparator.comparing(Transaction::getGasPrice));
 
         //First create a map to separate txs by each sender.
-        Map<RskAddress, List<Transaction>> senderTxs = transactions.stream().collect(Collectors.groupingBy(Transaction::getSender));
+        Map<Address, List<Transaction>> senderTxs = transactions.stream().collect(Collectors.groupingBy(Transaction::getSender));
 
         //For each sender, order all txs by nonce and then by hash,
         //finally we order by price in cases where nonce are equal, and then by hash to disambiguate

@@ -19,7 +19,7 @@
 package org.ethereum.rpc;
 
 import co.rsk.blockchain.utils.BlockGenerator;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import org.ethereum.core.Block;
 import org.ethereum.util.RskTestFactory;
@@ -60,7 +60,7 @@ public class LogFilterTest {
         Web3ImplLogsTest.addEmptyBlockToBlockchain(blockchain);
         Block block = blockchain.getBestBlock();
 
-        AddressesTopicsFilter atfilter = new AddressesTopicsFilter(new RskAddress[0], null);
+        AddressesTopicsFilter atfilter = new AddressesTopicsFilter(new Address[0], null);
 
         LogFilter filter = new LogFilter(atfilter, blockchain, false, true);
 
@@ -78,7 +78,7 @@ public class LogFilterTest {
         Web3ImplLogsTest.addEmptyBlockToBlockchain(blockchain);
         Block block = blockchain.getBestBlock();
 
-        AddressesTopicsFilter atfilter = new AddressesTopicsFilter(new RskAddress[0], null);
+        AddressesTopicsFilter atfilter = new AddressesTopicsFilter(new Address[0], null);
 
         LogFilter filter = new LogFilter(atfilter, blockchain, false, true);
 
@@ -97,7 +97,7 @@ public class LogFilterTest {
         Web3ImplLogsTest.addEmptyBlockToBlockchain(blockchain);
         Block block = blockchain.getBestBlock();
 
-        AddressesTopicsFilter atfilter = new AddressesTopicsFilter(new RskAddress[0], null);
+        AddressesTopicsFilter atfilter = new AddressesTopicsFilter(new Address[0], null);
 
         LogFilter filter = new LogFilter(atfilter, blockchain, true, true);
 

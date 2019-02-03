@@ -24,7 +24,6 @@ import org.bouncycastle.util.encoders.Hex;
 import org.ethereum.TestUtils;
 import org.ethereum.core.Block;
 import org.ethereum.core.CallTransaction;
-import org.ethereum.db.ContractDetails;
 import org.ethereum.util.ContractRunner;
 import org.ethereum.util.RskTestFactory;
 import org.ethereum.vm.program.ProgramResult;
@@ -43,9 +42,9 @@ public class ReversibleTransactionExecutorTest {
     public void executeTransactionHello() {
         TestContract hello = TestContract.hello();
         CallTransaction.Function helloFn = hello.functions.get("hello");
-        RskAddress contractAddress = contractRunner.addContract(hello.runtimeBytecode);
+        Address contractAddress = contractRunner.addContract(hello.runtimeBytecode);
 
-        RskAddress from = TestUtils.randomAddress();
+        Address from = TestUtils.randomAddress();
         byte[] gasPrice = Hex.decode("00");
         byte[] value = Hex.decode("00");
         byte[] gasLimit = Hex.decode("f424");
@@ -91,9 +90,9 @@ public class ReversibleTransactionExecutorTest {
     public void executeTransactionGreeterOtherSender() {
         TestContract greeter = TestContract.greeter();
         CallTransaction.Function greeterFn = greeter.functions.get("greet");
-        RskAddress contractAddress = contractRunner.addContract(greeter.runtimeBytecode);
+        Address contractAddress = contractRunner.addContract(greeter.runtimeBytecode);
 
-        RskAddress from = new RskAddress("0000000000000000000000000000000000000023"); // someone else
+        Address from = new Address("0000000000000000000000000000000000000023"); // someone else
         byte[] gasPrice = Hex.decode("00");
         byte[] value = Hex.decode("00");
         byte[] gasLimit = Hex.decode("f424");
@@ -118,9 +117,9 @@ public class ReversibleTransactionExecutorTest {
     public void executeTransactionCountCallsMultipleTimes() {
         TestContract countcalls = TestContract.countcalls();
         CallTransaction.Function callsFn = countcalls.functions.get("calls");
-        RskAddress contractAddress = contractRunner.addContract(countcalls.runtimeBytecode);
+        Address contractAddress = contractRunner.addContract(countcalls.runtimeBytecode);
 
-        RskAddress from = new RskAddress("0000000000000000000000000000000000000023"); // someone else
+        Address from = new Address("0000000000000000000000000000000000000023"); // someone else
         byte[] gasPrice = Hex.decode("00");
         byte[] value = Hex.decode("00");
         byte[] gasLimit = Hex.decode("f424");

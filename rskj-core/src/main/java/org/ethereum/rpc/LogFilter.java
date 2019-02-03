@@ -18,7 +18,7 @@
 
 package org.ethereum.rpc;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import org.ethereum.core.*;
 import org.ethereum.db.TransactionInfo;
@@ -104,7 +104,7 @@ public class LogFilter extends Filter {
     }
 
     public static LogFilter fromFilterRequest(Web3.FilterRequest fr, Blockchain blockchain) throws Exception {
-        RskAddress[] addresses;
+        Address[] addresses;
 
         // Now, there is an array of array of topics
         // first level are topic filters by position
@@ -113,7 +113,7 @@ public class LogFilter extends Filter {
         Topic[][] topics;
 
         if (fr.address instanceof String) {
-            addresses = new RskAddress[] { new RskAddress(stringHexToByteArray((String) fr.address)) };
+            addresses = new Address[] { new Address(stringHexToByteArray((String) fr.address)) };
         } else if (fr.address instanceof Collection<?>) {
             Collection<?> iterable = (Collection<?>)fr.address;
 
@@ -121,11 +121,11 @@ public class LogFilter extends Filter {
                     .filter(String.class::isInstance)
                     .map(String.class::cast)
                     .map(TypeConverter::stringHexToByteArray)
-                    .map(RskAddress::new)
-                    .toArray(RskAddress[]::new);
+                    .map(Address::new)
+                    .toArray(Address[]::new);
         }
         else {
-            addresses = new RskAddress[0];
+            addresses = new Address[0];
         }
 
         if (fr.topics != null) {

@@ -21,7 +21,7 @@ package org.ethereum.util;
 
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.util.ByteBufferUtil;
 import co.rsk.util.RLPElementType;
 import co.rsk.util.RLPElementView;
@@ -439,11 +439,11 @@ public class RLP {
     }
 
     @Nonnull
-    public static RskAddress parseRskAddress(@Nullable byte[] bytes) {
+    public static Address parseRskAddress(@Nullable byte[] bytes) {
         if (bytes == null || bytes.length == 0) {
-            return RskAddress.nullAddress();
+            return Address.nullAddress();
         } else {
-            return new RskAddress(bytes);
+            return new Address(bytes);
         }
     }
 
@@ -621,8 +621,8 @@ public class RLP {
         }
     }
 
-    public static byte[] encodeRskAddress(RskAddress addr) {
-        if (addr == null || RskAddress.nullAddress().equals(addr)) {
+    public static byte[] encodeRskAddress(Address addr) {
+        if (addr == null || Address.nullAddress().equals(addr)) {
             return encodeElement(null);
         }
 

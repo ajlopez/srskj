@@ -19,7 +19,7 @@
 package org.ethereum.rpc.dto;
 
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.core.Block;
 import org.ethereum.core.Transaction;
 import org.ethereum.crypto.ECKey;
@@ -82,8 +82,8 @@ public class TransactionResultDTO {
         s = TypeConverter.toJsonHex(signature.s);
     }
 
-    private String addressToJsonHex(RskAddress address) {
-        if (RskAddress.nullAddress().equals(address)) {
+    private String addressToJsonHex(Address address) {
+        if (Address.nullAddress().equals(address)) {
             return null;
         }
         return TypeConverter.toJsonHex(address.getBytes());

@@ -18,7 +18,7 @@
 
 package co.rsk.config;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.net.eth.MessageFilter;
 import co.rsk.net.eth.MessageRecorder;
 import co.rsk.net.eth.WriterMessageRecorder;
@@ -74,10 +74,10 @@ public class RskSystemProperties extends SystemProperties {
     }
 
     @Nullable
-    public RskAddress coinbaseAddress() {
+    public Address coinbaseAddress() {
         if (!isMinerServerEnabled()) {
             //todo(diegoll): we should carefully handle the case when you don't have a coinbase and want to execute pending blocks
-            return new RskAddress(new byte[20]);
+            return new Address(new byte[20]);
         }
 
         // validity checks are performed by localCoinbaseAccount
@@ -91,7 +91,7 @@ public class RskSystemProperties extends SystemProperties {
             throw new RskConfigurationException(MINER_REWARD_ADDRESS_CONFIG + " needs to be Hex encoded and 20 byte length");
         }
 
-        return new RskAddress(coinbaseAddress);
+        return new Address(coinbaseAddress);
     }
 
     @Nullable

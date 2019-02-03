@@ -19,7 +19,7 @@
 
 package co.rsk.db;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.core.Repository;
 import org.ethereum.db.RepositoryTrack;
 import org.ethereum.vm.DataWord;
@@ -72,7 +72,7 @@ public class RepositoryTrackWithBenchmarking extends RepositoryTrack {
     }
 
     @Override
-    public void addStorageBytes(RskAddress addr, DataWord key, byte[] value) {
+    public void addStorageBytes(Address addr, DataWord key, byte[] value) {
         byte[] oldValue = getStorageBytes(addr, key);
         statistics.recordWrite(oldValue, value);
 

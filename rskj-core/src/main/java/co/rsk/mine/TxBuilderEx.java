@@ -19,7 +19,7 @@
 package co.rsk.mine;
 
 import co.rsk.config.RskSystemProperties;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.net.BlockProcessor;
 import org.ethereum.core.*;
 import org.ethereum.crypto.ECKey;
@@ -66,7 +66,7 @@ public class TxBuilderEx {
     public void simulateTxs() {
         final byte[] privateKeyBytes = HashUtil.keccak256(config.simulateTxsExAccountSeed().getBytes(StandardCharsets.UTF_8));
         final ECKey key = ECKey.fromPrivate(privateKeyBytes);
-        RskAddress addr = new RskAddress(key.getAddress());
+        Address addr = new Address(key.getAddress());
 
         final Account targetAcc = new Account(new ECKey(Utils.getRandom()));
         final String targetAddress = targetAcc.getAddress().toString();

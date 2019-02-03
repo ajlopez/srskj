@@ -19,7 +19,7 @@
 package co.rsk.core.bc;
 
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.vm.DataWord;
 
 import java.math.BigInteger;
@@ -33,7 +33,7 @@ public interface AccountInformationProvider {
      * @param addr of the account
      * @return balance of the account as a <code>BigInteger</code> value
      */
-    Coin getBalance(RskAddress addr);
+    Coin getBalance(Address addr);
 
     /**
      * Retrieve storage value from an account for a given key
@@ -42,7 +42,7 @@ public interface AccountInformationProvider {
      * @param key associated with this value
      * @return data in the form of a <code>DataWord</code>
      */
-    DataWord getStorageValue(RskAddress addr, DataWord key);
+    DataWord getStorageValue(Address addr, DataWord key);
 
     /**
      *
@@ -50,21 +50,21 @@ public interface AccountInformationProvider {
      * @param key associated with this value
      * @return raw data
      */
-    byte[] getStorageBytes(RskAddress addr, DataWord key);
+    byte[] getStorageBytes(Address addr, DataWord key);
 
     /**
      *
      * @param addr of the account
      * @return the keys for that addr
      */
-    Iterator<DataWord> getStorageKeys(RskAddress addr);
+    Iterator<DataWord> getStorageKeys(Address addr);
 
     /**
      *
      * @param addr of the account
      * @return the count of keys for that addr
      */
-    int getStorageKeysCount(RskAddress addr);
+    int getStorageKeysCount(Address addr);
 
     /**
      * Retrieve the code associated with an account
@@ -72,13 +72,13 @@ public interface AccountInformationProvider {
      * @param addr of the account
      * @return code in byte-array format
      */
-    byte[] getCode(RskAddress addr);
+    byte[] getCode(Address addr);
 
     /**
      * @param addr an address account
      * @return true if the addr identifies a contract
      */
-    boolean isContract(RskAddress addr);
+    boolean isContract(Address addr);
 
     /**
      * Get current nonce of a given account
@@ -86,5 +86,5 @@ public interface AccountInformationProvider {
      * @param addr of the account
      * @return value of the nonce
      */
-    BigInteger getNonce(RskAddress addr);
+    BigInteger getNonce(Address addr);
 }

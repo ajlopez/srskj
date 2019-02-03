@@ -18,7 +18,7 @@
 
 package co.rsk.rpc.modules.eth;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.Wallet;
 import org.ethereum.core.Account;
 import org.ethereum.crypto.ECKey;
@@ -46,7 +46,7 @@ public class EthModuleWalletEnabled implements EthModuleWallet {
     public String sign(String addr, String data) {
         String s = null;
         try {
-            Account account = this.wallet.getAccount(new RskAddress(addr));
+            Account account = this.wallet.getAccount(new Address(addr));
             if (account == null) {
                 throw new JsonRpcInvalidParamException("Account not found");
             }

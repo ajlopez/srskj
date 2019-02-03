@@ -20,7 +20,7 @@
 package org.ethereum.db;
 
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.db.ContractDetailsImpl;
 import co.rsk.db.TrieStorePoolOnMemory;
 import co.rsk.trie.Trie;
@@ -46,7 +46,7 @@ public class DetailsDataStoreTest {
         TrieStorePoolOnMemory trieStorePool = new TrieStorePoolOnMemory();
         DetailsDataStore dds = new DetailsDataStore(db, trieStorePool, config.detailsInMemoryStorageLimit());
 
-        RskAddress c_key = new RskAddress("0000000000000000000000000000000000001a2b");
+        Address c_key = new Address("0000000000000000000000000000000000001a2b");
         byte[] code = Hex.decode("60606060");
         byte[] key =  Hex.decode("11");
         byte[] value =  Hex.decode("aa");
@@ -86,7 +86,7 @@ public class DetailsDataStoreTest {
         TrieStore.Pool trieStorePool = new TrieStorePoolOnMemory();
         DetailsDataStore dds = new DetailsDataStore(db, trieStorePool, config.detailsInMemoryStorageLimit());
 
-        RskAddress c_key = new RskAddress("0000000000000000000000000000000000001a2b");
+        Address c_key = new Address("0000000000000000000000000000000000001a2b");
         byte[] code = Hex.decode("60606060");
         byte[] key =  Hex.decode("11");
         byte[] value =  Hex.decode("aa");
@@ -131,7 +131,7 @@ public class DetailsDataStoreTest {
         TrieStore.Pool trieStorePool = new TrieStorePoolOnMemory();
         DetailsDataStore dds = new DetailsDataStore(db, trieStorePool, config.detailsInMemoryStorageLimit());
 
-        RskAddress c_key = new RskAddress("0000000000000000000000000000000000001a2b");
+        Address c_key = new Address("0000000000000000000000000000000000001a2b");
         byte[] code = Hex.decode("60606060");
         byte[] key =  Hex.decode("11");
         byte[] value =  Hex.decode("aa");
@@ -176,7 +176,7 @@ public class DetailsDataStoreTest {
         HashMapDB db = new HashMapDB();
         DetailsDataStore dds = new DetailsDataStore(db, new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
 
-        RskAddress c_key = new RskAddress("0000000000000000000000000000000000001a2b");
+        Address c_key = new Address("0000000000000000000000000000000000001a2b");
 
         ContractDetails contractDetails = dds.get(c_key, EMPTY_DATA_HASH);
         assertNull(contractDetails);

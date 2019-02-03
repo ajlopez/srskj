@@ -18,7 +18,7 @@
 
 package org.ethereum.rpc;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.test.builders.AccountBuilder;
 import org.ethereum.core.Account;
 import org.ethereum.core.Bloom;
@@ -34,17 +34,17 @@ public class AddressesTopicsFilterTest {
     @Test
     public void matchAddress() {
         Account account = new AccountBuilder().name("account").build();
-        RskAddress address = account.getAddress();
+        Address address = account.getAddress();
 
-        AddressesTopicsFilter filter = new AddressesTopicsFilter(new RskAddress[] { address }, null);
+        AddressesTopicsFilter filter = new AddressesTopicsFilter(new Address[] { address }, null);
 
         Assert.assertTrue(filter.matchesContractAddress(address));
-        Assert.assertFalse(filter.matchesContractAddress(RskAddress.nullAddress()));
+        Assert.assertFalse(filter.matchesContractAddress(Address.nullAddress()));
     }
 
     @Test
     public void matchEmptyBloomWithAllFilter() {
-        AddressesTopicsFilter filter = new AddressesTopicsFilter(new RskAddress[0], null);
+        AddressesTopicsFilter filter = new AddressesTopicsFilter(new Address[0], null);
 
         Assert.assertTrue(filter.matchBloom(new Bloom()));
     }
@@ -52,9 +52,9 @@ public class AddressesTopicsFilterTest {
     @Test
     public void noMatchEmptyBloomWithFilterWithAccount() {
         Account account = new AccountBuilder().name("account").build();
-        RskAddress address = account.getAddress();
+        Address address = account.getAddress();
 
-        AddressesTopicsFilter filter = new AddressesTopicsFilter(new RskAddress[] { address }, null);
+        AddressesTopicsFilter filter = new AddressesTopicsFilter(new Address[] { address }, null);
 
         Assert.assertFalse(filter.matchBloom(new Bloom()));
     }
@@ -63,7 +63,7 @@ public class AddressesTopicsFilterTest {
     public void noMatchEmptyBloomWithFilterWithTopic() {
         Topic topic = createTopic();
 
-        AddressesTopicsFilter filter = new AddressesTopicsFilter(new RskAddress[0], new Topic[][] {{ topic }});
+        AddressesTopicsFilter filter = new AddressesTopicsFilter(new Address[0], new Topic[][] {{ topic }});
 
         Assert.assertFalse(filter.matchBloom(new Bloom()));
     }
@@ -72,7 +72,7 @@ public class AddressesTopicsFilterTest {
     public void matchAllBloomWithFilterWithTopic() {
         Topic topic = createTopic();
 
-        AddressesTopicsFilter filter = new AddressesTopicsFilter(new RskAddress[0], new Topic[][] {{ topic }});
+        AddressesTopicsFilter filter = new AddressesTopicsFilter(new Address[0], new Topic[][] {{ topic }});
 
         Assert.assertTrue(filter.matchBloom(getAllBloom()));
     }
@@ -80,9 +80,9 @@ public class AddressesTopicsFilterTest {
     @Test
     public void matchAllBloomWithFilterWithAccount() {
         Account account = new AccountBuilder().name("account").build();
-        RskAddress address = account.getAddress();
+        Address address = account.getAddress();
 
-        AddressesTopicsFilter filter = new AddressesTopicsFilter(new RskAddress[] { address }, null);
+        AddressesTopicsFilter filter = new AddressesTopicsFilter(new Address[] { address }, null);
 
         Assert.assertTrue(filter.matchBloom(getAllBloom()));
     }

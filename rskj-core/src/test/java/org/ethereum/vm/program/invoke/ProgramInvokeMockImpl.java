@@ -19,7 +19,7 @@
 
 package org.ethereum.vm.program.invoke;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.db.RepositoryImplForTesting;
 import org.ethereum.core.Repository;
 import org.ethereum.crypto.ECKey;
@@ -42,10 +42,10 @@ public class ProgramInvokeMockImpl implements ProgramInvoke {
     private DataWord txindex;
 
     private Repository repository;
-    private RskAddress ownerAddress = new RskAddress("cd2a3d9f938e13cd947ec05abc7fe734df8dd826");
-    private final RskAddress defaultContractAddress = new RskAddress("471fd3ad3e9eeadeec4608b92d16ce6b500704cc");
+    private Address ownerAddress = new Address("cd2a3d9f938e13cd947ec05abc7fe734df8dd826");
+    private final Address defaultContractAddress = new Address("471fd3ad3e9eeadeec4608b92d16ce6b500704cc");
 
-    private RskAddress contractAddress;
+    private Address contractAddress;
     // default for most tests. This can be overwritten by the test
     private long gasLimit = 1000000;
 
@@ -54,11 +54,11 @@ public class ProgramInvokeMockImpl implements ProgramInvoke {
         this.msgData = msgDataRaw;
     }
 
-    public ProgramInvokeMockImpl(String contractCode, RskAddress contractAddress) {
+    public ProgramInvokeMockImpl(String contractCode, Address contractAddress) {
         this(Hex.decode(contractCode), contractAddress);
     }
 
-    public ProgramInvokeMockImpl(byte[] contractCode, RskAddress contractAddress) {
+    public ProgramInvokeMockImpl(byte[] contractCode, Address contractAddress) {
         this.repository = new RepositoryImplForTesting();
 
         this.repository.createAccount(ownerAddress);
@@ -77,7 +77,7 @@ public class ProgramInvokeMockImpl implements ProgramInvoke {
                 + "00603f556103e75660005460005360200235", null);
     }
 
-    public RskAddress getContractAddress() {
+    public Address getContractAddress() {
         return this.contractAddress;
     }
 
@@ -233,7 +233,7 @@ public class ProgramInvokeMockImpl implements ProgramInvoke {
         this.gasLimit = gasLimit;
     }
 
-    public void setOwnerAddress(RskAddress ownerAddress) {
+    public void setOwnerAddress(Address ownerAddress) {
         this.ownerAddress = ownerAddress;
     }
 

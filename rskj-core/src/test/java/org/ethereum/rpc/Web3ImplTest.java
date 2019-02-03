@@ -926,7 +926,7 @@ public class Web3ImplTest {
     public void eth_coinbase()  {
         String originalCoinbase = "1dcc4de8dec75d7aab85b513f0a142fd40d49347";
         MinerServer minerServerMock = Mockito.mock(MinerServer.class);
-        Mockito.when(minerServerMock.getCoinbaseAddress()).thenReturn(new RskAddress(originalCoinbase));
+        Mockito.when(minerServerMock.getCoinbaseAddress()).thenReturn(new Address(originalCoinbase));
 
         Ethereum ethMock = Web3Mocks.getMockEthereum();
         Blockchain blockchain = Web3Mocks.getMockBlockchain();
@@ -1007,7 +1007,7 @@ public class Web3ImplTest {
         Account account = null;
 
         try {
-            account = wallet.getAccount(new RskAddress(addr), "passphrase1");
+            account = wallet.getAccount(new Address(addr), "passphrase1");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -1046,11 +1046,11 @@ public class Web3ImplTest {
 
         org.junit.Assert.assertNotNull(address);
 
-        Account account0 = wallet.getAccount(new RskAddress(address));
+        Account account0 = wallet.getAccount(new Address(address));
 
         org.junit.Assert.assertNull(account0);
 
-        Account account = wallet.getAccount(new RskAddress(address), "passphrase1");
+        Account account = wallet.getAccount(new Address(address), "passphrase1");
 
         org.junit.Assert.assertNotNull(account);
         org.junit.Assert.assertEquals(address, "0x" + Hex.toHexString(account.getAddress().getBytes()));
@@ -1108,7 +1108,7 @@ public class Web3ImplTest {
 
         // ***** Verifies tx hash
         Transaction tx = new Transaction(config, toAddress.substring(2), value, nonce, gasPrice, gasLimit, args.data);
-        Account account = wallet.getAccount(new RskAddress(addr1), "passphrase1");
+        Account account = wallet.getAccount(new Address(addr1), "passphrase1");
         tx.sign(account.getEcKey().getPrivKeyBytes());
 
         String expectedHash = tx.getHash().toJsonString();
@@ -1123,13 +1123,13 @@ public class Web3ImplTest {
 
         String addr = web3.personal_newAccount("passphrase1");
 
-        Account account0 = wallet.getAccount(new RskAddress(addr));
+        Account account0 = wallet.getAccount(new Address(addr));
 
         org.junit.Assert.assertNull(account0);
 
         org.junit.Assert.assertTrue(web3.personal_unlockAccount(addr, "passphrase1", ""));
 
-        Account account = wallet.getAccount(new RskAddress(addr));
+        Account account = wallet.getAccount(new Address(addr));
 
         org.junit.Assert.assertNotNull(account);
     }
@@ -1141,7 +1141,7 @@ public class Web3ImplTest {
 
         String addr = web3.personal_newAccount("passphrase1");
 
-        Account account0 = wallet.getAccount(new RskAddress(addr));
+        Account account0 = wallet.getAccount(new Address(addr));
 
         org.junit.Assert.assertNull(account0);
 
@@ -1157,19 +1157,19 @@ public class Web3ImplTest {
 
         String addr = web3.personal_newAccount("passphrase1");
 
-        Account account0 = wallet.getAccount(new RskAddress(addr));
+        Account account0 = wallet.getAccount(new Address(addr));
 
         org.junit.Assert.assertNull(account0);
 
         org.junit.Assert.assertTrue(web3.personal_unlockAccount(addr, "passphrase1", ""));
 
-        Account account = wallet.getAccount(new RskAddress(addr));
+        Account account = wallet.getAccount(new Address(addr));
 
         org.junit.Assert.assertNotNull(account);
 
         org.junit.Assert.assertTrue(web3.personal_lockAccount(addr));
 
-        Account account1 = wallet.getAccount(new RskAddress(addr));
+        Account account1 = wallet.getAccount(new Address(addr));
 
         org.junit.Assert.assertNull(account1);
     }
@@ -1218,7 +1218,7 @@ public class Web3ImplTest {
 
         // ***** Verifies tx hash
         Transaction tx = new Transaction(config, toAddress.substring(2), value, nonce, gasPrice, gasLimit, args.data);
-        tx.sign(wallet.getAccount(new RskAddress(addr1)).getEcKey().getPrivKeyBytes());
+        tx.sign(wallet.getAccount(new Address(addr1)).getEcKey().getPrivKeyBytes());
 
         String expectedHash = tx.getHash().toJsonString();
 

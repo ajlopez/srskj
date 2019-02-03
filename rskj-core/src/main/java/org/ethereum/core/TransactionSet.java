@@ -18,7 +18,7 @@
 
 package org.ethereum.core;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.crypto.Keccak256;
 
 import java.util.*;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class TransactionSet {
     private final Map<Keccak256, Transaction> transactionsByHash;
-    private final Map<RskAddress, List<Transaction>> transactionsByAddress;
+    private final Map<Address, List<Transaction>> transactionsByAddress;
 
     public TransactionSet() {
         this(new HashMap<>(), new HashMap<>());
@@ -36,7 +36,7 @@ public class TransactionSet {
         this(new HashMap<>(transactionSet.transactionsByHash), new HashMap<>(transactionSet.transactionsByAddress));
     }
 
-    public TransactionSet(Map<Keccak256, Transaction> transactionsByHash, Map<RskAddress, List<Transaction>> transactionsByAddress) {
+    public TransactionSet(Map<Keccak256, Transaction> transactionsByHash, Map<Address, List<Transaction>> transactionsByAddress) {
         this.transactionsByHash = transactionsByHash;
         this.transactionsByAddress = transactionsByAddress;
     }
@@ -50,7 +50,7 @@ public class TransactionSet {
 
         this.transactionsByHash.put(txhash, transaction);
 
-        RskAddress senderAddress = transaction.getSender();
+        Address senderAddress = transaction.getSender();
 
         List<Transaction> txs = this.transactionsByAddress.get(senderAddress);
 
@@ -85,7 +85,7 @@ public class TransactionSet {
 
         this.transactionsByHash.remove(hash);
 
-        RskAddress senderAddress = transaction.getSender();
+        Address senderAddress = transaction.getSender();
         List<Transaction> txs = this.transactionsByAddress.get(senderAddress);
 
         if (txs != null) {
@@ -102,7 +102,7 @@ public class TransactionSet {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 
-    public List<Transaction> getTransactionsWithSender(RskAddress senderAddress) {
+    public List<Transaction> getTransactionsWithSender(Address senderAddress) {
         List<Transaction> list = this.transactionsByAddress.get(senderAddress);
 
         if (list == null) {

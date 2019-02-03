@@ -18,7 +18,7 @@
 
 package org.ethereum.core;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -128,7 +128,7 @@ public class TransactionSetTest {
     public void getEmptyTransactionListByUnknownSender() {
         TransactionSet txset = new TransactionSet();
 
-        List<Transaction> result = txset.getTransactionsWithSender(new RskAddress(new byte[20]));
+        List<Transaction> result = txset.getTransactionsWithSender(new Address(new byte[20]));
 
         Assert.assertNotNull(result);
         Assert.assertTrue(result.isEmpty());

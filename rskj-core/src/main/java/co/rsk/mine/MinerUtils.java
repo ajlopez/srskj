@@ -22,7 +22,7 @@ import co.rsk.bitcoinj.core.BtcTransaction;
 import co.rsk.bitcoinj.core.NetworkParameters;
 import co.rsk.config.RskMiningConstants;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.PendingState;
 import co.rsk.crypto.Keccak256;
 import org.ethereum.config.BlockchainNetConfig;
@@ -154,14 +154,14 @@ public class MinerUtils {
         return PendingState.sortByPriceTakingIntoAccountSenderAndNonce(txs);
     }
 
-    public List<org.ethereum.core.Transaction> filterTransactions(List<Transaction> txsToRemove, List<Transaction> txs, Map<RskAddress, BigInteger> accountNonces, Repository originalRepo, Coin minGasPrice) {
+    public List<org.ethereum.core.Transaction> filterTransactions(List<Transaction> txsToRemove, List<Transaction> txs, Map<Address, BigInteger> accountNonces, Repository originalRepo, Coin minGasPrice) {
         List<org.ethereum.core.Transaction> txsResult = new ArrayList<>();
         for (org.ethereum.core.Transaction tx : txs) {
             try {
                 Keccak256 hash = tx.getHash();
                 Coin txValue = tx.getValue();
                 BigInteger txNonce = new BigInteger(1, tx.getNonce());
-                RskAddress txSender = tx.getSender();
+                Address txSender = tx.getSender();
                 logger.debug("Examining tx={} sender: {} value: {} nonce: {}", hash, txSender, txValue, txNonce);
 
                 BigInteger expectedNonce;

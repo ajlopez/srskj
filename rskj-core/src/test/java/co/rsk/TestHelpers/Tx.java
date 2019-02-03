@@ -20,7 +20,7 @@ package co.rsk.TestHelpers;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.crypto.Keccak256;
 import org.ethereum.TestUtils;
 import org.ethereum.core.Block;
@@ -56,11 +56,11 @@ public class Tx {
 
         byte[] returnSenderBytes = new byte[20];
         r.nextBytes(returnSenderBytes);
-        RskAddress returnSender = new RskAddress(returnSenderBytes);
+        Address returnSender = new Address(returnSenderBytes);
 
         byte[] returnReceiveAddressBytes = new byte[20];
         r.nextBytes(returnReceiveAddressBytes);
-        RskAddress returnReceiveAddress = new RskAddress(returnReceiveAddressBytes);
+        Address returnReceiveAddress = new Address(returnReceiveAddressBytes);
 
         Mockito.when(transaction.getSender()).thenReturn(returnSender);
         Mockito.when(transaction.getHash()).thenReturn(new Keccak256(TestUtils.randomBytes(32)));

@@ -19,7 +19,6 @@
 package co.rsk.net;
 
 import co.rsk.blockchain.utils.BlockGenerator;
-import co.rsk.core.RskAddress;
 import com.google.common.collect.Lists;
 import org.ethereum.TestUtils;
 import org.ethereum.core.Block;

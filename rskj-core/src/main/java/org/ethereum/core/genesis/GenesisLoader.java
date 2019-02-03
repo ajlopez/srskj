@@ -21,7 +21,7 @@ package org.ethereum.core.genesis;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.trie.Trie;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,7 +59,7 @@ public class GenesisLoader {
 
             Genesis genesis = new GenesisMapper().mapFromJson(genesisJson, isRsk);
 
-            Map<RskAddress, InitialAddressState> premine = generatePreMine(config, initialNonce, genesisJson.getAlloc());
+            Map<Address, InitialAddressState> premine = generatePreMine(config, initialNonce, genesisJson.getAlloc());
             genesis.setPremine(premine);
 
             byte[] rootHash = generateRootHash(premine);
@@ -76,8 +76,8 @@ public class GenesisLoader {
         }
     }
 
-    private static Map<RskAddress, InitialAddressState> generatePreMine(RskSystemProperties config, BigInteger initialNonce, Map<String, AllocatedAccount> alloc){
-        Map<RskAddress, InitialAddressState> premine = new HashMap<>();
+    private static Map<Address, InitialAddressState> generatePreMine(RskSystemProperties config, BigInteger initialNonce, Map<String, AllocatedAccount> alloc){
+        Map<Address, InitialAddressState> premine = new HashMap<>();
         ContractDetailsMapper detailsMapper = new ContractDetailsMapper(config);
 
         for (Map.Entry<String, AllocatedAccount> accountEntry : alloc.entrySet()) {
@@ -105,17 +105,17 @@ public class GenesisLoader {
                     acctState.setStateRoot(contractDetails.getStorageHash());
                 }
 
-                premine.put(new RskAddress(accountEntry.getKey()), new InitialAddressState(acctState, contractDetails));
+                premine.put(new Address(accountEntry.getKey()), new InitialAddressState(acctState, contractDetails));
             }
         }
 
         return premine;
     }
 
-    private static byte[] generateRootHash(Map<RskAddress, InitialAddressState> premine){
+    private static byte[] generateRootHash(Map<Address, InitialAddressState> premine){
         Trie state = new Trie(null, true);
 
-        for (RskAddress addr : premine.keySet()) {
+        for (Address addr : premine.keySet()) {
             state = state.put(addr.getBytes(), premine.get(addr).getAccountState().getEncoded());
         }
 

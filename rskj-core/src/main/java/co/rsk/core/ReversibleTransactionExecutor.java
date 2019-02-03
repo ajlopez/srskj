@@ -62,13 +62,13 @@ public class ReversibleTransactionExecutor {
 
     public ProgramResult executeTransaction(
             Block executionBlock,
-            RskAddress coinbase,
+            Address coinbase,
             byte[] gasPrice,
             byte[] gasLimit,
             byte[] toAddress,
             byte[] value,
             byte[] data,
-            RskAddress fromAddress) {
+            Address fromAddress) {
         Repository repository = track.getSnapshotTo(executionBlock.getStateRoot()).startTracking();
 
         byte[] nonce = repository.getNonce(fromAddress).toByteArray();
@@ -105,7 +105,7 @@ public class ReversibleTransactionExecutor {
                 byte[] receiveAddress,
                 byte[] value,
                 byte[] data,
-                RskAddress fromAddress) {
+                Address fromAddress) {
             super(nonce, gasPrice, gasLimit, receiveAddress, value, data);
             this.sender = fromAddress;
         }

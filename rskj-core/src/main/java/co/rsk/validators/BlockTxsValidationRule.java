@@ -19,7 +19,7 @@
 package co.rsk.validators;
 
 import co.rsk.panic.PanicProcessor;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.core.Block;
 import org.ethereum.core.Repository;
 import org.ethereum.core.Transaction;
@@ -65,7 +65,7 @@ public class BlockTxsValidationRule implements BlockParentDependantValidationRul
 
         Repository parentRepo = repository.getSnapshotTo(parent.getStateRoot());
 
-        Map<RskAddress, BigInteger> curNonce = new HashMap<>();
+        Map<Address, BigInteger> curNonce = new HashMap<>();
 
         for (Transaction tx : txs) {
             try {
@@ -75,7 +75,7 @@ public class BlockTxsValidationRule implements BlockParentDependantValidationRul
                 return false;
             }
 
-            RskAddress sender = tx.getSender();
+            Address sender = tx.getSender();
             BigInteger expectedNonce = curNonce.get(sender);
             if (expectedNonce == null) {
                 expectedNonce = parentRepo.getNonce(sender);

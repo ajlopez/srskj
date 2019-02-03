@@ -21,7 +21,7 @@ package org.ethereum.core;
 
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.BlockDifficulty;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.core.bc.TransactionPoolImpl;
@@ -106,7 +106,7 @@ public class ImportLightTest {
 
         Repository track = repository.startTracking();
 
-        for (RskAddress addr : genesis.getPremine().keySet()) {
+        for (Address addr : genesis.getPremine().keySet()) {
             track.createAccount(addr);
             track.addBalance(addr, genesis.getPremine().get(addr).getAccountState().getBalance());
         }

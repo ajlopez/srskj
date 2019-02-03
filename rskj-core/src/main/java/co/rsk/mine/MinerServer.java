@@ -20,7 +20,7 @@ package co.rsk.mine;
 
 import co.rsk.bitcoinj.core.BtcBlock;
 import co.rsk.bitcoinj.core.BtcTransaction;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.core.Block;
 
 import javax.annotation.Nonnull;
@@ -53,7 +53,7 @@ public interface MinerServer {
 
     SubmitBlockResult submitBitcoinBlock(String blockHashForMergedMining, BtcBlock bitcoinMergedMiningBlock);
 
-    RskAddress getCoinbaseAddress();
+    Address getCoinbaseAddress();
 
     MinerWork getWork();
 

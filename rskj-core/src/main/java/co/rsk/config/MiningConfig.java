@@ -18,13 +18,13 @@
 
 package co.rsk.config;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 
 /**
  * Wraps configuration for Mining, which is usually derived from configuration files.
  */
 public class MiningConfig {
-    private final RskAddress coinbaseAddress;
+    private final Address coinbaseAddress;
     private final double minFeesNotifyInDollars;
     private final double minerGasUnitInDollars;
     private final long minGasPriceTarget;
@@ -32,7 +32,7 @@ public class MiningConfig {
     private final int uncleGenerationLimit;
     private final GasLimitConfig gasLimit;
 
-    public MiningConfig(RskAddress coinbaseAddress, double minFeesNotifyInDollars, double minerGasUnitInDollars, long minGasPriceTarget, int uncleListLimit, int uncleGenerationLimit, GasLimitConfig gasLimit) {
+    public MiningConfig(Address coinbaseAddress, double minFeesNotifyInDollars, double minerGasUnitInDollars, long minGasPriceTarget, int uncleListLimit, int uncleGenerationLimit, GasLimitConfig gasLimit) {
         this.coinbaseAddress = coinbaseAddress;
         this.minFeesNotifyInDollars = minFeesNotifyInDollars;
         this.minerGasUnitInDollars = minerGasUnitInDollars;
@@ -42,7 +42,7 @@ public class MiningConfig {
         this.gasLimit = gasLimit;
     }
 
-    public RskAddress getCoinbaseAddress() {
+    public Address getCoinbaseAddress() {
         return coinbaseAddress;
     }
 

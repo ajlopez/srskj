@@ -21,7 +21,7 @@ package co.rsk.vm;
 import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.test.World;
 import org.ethereum.core.*;
@@ -102,11 +102,11 @@ public class BlockchainVMTest {
         srcAmount = srcAmount.subtract(transactionGasPrice.multiply(transactionGasLimit));
 
         Assert.assertEquals(
-                binfo.repository.getBalance(new RskAddress(binfo.faucetKey.getAddress())),
+                binfo.repository.getBalance(new Address(binfo.faucetKey.getAddress())),
                 srcAmount);
 
         Assert.assertEquals(
-                binfo.repository.getBalance(new RskAddress(dstAddress)),
+                binfo.repository.getBalance(new Address(dstAddress)),
                 transferAmount);
     }
 

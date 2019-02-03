@@ -20,7 +20,7 @@
 package org.ethereum.core;
 
 import co.rsk.config.RskSystemProperties;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -54,13 +54,13 @@ public class CallTransaction {
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
             .enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
 
-    public static Transaction createRawTransaction(RskSystemProperties config, long nonce, long gasPrice, long gasLimit, RskAddress toAddress,
+    public static Transaction createRawTransaction(RskSystemProperties config, long nonce, long gasPrice, long gasLimit, Address toAddress,
                                                    long value, byte[] data) {
         return new Transaction(
                 longToBytesNoLeadZeroes(nonce),
                 longToBytesNoLeadZeroes(gasPrice),
                 longToBytesNoLeadZeroes(gasLimit),
-                toAddress.equals(RskAddress.nullAddress()) ? null : toAddress.getBytes(),
+                toAddress.equals(Address.nullAddress()) ? null : toAddress.getBytes(),
                 longToBytesNoLeadZeroes(value),
                 data,
                 config.getBlockchainConfig().getCommonConstants().getChainId());
@@ -68,7 +68,7 @@ public class CallTransaction {
 
 
 
-    public static Transaction createCallTransaction(RskSystemProperties config, long nonce, long gasPrice, long gasLimit, RskAddress toAddress,
+    public static Transaction createCallTransaction(RskSystemProperties config, long nonce, long gasPrice, long gasLimit, Address toAddress,
                                                     long value, Function callFunc, Object... funcArgs) {
 
         byte[] callData = callFunc.encode(funcArgs);

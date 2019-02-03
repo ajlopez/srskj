@@ -20,7 +20,7 @@ package co.rsk.test.dsl;
 
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.net.NodeBlockProcessor;
@@ -116,7 +116,7 @@ public class WorldDslProcessor {
         String accountName = cmd.getArgument(0);
         Coin expected = new Coin(new BigInteger(cmd.getArgument(1)));
 
-        RskAddress accountAddress;
+        Address accountAddress;
 
         Account account = world.getAccountByName(accountName);
 
@@ -128,7 +128,7 @@ public class WorldDslProcessor {
             if (tx != null)
                 accountAddress = tx.getContractAddress();
             else
-                accountAddress = new RskAddress(accountName);
+                accountAddress = new Address(accountName);
         }
 
         Coin accountBalance = world.getRepository().getBalance(accountAddress);

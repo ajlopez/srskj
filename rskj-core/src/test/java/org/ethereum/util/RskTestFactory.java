@@ -4,7 +4,7 @@ import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.ReversibleTransactionExecutor;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.RskImpl;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
@@ -99,7 +99,7 @@ public class RskTestFactory {
         TransactionExecutor executor = new TransactionExecutor(
                 transaction,
                 0,
-                RskAddress.nullAddress(),
+                Address.nullAddress(),
                 getRepository(),
                 getBlockStore(),
                 getReceiptStore(),

@@ -22,14 +22,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.bouncycastle.util.encoders.DecoderException;
 
-public class RskAddressTest {
+public class AddressTest {
     @Test
     public void testEquals() {
-        RskAddress senderA = new RskAddress("0000000000000000000000000000000001000006");
-        RskAddress senderB = new RskAddress("0000000000000000000000000000000001000006");
-        RskAddress senderC = new RskAddress("0000000000000000000000000000000001000008");
-        RskAddress senderD = RskAddress.nullAddress();
-        RskAddress senderE = new RskAddress("0x00002000f000000a000000330000000001000006");
+        Address senderA = new Address("0000000000000000000000000000000001000006");
+        Address senderB = new Address("0000000000000000000000000000000001000006");
+        Address senderC = new Address("0000000000000000000000000000000001000008");
+        Address senderD = Address.nullAddress();
+        Address senderE = new Address("0x00002000f000000a000000330000000001000006");
 
         Assert.assertEquals(senderA, senderB);
         Assert.assertNotEquals(senderA, senderC);
@@ -39,58 +39,58 @@ public class RskAddressTest {
 
     @Test
     public void zeroAddress() {
-        RskAddress senderA = new RskAddress("0000000000000000000000000000000000000000");
-        RskAddress senderB = new RskAddress("0x0000000000000000000000000000000000000000");
-        RskAddress senderC = new RskAddress(new byte[20]);
+        Address senderA = new Address("0000000000000000000000000000000000000000");
+        Address senderB = new Address("0x0000000000000000000000000000000000000000");
+        Address senderC = new Address(new byte[20]);
 
         Assert.assertEquals(senderA, senderB);
         Assert.assertEquals(senderB, senderC);
-        Assert.assertNotEquals(RskAddress.nullAddress(), senderC);
+        Assert.assertNotEquals(Address.nullAddress(), senderC);
     }
 
     @Test
     public void nullAddress() {
-        Assert.assertArrayEquals(RskAddress.nullAddress().getBytes(), new byte[0]);
+        Assert.assertArrayEquals(Address.nullAddress().getBytes(), new byte[0]);
     }
 
     @Test(expected = RuntimeException.class)
     public void invalidLongAddress() {
-        new RskAddress("00000000000000000000000000000000010000060");
+        new Address("00000000000000000000000000000000010000060");
     }
 
     @Test(expected = RuntimeException.class)
     public void invalidShortAddress() {
-        new RskAddress("0000000000000000000000000000000001006");
+        new Address("0000000000000000000000000000000001006");
     }
 
     @Test
     public void oddLengthAddressPaddedWithOneZero() {
-        new RskAddress("000000000000000000000000000000000100006");
+        new Address("000000000000000000000000000000000100006");
     }
 
     @Test(expected = DecoderException.class)
     public void invalidHexAddress() {
-        new RskAddress("000000000000000000000000000000000100000X");
+        new Address("000000000000000000000000000000000100000X");
     }
 
     @Test(expected = NullPointerException.class)
     public void invalidNullAddressBytes() {
-        new RskAddress((byte[]) null);
+        new Address((byte[]) null);
     }
 
     @Test(expected = NullPointerException.class)
     public void invalidNullAddressString() {
-        new RskAddress((String) null);
+        new Address((String) null);
     }
 
     @Test(expected = RuntimeException.class)
     public void invalidShortAddressBytes() {
-        new RskAddress(new byte[19]);
+        new Address(new byte[19]);
     }
 
     @Test(expected = RuntimeException.class)
     public void invalidLongAddressBytes() {
-        new RskAddress(new byte[21]);
+        new Address(new byte[21]);
     }
 
 }

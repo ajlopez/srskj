@@ -22,7 +22,7 @@ package org.ethereum.vm;
 import co.rsk.asm.EVMAssembler;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.config.VmConfig;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.test.builders.AccountBuilder;
 import co.rsk.test.builders.TransactionBuilder;
 import co.rsk.vm.BitSet;
@@ -101,7 +101,7 @@ public class VMTest {
 
     public void testSTATICCALLWithStatusZeroUsingOpCode(String opcode) {
         invoke = new ProgramInvokeMockImpl(compile("PUSH1 0x01 PUSH1 0x02 " + opcode), null);
-        RskAddress address = invoke.getContractAddress();
+        Address address = invoke.getContractAddress();
         program = getProgram(compile("PUSH1 0x00" +
                 " PUSH1 0x00" +
                 " PUSH1 0x00" +
@@ -1698,7 +1698,7 @@ public class VMTest {
         vm.step(program);
 
         DataWord key = new DataWord(Hex.decode(s_expected_key));
-        DataWord val = program.getStorage().getStorageValue(new RskAddress(invoke.getOwnerAddress()), key);
+        DataWord val = program.getStorage().getStorageValue(new Address(invoke.getOwnerAddress()), key);
 
         assertEquals(s_expected_val, Hex.toHexString(val.getData()).toUpperCase());
     }
@@ -1719,7 +1719,7 @@ public class VMTest {
 
         Repository repository = program.getStorage();
         DataWord key = new DataWord(Hex.decode(s_expected_key));
-        DataWord val = repository.getStorageValue(new RskAddress(invoke.getOwnerAddress()), key);
+        DataWord val = repository.getStorageValue(new Address(invoke.getOwnerAddress()), key);
 
         assertEquals(s_expected_val, Hex.toHexString(val.getData()).toUpperCase());
     }
@@ -1928,7 +1928,7 @@ public class VMTest {
         vm.step(program);
 
         DataWord key = new DataWord(Hex.decode(s_expected_key));
-        DataWord val = program.getStorage().getStorageValue(new RskAddress(invoke.getOwnerAddress()), key);
+        DataWord val = program.getStorage().getStorageValue(new Address(invoke.getOwnerAddress()), key);
 
         assertTrue(program.isStopped());
         assertEquals(s_expected_val, Hex.toHexString(val.getData()).toUpperCase());
@@ -1951,7 +1951,7 @@ public class VMTest {
         vm.step(program);
 
         DataWord key = new DataWord(Hex.decode(s_expected_key));
-        DataWord val = program.getStorage().getStorageValue(new RskAddress(invoke.getOwnerAddress()), key);
+        DataWord val = program.getStorage().getStorageValue(new Address(invoke.getOwnerAddress()), key);
 
         assertTrue(program.isStopped());
         assertEquals(s_expected_val, Hex.toHexString(val.getData()).toUpperCase());

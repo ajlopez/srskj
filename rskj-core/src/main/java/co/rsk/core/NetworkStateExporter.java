@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.ethereum.core.Repository;
 import org.ethereum.vm.DataWord;
-import org.ethereum.vm.PrecompiledContracts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.bouncycastle.util.encoders.Hex;
@@ -60,8 +59,8 @@ public class NetworkStateExporter {
         try(FileWriter fw = new FileWriter(dumpFile.getAbsoluteFile()); BufferedWriter bw = new BufferedWriter(fw)) {
             JsonNodeFactory jsonFactory = new JsonNodeFactory(false);
             ObjectNode mainNode = jsonFactory.objectNode();
-            for (RskAddress addr : frozenRepository.getAccountsKeys()) {
-                if(!addr.equals(RskAddress.nullAddress())) {
+            for (Address addr : frozenRepository.getAccountsKeys()) {
+                if(!addr.equals(Address.nullAddress())) {
                     mainNode.set(addr.toString(), createAccountNode(mainNode, addr, frozenRepository));
                 }
             }
@@ -76,7 +75,7 @@ public class NetworkStateExporter {
         }
     }
 
-    private ObjectNode createContractNode(ObjectNode accountNode, AccountInformationProvider accountInformation, RskAddress addr, Iterator<DataWord> contractKeys) {
+    private ObjectNode createContractNode(ObjectNode accountNode, AccountInformationProvider accountInformation, Address addr, Iterator<DataWord> contractKeys) {
         ObjectNode contractNode = accountNode.objectNode();
         contractNode.put("code", Hex.toHexString(accountInformation.getCode(addr)));
         ObjectNode dataNode = contractNode.objectNode();
@@ -89,7 +88,7 @@ public class NetworkStateExporter {
         return contractNode;
     }
 
-    private ObjectNode createAccountNode(ObjectNode mainNode, RskAddress addr, AccountInformationProvider accountInformation) {
+    private ObjectNode createAccountNode(ObjectNode mainNode, Address addr, AccountInformationProvider accountInformation) {
         ObjectNode accountNode = mainNode.objectNode();
         Coin balance = accountInformation.getBalance(addr);
         accountNode.put("balance", balance.asBigInteger().toString());

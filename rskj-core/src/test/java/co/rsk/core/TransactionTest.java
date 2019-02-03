@@ -19,21 +19,15 @@
 package co.rsk.core;
 
 import co.rsk.config.TestSystemProperties;
-import co.rsk.crypto.Keccak256;
 import org.ethereum.core.*;
 import org.ethereum.crypto.ECKey;
 import org.ethereum.crypto.HashUtil;
-import org.ethereum.db.BlockStoreDummy;
-import org.ethereum.listener.EthereumListenerAdapter;
-import org.ethereum.vm.PrecompiledContracts;
-import org.ethereum.vm.program.ProgramResult;
 import org.junit.Assert;
 import org.junit.Test;
 import org.bouncycastle.util.BigIntegers;
 import org.bouncycastle.util.encoders.Hex;
 
 import java.math.BigInteger;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -114,14 +108,14 @@ public class TransactionTest {
         System.out.println("RLP encoded tx\t\t: " + Hex.toHexString(tx.getEncoded()));
 
         // Retrieve sender from transaction
-        RskAddress sender = tx.getSender();
+        Address sender = tx.getSender();
 
         // Re-sign transaction with a different sender's key
         byte[] newSenderPrivateKey = HashUtil.keccak256("bat".getBytes());
         tx.sign(newSenderPrivateKey);
 
         // Retrieve new sender from transaction
-        RskAddress newSender = tx.getSender();
+        Address newSender = tx.getSender();
 
         // Verify sender changed
         assertNotEquals(sender, newSender);

@@ -19,7 +19,7 @@
 package co.rsk.core.bc;
 
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.core.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -254,6 +254,6 @@ public class BlockExecutor {
     }
 
     public interface TransactionExecutorFactory {
-        TransactionExecutor newInstance(Transaction tx, int txindex, RskAddress coinbase, Repository track, Block block, long totalGasUsed);
+        TransactionExecutor newInstance(Transaction tx, int txindex, Address coinbase, Repository track, Block block, long totalGasUsed);
     }
 }

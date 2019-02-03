@@ -19,7 +19,7 @@ package co.rsk.vm;
  */
 
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.vm.DataWord;
 import org.ethereum.vm.PrecompiledContracts;
 import org.junit.Assert;
@@ -51,8 +51,8 @@ public class PrecompiledContractAddressTests {
     }
 
     void checkAddr(PrecompiledContracts pcList,String addr,String className) {
-        RskAddress a;
-        a = new RskAddress(addr);
+        Address a;
+        a = new Address(addr);
         PrecompiledContracts.PrecompiledContract pc = pcList.getContractForAddress(null,new DataWord(a.getBytes()));
         Assert.assertEquals(className,pc.getClass().getSimpleName());
         // Do not get precompiles if the 12-byte prefix is non-zero.

@@ -20,7 +20,7 @@
 package org.ethereum.core;
 
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.AccountInformationProvider;
 import org.ethereum.db.ContractDetails;
 import org.ethereum.vm.DataWord;
@@ -41,7 +41,7 @@ public interface Repository extends AccountInformationProvider {
      * @param addr of the contract
      * @return newly created account state
      */
-    AccountState createAccount(RskAddress addr);
+    AccountState createAccount(Address addr);
 
 
     /**
@@ -49,7 +49,7 @@ public interface Repository extends AccountInformationProvider {
      * @return - true if account exist,
      *           false otherwise
      */
-    boolean isExist(RskAddress addr);
+    boolean isExist(Address addr);
 
     /**
      * Retrieve an account
@@ -57,21 +57,21 @@ public interface Repository extends AccountInformationProvider {
      * @param addr of the account
      * @return account state as stored in the database
      */
-    AccountState getAccountState(RskAddress addr);
+    AccountState getAccountState(Address addr);
 
     /**
      * Deletes the account
      *
      * @param addr of the account
      */
-    void delete(RskAddress addr);
+    void delete(Address addr);
 
     /**
      * Hibernates the account
      *
      * @param addr of the account
      */
-    void hibernate(RskAddress addr);
+    void hibernate(Address addr);
 
         /**
      * Increase the account nonce of the given account by one
@@ -79,7 +79,7 @@ public interface Repository extends AccountInformationProvider {
      * @param addr of the account
      * @return new value of the nonce
      */
-    BigInteger increaseNonce(RskAddress addr);
+    BigInteger increaseNonce(Address addr);
 
     /**
      * Retrieve contract details for a given account from the database
@@ -89,7 +89,7 @@ public interface Repository extends AccountInformationProvider {
      * @deprecated prefer using {@link AccountInformationProvider}
      */
     @Deprecated
-    ContractDetails getContractDetails(RskAddress addr);
+    ContractDetails getContractDetails(Address addr);
 
     /**
      * Store code associated with an account
@@ -97,7 +97,7 @@ public interface Repository extends AccountInformationProvider {
      * @param addr for the account
      * @param code that will be associated with this account
      */
-    void saveCode(RskAddress addr, byte[] code);
+    void saveCode(Address addr, byte[] code);
 
     /**
      * Put a value in storage of an account at a given key
@@ -106,9 +106,9 @@ public interface Repository extends AccountInformationProvider {
      * @param key of the data to store
      * @param value is the data to store
      */
-    void addStorageRow(RskAddress addr, DataWord key, DataWord value);
+    void addStorageRow(Address addr, DataWord key, DataWord value);
 
-    void addStorageBytes(RskAddress addr, DataWord key, byte[] value);
+    void addStorageBytes(Address addr, DataWord key, byte[] value);
 
     /**
      * Add value to the balance of an account
@@ -117,12 +117,12 @@ public interface Repository extends AccountInformationProvider {
      * @param value to be added
      * @return new balance of the account
      */
-    Coin addBalance(RskAddress addr, Coin value);
+    Coin addBalance(Address addr, Coin value);
 
     /**
      * @return Returns set of all the account addresses
      */
-    Set<RskAddress> getAccountsKeys();
+    Set<Address> getAccountsKeys();
 
     /**
      * Dump the full state of the current repository into a file with JSON format
@@ -167,23 +167,23 @@ public interface Repository extends AccountInformationProvider {
      */
     void syncToRoot(byte[] root);
 
-    void updateBatch(Map<RskAddress, AccountState> accountStates,
-                     Map<RskAddress, ContractDetails> contractDetailes);
+    void updateBatch(Map<Address, AccountState> accountStates,
+                     Map<Address, ContractDetails> contractDetailes);
 
 
     byte[] getRoot();
 
-    void loadAccount(RskAddress addr,
-                     Map<RskAddress, AccountState> cacheAccounts,
-                     Map<RskAddress, ContractDetails> cacheDetails);
+    void loadAccount(Address addr,
+                     Map<Address, AccountState> cacheAccounts,
+                     Map<Address, ContractDetails> cacheDetails);
 
     Repository getSnapshotTo(byte[] root);
 
-    void updateContractDetails(RskAddress addr, final ContractDetails contractDetails);
+    void updateContractDetails(Address addr, final ContractDetails contractDetails);
 
-    void updateAccountState(RskAddress addr, AccountState accountState);
+    void updateAccountState(Address addr, AccountState accountState);
 
-    default void transfer(RskAddress fromAddr, RskAddress toAddr, Coin value) {
+    default void transfer(Address fromAddr, Address toAddr, Coin value) {
         addBalance(fromAddr, value.negate());
         addBalance(toAddr, value);
     }

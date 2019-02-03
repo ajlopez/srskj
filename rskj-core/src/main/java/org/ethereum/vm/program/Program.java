@@ -21,13 +21,12 @@ package org.ethereum.vm.program;
 
 import co.rsk.config.VmConfig;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.vm.BitSet;
 import com.google.common.annotations.VisibleForTesting;
 import org.bouncycastle.util.encoders.Hex;
 import org.ethereum.config.BlockchainConfig;
 import org.ethereum.config.Constants;
-import org.ethereum.core.Block;
 import org.ethereum.core.Repository;
 import org.ethereum.core.Transaction;
 import org.ethereum.crypto.HashUtil;
@@ -238,7 +237,7 @@ public class Program {
 
 
 
-    private InternalTransaction addInternalTx(byte[] nonce, DataWord gasLimit, RskAddress senderAddress, RskAddress receiveAddress,
+    private InternalTransaction addInternalTx(byte[] nonce, DataWord gasLimit, Address senderAddress, Address receiveAddress,
                                               Coin value, byte[] data, String note) {
         if (transaction == null) {
             return null;
@@ -538,11 +537,11 @@ public class Program {
 
     public void suicide(DataWord obtainerAddress) {
 
-        RskAddress owner = new RskAddress(getOwnerAddress());
+        Address owner = new Address(getOwnerAddress());
         Coin balance = getStorage().getBalance(owner);
 
         if (!balance.equals(Coin.ZERO)) {
-            RskAddress obtainer = new RskAddress(obtainerAddress);
+            Address obtainer = new Address(obtainerAddress);
 
             logger.info("Transfer to: [{}] heritage: [{}]", obtainer, balance);
 
@@ -562,8 +561,8 @@ public class Program {
 
     public void send(DataWord destAddress, Coin amount) {
 
-        RskAddress owner = new RskAddress(getOwnerAddress());
-        RskAddress dest = new RskAddress(destAddress);
+        Address owner = new Address(getOwnerAddress());
+        Address dest = new Address(destAddress);
         Coin balance = getStorage().getBalance(owner);
 
         if (isNotCovers(balance, amount)) {
@@ -593,7 +592,7 @@ public class Program {
             return;
         }
 
-        RskAddress senderAddress = new RskAddress(getOwnerAddress());
+        Address senderAddress = new Address(getOwnerAddress());
         Coin endowment = new Coin(value.getData());
         if (isNotCovers(getStorage().getBalance(senderAddress), endowment)) {
             stackPushZero();
@@ -614,7 +613,7 @@ public class Program {
         // [2] CREATE THE CONTRACT ADDRESS
         byte[] nonce = getStorage().getNonce(senderAddress).toByteArray();
         byte[] newAddressBytes = HashUtil.calcNewAddr(getOwnerAddress().getLast20Bytes(), nonce);
-        RskAddress newAddress = new RskAddress(newAddressBytes);
+        Address newAddress = new Address(newAddressBytes);
 
         if (byTestingSuite()) {
             // This keeps track of the contracts created for a test
@@ -649,7 +648,7 @@ public class Program {
 
 
         // [5] COOK THE INVOKE AND EXECUTE
-        InternalTransaction internalTx = addInternalTx(nonce, getGasLimit(), senderAddress, RskAddress.nullAddress(), endowment, programCode, "create");
+        InternalTransaction internalTx = addInternalTx(nonce, getGasLimit(), senderAddress, Address.nullAddress(), endowment, programCode, "create");
         ProgramInvoke programInvoke = programInvokeFactory.createProgramInvoke(
                 this, new DataWord(newAddressBytes), getOwnerAddress(), value, gasLimit,
                 newBalance, null, track, this.invoke.getBlockStore(), false, byTestingSuite());
@@ -804,9 +803,9 @@ public class Program {
         byte[] data = memoryChunk(msg.getInDataOffs().intValue(), msg.getInDataSize().intValue());
 
         // FETCH THE SAVED STORAGE
-        RskAddress codeAddress = new RskAddress(msg.getCodeAddress());
-        RskAddress senderAddress = new RskAddress(getOwnerAddress());
-        RskAddress contextAddress = msg.getType().isStateless() ? senderAddress : codeAddress;
+        Address codeAddress = new Address(msg.getCodeAddress());
+        Address senderAddress = new Address(getOwnerAddress());
+        Address contextAddress = msg.getType().isStateless() ? senderAddress : codeAddress;
 
         if (isLogEnabled) {
             logger.info("{} for existing contract: address: [{}], outDataOffs: [{}], outDataSize: [{}]  ", msg.getType().name(),
@@ -867,12 +866,12 @@ public class Program {
 
     private boolean executeCode(
             MessageCall msg,
-            RskAddress contextAddress,
+            Address contextAddress,
             Coin contextBalance,
             InternalTransaction internalTx,
             Repository track,
             byte[] programCode,
-            RskAddress senderAddress,
+            Address senderAddress,
             byte[] data) {
 
         returnDataBuffer = null; // reset return buffer right before the call
@@ -1016,7 +1015,7 @@ public class Program {
             valWord = valWord.clone();
         }
 
-        getStorage().addStorageRow(new RskAddress(getOwnerAddress()), keyWord, valWord);
+        getStorage().addStorageRow(new Address(getOwnerAddress()), keyWord, valWord);
     }
 
     public byte[] getCode() {
@@ -1024,10 +1023,10 @@ public class Program {
     }
 
     public byte[] getCodeAt(DataWord address) {
-        return getCodeAt(new RskAddress(address));
+        return getCodeAt(new Address(address));
     }
 
-    private byte[] getCodeAt(RskAddress addr) {
+    private byte[] getCodeAt(Address addr) {
         byte[] code = invoke.getRepository().getCode(addr);
         return nullToEmpty(code);
     }
@@ -1054,7 +1053,7 @@ public class Program {
     }
 
     public DataWord getBalance(DataWord address) {
-        Coin balance = getStorage().getBalance(new RskAddress(address));
+        Coin balance = getStorage().getBalance(new Address(address));
         return new DataWord(balance.getBytes());
     }
 
@@ -1091,7 +1090,7 @@ public class Program {
     }
 
     public DataWord storageLoad(DataWord key) {
-        return getStorage().getStorageValue(new RskAddress(getOwnerAddress()), key);
+        return getStorage().getStorageValue(new Address(getOwnerAddress()), key);
     }
 
     public DataWord getPrevHash() {
@@ -1158,7 +1157,7 @@ public class Program {
                 stackData.insert(0, "\n");
             }
 
-            RskAddress ownerAddress = new RskAddress(getOwnerAddress());
+            Address ownerAddress = new Address(getOwnerAddress());
             StringBuilder storageData = new StringBuilder();
             if (getStorage().isContract(ownerAddress)) {
                 Iterator<DataWord> it = getStorage().getStorageKeys(ownerAddress);
@@ -1391,9 +1390,9 @@ public class Program {
 
         Repository track = getStorage().startTracking();
 
-        RskAddress senderAddress = new RskAddress(getOwnerAddress());
-        RskAddress codeAddress = new RskAddress(msg.getCodeAddress());
-        RskAddress contextAddress = msg.getType().isStateless() ? senderAddress : codeAddress;
+        Address senderAddress = new Address(getOwnerAddress());
+        Address codeAddress = new Address(msg.getCodeAddress());
+        Address contextAddress = msg.getType().isStateless() ? senderAddress : codeAddress;
 
         Coin endowment = new Coin(msg.getEndowment().getData());
         Coin senderBalance = track.getBalance(senderAddress);

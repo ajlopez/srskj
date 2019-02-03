@@ -20,7 +20,7 @@ package org.ethereum.rpc;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.AccountInformationProvider;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
@@ -379,7 +379,7 @@ public class Web3Impl implements Web3 {
             throw new NullPointerException();
         }
 
-        RskAddress addr = new RskAddress(address);
+        Address addr = new Address(address);
         BigInteger balance = accountInformationProvider.getBalance(addr).asBigInteger();
 
         return toJsonHex(balance);
@@ -387,7 +387,7 @@ public class Web3Impl implements Web3 {
 
     @Override
     public String eth_getBalance(String address) throws Exception {
-        RskAddress addr = new RskAddress(address);
+        Address addr = new Address(address);
         BigInteger balance = this.repository.getBalance(addr).asBigInteger();
 
         return toJsonHex(balance);
@@ -398,7 +398,7 @@ public class Web3Impl implements Web3 {
         String s = null;
 
         try {
-            RskAddress addr = new RskAddress(address);
+            Address addr = new Address(address);
             AccountInformationProvider accountInformationProvider = getAccountInformationProvider(blockId);
 
             if(accountInformationProvider == null) {
@@ -423,7 +423,7 @@ public class Web3Impl implements Web3 {
     public String eth_getTransactionCount(String address, String blockId) throws Exception {
         String s = null;
         try {
-            RskAddress addr = new RskAddress(address);
+            Address addr = new Address(address);
 
             AccountInformationProvider accountInformationProvider = getAccountInformationProvider(blockId);
 
@@ -532,7 +532,7 @@ public class Web3Impl implements Web3 {
                 return null;
             }
 
-            RskAddress addr = new RskAddress(address);
+            Address addr = new Address(address);
 
             AccountInformationProvider accountInformationProvider = getAccountInformationProvider(blockId);
 

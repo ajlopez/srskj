@@ -20,7 +20,7 @@ package org.ethereum.core;
 
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.crypto.Keccak256;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
@@ -52,7 +52,7 @@ public class BlockHeader {
     private byte[] unclesHash;
     /* The 160-bit address to which all fees collected from the
      * successful mining of this block be transferred; formally */
-    private RskAddress coinbase;
+    private Address coinbase;
     /* The SHA3 256-bit hash of the root node of the state trie,
      * after all transactions are executed and finalisations applied */
     private byte[] stateRoot;
@@ -193,7 +193,7 @@ public class BlockHeader {
                        int uncleCount) {
         this.parentHash = parentHash;
         this.unclesHash = unclesHash;
-        this.coinbase = new RskAddress(coinbase);
+        this.coinbase = new Address(coinbase);
         this.logsBloom = logsBloom;
         this.difficulty = RLP.parseBlockDifficulty(difficulty);
         this.number = number;
@@ -249,7 +249,7 @@ public class BlockHeader {
         this.unclesHash = unclesHash;
     }
 
-    public RskAddress getCoinbase() {
+    public Address getCoinbase() {
         return this.coinbase;
     }
 

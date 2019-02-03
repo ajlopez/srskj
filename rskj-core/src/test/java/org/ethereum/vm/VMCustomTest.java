@@ -22,7 +22,7 @@ package org.ethereum.vm;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.config.VmConfig;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.config.BlockchainConfig;
 import org.ethereum.vm.program.Program;
 import org.ethereum.vm.program.Program.OutOfGasException;
@@ -51,7 +51,7 @@ public class VMCustomTest {
 
     @Before
     public void setup() {
-        RskAddress ownerAddress = new RskAddress("77045E71A7A2C50903D88E564CD72FAB11E82051");
+        Address ownerAddress = new Address("77045E71A7A2C50903D88E564CD72FAB11E82051");
         byte[] msgData = Hex.decode("00000000000000000000000000000000000000000000000000000000000000A1" +
                 "00000000000000000000000000000000000000000000000000000000000000B1");
 

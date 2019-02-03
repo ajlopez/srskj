@@ -22,7 +22,7 @@ import co.rsk.config.MiningConfig;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
 import co.rsk.core.DifficultyCalculator;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.core.bc.FamilyUtils;
 import co.rsk.validators.BlockValidationRule;
@@ -152,7 +152,7 @@ public class BlockToMineBuilder {
         List<Transaction> txs = minerUtils.getAllTransactions(transactionPool);
         logger.debug("{} transaction(s) collected from pending state", txs.size());
 
-        Map<RskAddress, BigInteger> accountNonces = new HashMap<>();
+        Map<Address, BigInteger> accountNonces = new HashMap<>();
 
         Repository originalRepo = repository.getSnapshotTo(parent.getStateRoot());
 

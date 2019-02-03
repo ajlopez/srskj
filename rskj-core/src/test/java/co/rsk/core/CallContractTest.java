@@ -55,7 +55,7 @@ public class CallContractTest {
         Assert.assertEquals(BigInteger.ONE, new BigInteger(1, value));
     }
 
-    private static ProgramResult callContract(World world, RskAddress receiveAddress, byte[] data) {
+    private static ProgramResult callContract(World world, Address receiveAddress, byte[] data) {
         Transaction tx = CallTransaction.createRawTransaction(config, 0, 0, 100000000000000L,
                 receiveAddress, 0, data);
         tx.sign(new byte[32]);

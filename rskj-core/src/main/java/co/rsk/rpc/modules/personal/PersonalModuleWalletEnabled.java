@@ -20,7 +20,7 @@ package co.rsk.rpc.modules.personal;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.config.WalletAccount;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.Wallet;
 import org.ethereum.config.net.RegTestConfig;
 import org.ethereum.core.Account;
@@ -148,19 +148,19 @@ public class PersonalModuleWalletEnabled implements PersonalModule {
             }
         }
 
-        return this.wallet.unlockAccount(new RskAddress(address), passphrase, dur);
+        return this.wallet.unlockAccount(new Address(address), passphrase, dur);
     }
 
     @Override
     public boolean lockAccount(String address) {
-        return this.wallet.lockAccount(new RskAddress(address));
+        return this.wallet.lockAccount(new Address(address));
     }
 
     @Override
     public String dumpRawKey(String address) throws Exception {
         String s = null;
         try {
-            Account account = wallet.getAccount(new RskAddress(convertFromJsonHexToHex(address)));
+            Account account = wallet.getAccount(new Address(convertFromJsonHexToHex(address)));
             if (account == null) {
                 throw new Exception("Address private key is locked or could not be found in this node");
             }
@@ -172,7 +172,7 @@ public class PersonalModuleWalletEnabled implements PersonalModule {
     }
 
     private Account getAccount(String from, String passphrase) {
-        return wallet.getAccount(new RskAddress(from), passphrase);
+        return wallet.getAccount(new Address(from), passphrase);
     }
 
     private String sendTransaction(Web3.CallArguments args, Account account) throws Exception {

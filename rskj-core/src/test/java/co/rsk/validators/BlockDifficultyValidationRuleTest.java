@@ -21,7 +21,6 @@ package co.rsk.validators;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.DifficultyCalculator;
-import co.rsk.core.RskAddress;
 import org.ethereum.TestUtils;
 import org.ethereum.config.blockchain.regtest.RegTestGenesisConfig;
 import org.ethereum.core.Block;

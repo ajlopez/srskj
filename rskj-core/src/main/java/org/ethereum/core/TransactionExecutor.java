@@ -21,7 +21,7 @@ package org.ethereum.core;
 
 import co.rsk.config.VmConfig;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.panic.PanicProcessor;
 import org.ethereum.config.BlockchainConfig;
 import org.ethereum.config.BlockchainNetConfig;
@@ -80,7 +80,7 @@ public class TransactionExecutor {
     private boolean readyToExecute = false;
 
     private final ProgramInvokeFactory programInvokeFactory;
-    private final RskAddress coinbase;
+    private final Address coinbase;
 
     private TransactionReceipt receipt;
     private ProgramResult result = new ProgramResult();
@@ -99,7 +99,7 @@ public class TransactionExecutor {
 
     private boolean localCall = false;
 
-    public TransactionExecutor(Transaction tx, int txindex, RskAddress coinbase, Repository track, BlockStore blockStore, ReceiptStore receiptStore,
+    public TransactionExecutor(Transaction tx, int txindex, Address coinbase, Repository track, BlockStore blockStore, ReceiptStore receiptStore,
                                ProgramInvokeFactory programInvokeFactory, Block executionBlock, EthereumListener listener, long gasUsedInTheBlock,
                                VmConfig vmConfig, BlockchainNetConfig blockchainConfig, boolean playVm,
                                boolean vmTrace, PrecompiledContracts precompiledContracts, String databaseDir, String vmTraceDir, boolean vmTraceCompressed) {
@@ -251,7 +251,7 @@ public class TransactionExecutor {
 
         logger.trace("Call transaction {} {}", toBI(tx.getNonce()), tx.getHash());
 
-        RskAddress targetAddress = tx.getReceiveAddress();
+        Address targetAddress = tx.getReceiveAddress();
 
         // DataWord(targetAddress)) can fail with exception:
         // java.lang.RuntimeException: Data word can't exceed 32 bytes:
@@ -308,7 +308,7 @@ public class TransactionExecutor {
     }
 
     private void create() {
-        RskAddress newContractAddress = tx.getContractAddress();
+        Address newContractAddress = tx.getContractAddress();
         if (isEmpty(tx.getData())) {
             mEndGas = toBI(tx.getGasLimit()).subtract(BigInteger.valueOf(basicTxCost));
             cacheTrack.createAccount(newContractAddress);
@@ -456,7 +456,7 @@ public class TransactionExecutor {
         // Accumulate refunds for suicides
         result.addFutureRefund((long)result.getDeleteAccounts().size() * GasCost.SUICIDE_REFUND);
         long gasRefund = Math.min(result.getFutureRefund(), result.getGasUsed() / 2);
-        RskAddress addr = tx.isContractCreation() ? tx.getContractAddress() : tx.getReceiveAddress();
+        Address addr = tx.isContractCreation() ? tx.getContractAddress() : tx.getReceiveAddress();
         mEndGas = mEndGas.add(BigInteger.valueOf(gasRefund));
 
         summaryBuilder
@@ -493,9 +493,9 @@ public class TransactionExecutor {
         logger.trace("Processing result");
         logs = notRejectedLogInfos;
 
-        result.getCodeChanges().forEach((key, value) -> track.saveCode(new RskAddress(key), value));
+        result.getCodeChanges().forEach((key, value) -> track.saveCode(new Address(key), value));
         // Traverse list of suicides
-        result.getDeleteAccounts().forEach(address -> track.delete(new RskAddress(address)));
+        result.getDeleteAccounts().forEach(address -> track.delete(new Address(address)));
 
         if (listener != null) {
             listener.onTransactionExecuted(summary);

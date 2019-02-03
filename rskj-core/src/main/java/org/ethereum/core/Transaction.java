@@ -21,7 +21,7 @@ package org.ethereum.core;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.crypto.Keccak256;
 import co.rsk.panic.PanicProcessor;
 import org.apache.commons.lang3.ArrayUtils;
@@ -68,7 +68,7 @@ public class Transaction {
     private static final byte CHAIN_ID_INC = 35;
 
     private static final byte LOWER_REAL_V = 27;
-    protected RskAddress sender;
+    protected Address sender;
     /* whether this is a local call transaction */
     private boolean isLocalCall;
     /* a counter used to make sure each transaction can only be processed once */
@@ -76,7 +76,7 @@ public class Transaction {
     private final Coin value;
     /* the address of the destination account
      * In creation transaction the receive address is - 0 */
-    private final RskAddress receiveAddress;
+    private final Address receiveAddress;
     private final Coin gasPrice;
     /* the amount of "gas" to allow for the computation.
      * Gas is the fuel of the computational engine.
@@ -275,7 +275,7 @@ public class Transaction {
         return value;
     }
 
-    public RskAddress getReceiveAddress() {
+    public Address getReceiveAddress() {
         return receiveAddress;
     }
 
@@ -327,16 +327,16 @@ public class Transaction {
     }
 
     @Nullable
-    public RskAddress getContractAddress() {
+    public Address getContractAddress() {
         if (!isContractCreation()) {
             return null;
         }
 
-        return new RskAddress(HashUtil.calcNewAddr(this.getSender().getBytes(), this.getNonce()));
+        return new Address(HashUtil.calcNewAddr(this.getSender().getBytes(), this.getNonce()));
     }
 
     public boolean isContractCreation() {
-        return this.receiveAddress.equals(RskAddress.nullAddress());
+        return this.receiveAddress.equals(Address.nullAddress());
     }
 
     private long nonZeroDataBytes() {
@@ -363,18 +363,18 @@ public class Transaction {
         return ECKey.recoverFromSignature((signature.v - 27) & ~4, signature, raw, true);
     }
 
-    public synchronized RskAddress getSender() {
+    public synchronized Address getSender() {
         if (sender != null) {
             return sender;
         }
 
         try {
             ECKey key = ECKey.signatureToKey(getRawHash().getBytes(), getSignature());
-            sender = new RskAddress(key.getAddress());
+            sender = new Address(key.getAddress());
         } catch (SignatureException e) {
             logger.error(e.getMessage(), e);
             panicProcessor.panic("transaction", e.getMessage());
-            sender = RskAddress.nullAddress();
+            sender = Address.nullAddress();
         }
 
         return sender;

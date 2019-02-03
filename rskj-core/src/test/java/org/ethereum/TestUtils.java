@@ -20,7 +20,7 @@
 package org.ethereum;
 
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.crypto.Keccak256;
 import org.apache.commons.lang3.StringUtils;
 import org.ethereum.core.Block;
@@ -56,8 +56,8 @@ public final class TestUtils {
         return new DataWord(randomBytes(32));
     }
 
-    public static RskAddress randomAddress() {
-        return new RskAddress(randomBytes(20));
+    public static Address randomAddress() {
+        return new Address(randomBytes(20));
     }
 
     public static Keccak256 randomHash() {
@@ -102,7 +102,7 @@ public final class TestUtils {
             byte[] difficutly = new BigInteger(8, new Random()).toByteArray();
             byte[] newHash = HashUtil.randomHash();
 
-            Block block = new Block(lastHash, newHash,  RskAddress.nullAddress().getBytes(), null, difficutly, lastIndex, new byte[] {0}, 0, 0, null, null,
+            Block block = new Block(lastHash, newHash,  Address.nullAddress().getBytes(), null, difficutly, lastIndex, new byte[] {0}, 0, 0, null, null,
                     null, null, EMPTY_TRIE_HASH, HashUtil.randomHash(), null, null, null, Coin.ZERO);
 
             ++lastIndex;

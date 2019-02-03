@@ -18,8 +18,7 @@
 
 package co.rsk.test;
 
-import co.rsk.core.RskAddress;
-import co.rsk.core.RskAddressTest;
+import co.rsk.core.Address;
 import co.rsk.core.bc.BlockChainStatus;
 import co.rsk.test.dsl.DslParser;
 import co.rsk.test.dsl.DslProcessorException;
@@ -106,9 +105,9 @@ public class DslFilesTest {
         Repository repo1 = world.getRepository().getSnapshotTo(top1.getStateRoot());
         Repository repo2 = world.getRepository().getSnapshotTo(top2.getStateRoot());
 
-        RskAddress addr1 = new RskAddress("a0663f719962ec10bb57865532bef522059dfd96");
-        RskAddress addr2 = new RskAddress("6252703f5ba322ec64d3ac45e56241b7d9e481ad");
-        RskAddress addr3 = new RskAddress("8bdb1bf28586425b976b06a3079bd2c09a6f8e8b");
+        Address addr1 = new Address("a0663f719962ec10bb57865532bef522059dfd96");
+        Address addr2 = new Address("6252703f5ba322ec64d3ac45e56241b7d9e481ad");
+        Address addr3 = new Address("8bdb1bf28586425b976b06a3079bd2c09a6f8e8b");
 
         // Sender account in branch 1
         Assert.assertNotNull(repo1.getCode(addr1));
@@ -157,8 +156,8 @@ public class DslFilesTest {
         Repository repo1 = world.getRepository().getSnapshotTo(top1.getStateRoot());
         Repository repo2 = world.getRepository().getSnapshotTo(top2.getStateRoot());
 
-        RskAddress addr1 = new RskAddress("a0663f719962ec10bb57865532bef522059dfd96");
-        RskAddress addr2 = new RskAddress("6252703f5ba322ec64d3ac45e56241b7d9e481ad");
+        Address addr1 = new Address("a0663f719962ec10bb57865532bef522059dfd96");
+        Address addr2 = new Address("6252703f5ba322ec64d3ac45e56241b7d9e481ad");
 
         // Sender account in branch 1
         Assert.assertNotNull(repo1.getCode(addr1));
@@ -195,8 +194,8 @@ public class DslFilesTest {
         Repository repo1 = world.getRepository().getSnapshotTo(top1.getStateRoot());
         Repository repo2 = world.getRepository().getSnapshotTo(top2.getStateRoot());
 
-        RskAddress addr1 = new RskAddress("a0663f719962ec10bb57865532bef522059dfd96");
-        RskAddress addr2 = new RskAddress("6252703f5ba322ec64d3ac45e56241b7d9e481ad");
+        Address addr1 = new Address("a0663f719962ec10bb57865532bef522059dfd96");
+        Address addr2 = new Address("6252703f5ba322ec64d3ac45e56241b7d9e481ad");
 
         // Sender account in branch 1
         Assert.assertNotNull(repo1.getCode(addr1));

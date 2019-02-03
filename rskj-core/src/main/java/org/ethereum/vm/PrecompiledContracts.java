@@ -20,7 +20,7 @@ package org.ethereum.vm;
 
 
 import co.rsk.config.RskSystemProperties;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.peg.SamplePrecompiledContract;
 import org.ethereum.config.BlockchainConfig;
 import org.ethereum.core.Block;
@@ -53,8 +53,8 @@ public class PrecompiledContracts {
     public static final String BIG_INT_MODEXP_ADDR = "0000000000000000000000000000000000000005";
     public static final String SAMPLE_ADDR_STR = "0000000000000000000000000000000001000005";
 
-    public static final RskAddress IDENTITY_ADDR = new RskAddress(IDENTITY_ADDR_STR);
-    public static final RskAddress SAMPLE_ADDR = new RskAddress(SAMPLE_ADDR_STR);
+    public static final Address IDENTITY_ADDR = new Address(IDENTITY_ADDR_STR);
+    public static final Address SAMPLE_ADDR = new Address(SAMPLE_ADDR_STR);
 
     public static final DataWord IDENTITY_ADDR_DW = new DataWord(IDENTITY_ADDR.getBytes());
     public static final DataWord SAMPLE_ADDR_DW = new DataWord(SAMPLE_ADDR.getBytes());
@@ -106,7 +106,7 @@ public class PrecompiledContracts {
     }
 
     public abstract static class PrecompiledContract {
-        public RskAddress contractAddress;
+        public Address contractAddress;
 
         public abstract long getGasForData(byte[] data);
 

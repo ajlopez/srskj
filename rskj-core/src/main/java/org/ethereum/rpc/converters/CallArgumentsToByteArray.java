@@ -18,7 +18,7 @@
 
 package org.ethereum.rpc.converters;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.rpc.Web3;
 
 import static org.ethereum.rpc.TypeConverter.stringHexToByteArray;
@@ -82,11 +82,11 @@ public class CallArgumentsToByteArray {
         return data;
     }
 
-    public RskAddress getFromAddress() {
+    public Address getFromAddress() {
         if (args.from == null || args.from.isEmpty()) {
-            return RskAddress.nullAddress();
+            return Address.nullAddress();
         }
 
-        return new RskAddress(stringHexToByteArray(args.from));
+        return new Address(stringHexToByteArray(args.from));
     }
 }

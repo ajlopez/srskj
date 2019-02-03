@@ -20,7 +20,7 @@
 package org.ethereum.vm.trace;
 
 import co.rsk.config.VmConfig;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.AccountInformationProvider;
 import org.ethereum.core.Repository;
 import org.ethereum.db.RepositoryTrack;
@@ -54,7 +54,7 @@ public class ProgramTrace {
             contractAddress = Hex.toHexString(programInvoke.getOwnerAddress().getLast20Bytes());
 
             AccountInformationProvider informationProvider = getInformationProvider(programInvoke);
-            RskAddress ownerAddress = new RskAddress(programInvoke.getOwnerAddress());
+            Address ownerAddress = new Address(programInvoke.getOwnerAddress());
             if (!informationProvider.isContract(ownerAddress)) {
                 storageSize = 0;
                 fullStorage = true;

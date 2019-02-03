@@ -19,7 +19,7 @@
 
 package org.ethereum.db;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.db.ContractDetailsImpl;
 import co.rsk.trie.TrieStore;
 import org.ethereum.crypto.Keccak256Helper;
@@ -41,8 +41,8 @@ public class DetailsDataStore {
 
     private static final Logger gLogger = LoggerFactory.getLogger("general");
 
-    private final Map<RskAddress, ContractDetails> cache = new ConcurrentHashMap<>();
-    private final Set<RskAddress> removes = new HashSet<>();
+    private final Map<Address, ContractDetails> cache = new ConcurrentHashMap<>();
+    private final Set<Address> removes = new HashSet<>();
 
     private final KeyValueDataSource db;
     private final int memoryStorageLimit;
@@ -54,7 +54,7 @@ public class DetailsDataStore {
         this.memoryStorageLimit = memoryStorageLimit;
     }
 
-    public synchronized ContractDetails get(RskAddress addr, byte[] codeHash) {
+    public synchronized ContractDetails get(Address addr, byte[] codeHash) {
         ContractDetails details = cache.get(addr);
         boolean isDifferentCodeHash = false;
 
@@ -101,7 +101,7 @@ public class DetailsDataStore {
         return new ContractDetailsImpl(data, trieStorePool, memoryStorageLimit);
     }
 
-    public synchronized void update(RskAddress addr, ContractDetails contractDetails) {
+    public synchronized void update(Address addr, ContractDetails contractDetails) {
         contractDetails.setAddress(addr.getBytes());
         ContractDetails cachedDetails = cache.get(addr);
         if (cachedDetails != null && cachedDetails.getCode() != null) {
@@ -115,7 +115,7 @@ public class DetailsDataStore {
         removes.remove(addr);
     }
 
-    public synchronized void remove(RskAddress addr) {
+    public synchronized void remove(Address addr) {
         cache.remove(addr);
         removes.add(addr);
     }
@@ -136,7 +136,7 @@ public class DetailsDataStore {
         long totalSize = 0;
 
         Map<byte[], byte[]> batch = new HashMap<>();
-        for (Map.Entry<RskAddress, ContractDetails> entry : cache.entrySet()) {
+        for (Map.Entry<Address, ContractDetails> entry : cache.entrySet()) {
             ContractDetails details = entry.getValue();
             details.syncStorage();
 
@@ -150,7 +150,7 @@ public class DetailsDataStore {
 
         db.updateBatch(batch);
 
-        for (RskAddress key : removes) {
+        for (Address key : removes) {
             db.delete(key.getBytes());
         }
 
@@ -161,10 +161,10 @@ public class DetailsDataStore {
     }
 
 
-    public synchronized Set<RskAddress> keys() {
-        Stream<RskAddress> keys = Stream.concat(
+    public synchronized Set<Address> keys() {
+        Stream<Address> keys = Stream.concat(
                 cache.keySet().stream(),
-                db.keys().stream().map(RskAddress::new)
+                db.keys().stream().map(Address::new)
         );
         return keys.collect(Collectors.toSet());
     }

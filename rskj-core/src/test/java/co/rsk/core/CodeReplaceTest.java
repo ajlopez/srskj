@@ -70,7 +70,7 @@ public class CodeReplaceTest {
         Transaction tx1 = createTx(blockchain, sender, new byte[0], code);
         executeTransaction(blockchain, tx1);
         // Now we can directly check the store and see the new code.
-        RskAddress createdContract = tx1.getContractAddress();
+        Address createdContract = tx1.getContractAddress();
         byte[] expectedCode  = Arrays.copyOfRange(code, 12, 12+20);
         byte[] installedCode = blockchain.getRepository().getCode(createdContract);
         // assert the contract has been created
@@ -155,7 +155,7 @@ public class CodeReplaceTest {
         Transaction tx1 = createTx(blockchain, sender, new byte[0], code);
         executeTransaction(blockchain, tx1);
         // Now we can directly check the store and see the new code.
-        RskAddress createdContract = tx1.getContractAddress();
+        Address createdContract = tx1.getContractAddress();
         byte[] expectedCode  = Arrays.copyOfRange(code, 12, 12+20);
         byte[] installedCode = blockchain.getRepository().getCode(createdContract);
         // assert the contract has been created
@@ -186,7 +186,7 @@ public class CodeReplaceTest {
 
     protected Transaction createTx(Blockchain blockchain, ECKey sender, byte[] receiveAddress,
                                    byte[] data, long value) throws InterruptedException {
-        BigInteger nonce = blockchain.getRepository().getNonce(new RskAddress(sender.getAddress()));
+        BigInteger nonce = blockchain.getRepository().getNonce(new Address(sender.getAddress()));
         Transaction tx = new Transaction(
                 ByteUtil.bigIntegerToBytes(nonce),
                 ByteUtil.longToBytesNoLeadZeroes(1),
@@ -204,7 +204,7 @@ public class CodeReplaceTest {
         TransactionExecutor executor = new TransactionExecutor(
                 tx,
                 0,
-                RskAddress.nullAddress(),
+                Address.nullAddress(),
                 blockchain.getRepository(),
                 blockchain.getBlockStore(),
                 null,

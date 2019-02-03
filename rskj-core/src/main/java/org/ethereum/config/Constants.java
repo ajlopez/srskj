@@ -22,7 +22,7 @@ package org.ethereum.config;
 import co.rsk.config.BridgeConstants;
 import co.rsk.config.BridgeTestNetConstants;
 import co.rsk.core.BlockDifficulty;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.bouncycastle.util.encoders.Hex;
 
 import java.math.BigDecimal;
@@ -68,7 +68,7 @@ public class Constants {
 
     private static final BigInteger SECP256K1N = new BigInteger("fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141", 16);
 
-    private static final RskAddress BURN_ADDRESS = new RskAddress("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+    private static final Address BURN_ADDRESS = new Address("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
 
     private static final byte CHAIN_ID = 30;
 
@@ -153,7 +153,7 @@ public class Constants {
         return this.newBlockMaxSecondsInTheFuture;
     }
 
-    public RskAddress getBurnAddress() { return Constants.BURN_ADDRESS; }
+    public Address getBurnAddress() { return Constants.BURN_ADDRESS; }
 
     /**
      * EIP155: https://github.com/ethereum/EIPs/issues/155

@@ -103,7 +103,7 @@ public class BlockGenerator {
                 bitcoinMergedMiningCoinbaseTransaction, BigInteger.valueOf(100L).toByteArray());
 
         if (preMineMap != null) {
-            Map<RskAddress, InitialAddressState> preMineMap2 = generatePreMine(preMineMap);
+            Map<Address, InitialAddressState> preMineMap2 = generatePreMine(preMineMap);
             genesis.setPremine(preMineMap2);
 
             byte[] rootHash = generateRootHash(preMineMap2);
@@ -113,22 +113,22 @@ public class BlockGenerator {
         return genesis;
     }
 
-    private byte[] generateRootHash(Map<RskAddress, InitialAddressState> premine){
+    private byte[] generateRootHash(Map<Address, InitialAddressState> premine){
         Trie state = new Trie(null, true);
 
-        for (RskAddress addr : premine.keySet()) {
+        for (Address addr : premine.keySet()) {
             state = state.put(addr.getBytes(), premine.get(addr).getAccountState().getEncoded());
         }
 
         return state.getHash().getBytes();
     }
 
-    private Map<RskAddress, InitialAddressState> generatePreMine(Map<byte[], BigInteger> alloc){
-        Map<RskAddress, InitialAddressState> premine = new HashMap<>();
+    private Map<Address, InitialAddressState> generatePreMine(Map<byte[], BigInteger> alloc){
+        Map<Address, InitialAddressState> premine = new HashMap<>();
 
         for (byte[] key : alloc.keySet()) {
             AccountState acctState = new AccountState(BigInteger.valueOf(0), new Coin(alloc.get(key)));
-            premine.put(new RskAddress(key), new InitialAddressState(acctState, null));
+            premine.put(new Address(key), new InitialAddressState(acctState, null));
         }
 
         return premine;

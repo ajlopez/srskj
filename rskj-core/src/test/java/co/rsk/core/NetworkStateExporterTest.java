@@ -76,12 +76,12 @@ public class NetworkStateExporterTest {
     public void testNoContracts() throws Exception {
         Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
         String address1String = "1000000000000000000000000000000000000000";
-        RskAddress addr1 = new RskAddress(address1String);
+        Address addr1 = new Address(address1String);
         repository.createAccount(addr1);
         repository.addBalance(addr1, Coin.valueOf(1L));
         repository.increaseNonce(addr1);
         String address2String = "2000000000000000000000000000000000000000";
-        RskAddress addr2 = new RskAddress(address2String);
+        Address addr2 = new Address(address2String);
         repository.createAccount(addr2);
         repository.addBalance(addr2, Coin.valueOf(10L));
         repository.increaseNonce(addr2);
@@ -106,7 +106,7 @@ public class NetworkStateExporterTest {
         TrieStore.Pool trieStorePool = new TrieStorePoolOnMemory();
         Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), trieStorePool, config.detailsInMemoryStorageLimit());
         String address1String = "1000000000000000000000000000000000000000";
-        RskAddress addr1 = new RskAddress(address1String);
+        Address addr1 = new Address(address1String);
         repository.createAccount(addr1);
         repository.addBalance(addr1, Coin.valueOf(1L));
         repository.increaseNonce(addr1);

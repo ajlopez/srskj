@@ -18,7 +18,7 @@
 
 package co.rsk.db;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.trie.Trie;
 import org.ethereum.core.AccountState;
 import org.ethereum.datasource.HashMapDB;
@@ -37,7 +37,7 @@ public class RepositoryImplForTesting extends RepositoryImpl {
     }
 
     @Override
-    public synchronized void addStorageRow(RskAddress addr, DataWord key, DataWord value) {
+    public synchronized void addStorageRow(Address addr, DataWord key, DataWord value) {
         super.addStorageRow(addr, key, value);
         AccountState accountState = getAccountState(addr);
         ContractDetails details = detailsDataStore.get(addr, EMPTY_DATA_HASH);
@@ -46,7 +46,7 @@ public class RepositoryImplForTesting extends RepositoryImpl {
     }
 
     @Override
-    public synchronized void addStorageBytes(RskAddress addr, DataWord key, byte[] value) {
+    public synchronized void addStorageBytes(Address addr, DataWord key, byte[] value) {
         super.addStorageBytes(addr, key, value);
         AccountState accountState = getAccountState(addr);
         ContractDetails details = detailsDataStore.get(addr, EMPTY_DATA_HASH);

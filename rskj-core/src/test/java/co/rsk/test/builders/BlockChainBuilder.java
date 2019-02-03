@@ -22,7 +22,7 @@ import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.*;
 import co.rsk.db.RepositoryImpl;
 import co.rsk.db.TrieStorePoolOnMemory;
@@ -170,7 +170,7 @@ public class BlockChainBuilder {
         }
 
         if (this.genesis != null) {
-            for (RskAddress addr : this.genesis.getPremine().keySet()) {
+            for (Address addr : this.genesis.getPremine().keySet()) {
                 this.repository.createAccount(addr);
                 this.repository.addBalance(addr, this.genesis.getPremine().get(addr).getAccountState().getBalance());
             }

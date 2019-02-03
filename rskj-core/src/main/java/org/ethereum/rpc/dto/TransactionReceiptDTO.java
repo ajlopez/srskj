@@ -18,7 +18,7 @@
 
 package org.ethereum.rpc.dto;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.core.Block;
 import org.ethereum.core.TransactionReceipt;
 import org.ethereum.db.TransactionInfo;
@@ -54,7 +54,7 @@ public class TransactionReceiptDTO {
         blockHash = toJsonHex(txInfo.getBlockHash());
         blockNumber = toJsonHex(block.getNumber());
 
-        RskAddress contractAddress = receipt.getTransaction().getContractAddress();
+        Address contractAddress = receipt.getTransaction().getContractAddress();
         if (contractAddress != null) {
             this.contractAddress = toJsonHex(contractAddress.getBytes());
         }

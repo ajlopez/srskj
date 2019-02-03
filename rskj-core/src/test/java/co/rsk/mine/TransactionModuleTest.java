@@ -232,7 +232,7 @@ public class TransactionModuleTest {
     }
 
     private Web3.CallArguments getTransactionParameters(Web3Impl web3, Repository repository) {
-        RskAddress addr1 = new RskAddress(ECKey.fromPrivate(Keccak256Helper.keccak256("cow".getBytes())).getAddress());
+        Address addr1 = new Address(ECKey.fromPrivate(Keccak256Helper.keccak256("cow".getBytes())).getAddress());
         String addr2 = web3.personal_newAccountWithSeed("addr2");
         BigInteger value = BigInteger.valueOf(7);
         BigInteger gasPrice = BigInteger.valueOf(8);

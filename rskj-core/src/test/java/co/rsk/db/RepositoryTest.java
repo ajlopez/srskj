@@ -20,7 +20,7 @@ package co.rsk.db;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.trie.Trie;
 import co.rsk.trie.TrieStore;
 import org.bouncycastle.util.encoders.Hex;
@@ -46,8 +46,8 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RepositoryTest {
 
-    public static final RskAddress COW = new RskAddress("CD2A3D9F938E13CD947EC05ABC7FE734DF8DD826");
-    public static final RskAddress HORSE = new RskAddress("13978AEE95F38490E9769C39B2773ED763D9CD5F");
+    public static final Address COW = new Address("CD2A3D9F938E13CD947EC05ABC7FE734DF8DD826");
+    public static final Address HORSE = new Address("13978AEE95F38490E9769C39B2773ED763D9CD5F");
     private final TestSystemProperties config = new TestSystemProperties();
 
     @Test

@@ -20,16 +20,13 @@
 package org.ethereum.core;
 
 import co.rsk.config.TestSystemProperties;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
-import org.ethereum.config.blockchain.GenesisConfig;
-import org.ethereum.config.net.MainNetConfig;
 import org.ethereum.core.genesis.GenesisLoader;
 import org.ethereum.crypto.ECKey;
 import org.ethereum.crypto.ECKey.MissingPrivateKeyException;
 import org.ethereum.crypto.HashUtil;
-import org.ethereum.db.BlockStoreDummy;
 import org.ethereum.listener.EthereumListenerAdapter;
 import org.ethereum.util.ByteUtil;
 import org.ethereum.vm.LogInfo;
@@ -469,7 +466,7 @@ public class TransactionTest {
 
     private Transaction createTx(Blockchain blockchain, ECKey sender, byte[] receiveAddress,
                                    byte[] data, long value) throws InterruptedException {
-        BigInteger nonce = blockchain.getRepository().getNonce(new RskAddress(sender.getAddress()));
+        BigInteger nonce = blockchain.getRepository().getNonce(new Address(sender.getAddress()));
         Transaction tx = new Transaction(
                 ByteUtil.bigIntegerToBytes(nonce),
                 ByteUtil.longToBytesNoLeadZeroes(1),
@@ -486,7 +483,7 @@ public class TransactionTest {
         TransactionExecutor executor = new TransactionExecutor(
                 tx,
                 0,
-                RskAddress.nullAddress(),
+                Address.nullAddress(),
                 blockchain.getRepository(),
                 blockchain.getBlockStore(),
                 null,

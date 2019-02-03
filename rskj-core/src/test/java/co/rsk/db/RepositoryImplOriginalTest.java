@@ -22,7 +22,7 @@ package co.rsk.db;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.trie.Trie;
 import co.rsk.trie.TrieStore;
 import org.ethereum.core.Genesis;
@@ -53,8 +53,8 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RepositoryImplOriginalTest {
 
-    public static final RskAddress COW = new RskAddress("CD2A3D9F938E13CD947EC05ABC7FE734DF8DD826");
-    public static final RskAddress HORSE = new RskAddress("13978AEE95F38490E9769C39B2773ED763D9CD5F");
+    public static final Address COW = new Address("CD2A3D9F938E13CD947EC05ABC7FE734DF8DD826");
+    public static final Address HORSE = new Address("13978AEE95F38490E9769C39B2773ED763D9CD5F");
     private final TestSystemProperties config = new TestSystemProperties();
 
     @Test
@@ -348,7 +348,7 @@ public class RepositoryImplOriginalTest {
         Repository track = repository.startTracking();
 
         Genesis genesis = (Genesis)Genesis.getInstance(config);
-        for (RskAddress addr : genesis.getPremine().keySet()) {
+        for (Address addr : genesis.getPremine().keySet()) {
             repository.createAccount(addr);
             repository.addBalance(addr, genesis.getPremine().get(addr).getAccountState().getBalance());
         }
@@ -673,8 +673,8 @@ public class RepositoryImplOriginalTest {
         Repository repository = createRepositoryImpl(config);
         Repository repoTrack2 = repository.startTracking(); //track
 
-        RskAddress pig = new RskAddress("F0B8C9D84DD2B877E0B952130B73E218106FEC04");
-        RskAddress precompiled = new RskAddress("0000000000000000000000000000000000000002");
+        Address pig = new Address("F0B8C9D84DD2B877E0B952130B73E218106FEC04");
+        Address precompiled = new Address("0000000000000000000000000000000000000002");
 
         byte[] cowCode = Hex.decode("A1A2A3");
         byte[] horseCode = Hex.decode("B1B2B3");

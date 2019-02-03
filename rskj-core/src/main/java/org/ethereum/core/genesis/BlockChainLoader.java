@@ -21,7 +21,7 @@ package org.ethereum.core.genesis;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.BlockDifficulty;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.core.bc.BlockExecutor;
 import co.rsk.validators.BlockValidator;
@@ -121,7 +121,7 @@ public class BlockChainLoader {
 
             BigInteger initialNonce = config.getBlockchainConfig().getCommonConstants().getInitialNonce();
             Genesis genesis = GenesisLoader.loadGenesis(config, config.genesisInfo(), initialNonce, true);
-            for (RskAddress addr : genesis.getPremine().keySet()) {
+            for (Address addr : genesis.getPremine().keySet()) {
                 repository.createAccount(addr);
                 InitialAddressState initialAddressState = genesis.getPremine().get(addr);
                 repository.addBalance(addr, initialAddressState.getAccountState().getBalance());

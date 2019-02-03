@@ -18,7 +18,7 @@
 
 package co.rsk.trie;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.db.ContractDetailsImpl;
@@ -56,7 +56,7 @@ public class TrieCopier {
         }
     }
 
-    public static void trieContractStateCopy(TrieStore target, Blockchain blockchain, long initialHeight, long finalHeight, Repository repository, RskAddress contractAddress) {
+    public static void trieContractStateCopy(TrieStore target, Blockchain blockchain, long initialHeight, long finalHeight, Repository repository, Address contractAddress) {
         long h = initialHeight;
 
         List<Block> blocks = blockchain.getBlocksByNumber(h);

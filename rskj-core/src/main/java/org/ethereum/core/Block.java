@@ -21,7 +21,7 @@ package org.ethereum.core;
 
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.crypto.Keccak256;
 import co.rsk.panic.PanicProcessor;
 import co.rsk.trie.Trie;
@@ -273,7 +273,7 @@ public class Block {
         return this.header.getUnclesHash();
     }
 
-    public RskAddress getCoinbase() {
+    public Address getCoinbase() {
         if (!parsed) {
             parseRLP();
         }

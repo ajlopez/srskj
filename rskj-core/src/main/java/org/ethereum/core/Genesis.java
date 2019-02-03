@@ -21,7 +21,7 @@ package org.ethereum.core;
 
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.BlockDifficulty;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.crypto.Keccak256;
 import org.ethereum.core.genesis.GenesisLoader;
 import org.ethereum.core.genesis.InitialAddressState;
@@ -52,7 +52,7 @@ import java.util.Map;
  */
 public class Genesis extends Block {
 
-    private Map<RskAddress, InitialAddressState> premine = new HashMap<>();
+    private Map<Address, InitialAddressState> premine = new HashMap<>();
 
     private static final byte[] ZERO_HASH_2048 = new byte[256];
     protected static final long NUMBER = 0;
@@ -97,11 +97,11 @@ public class Genesis extends Block {
         return Keccak256.ZERO_HASH;
     }
 
-    public Map<RskAddress, InitialAddressState> getPremine() {
+    public Map<Address, InitialAddressState> getPremine() {
         return premine;
     }
 
-    public void setPremine(Map<RskAddress, InitialAddressState> premine) {
+    public void setPremine(Map<Address, InitialAddressState> premine) {
         this.premine = premine;
     }
 }

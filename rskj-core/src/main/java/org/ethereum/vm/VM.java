@@ -20,7 +20,7 @@
 package org.ethereum.vm;
 
 import co.rsk.config.VmConfig;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import org.ethereum.core.Repository;
 import org.ethereum.crypto.HashUtil;
 import org.ethereum.config.BlockchainConfig;
@@ -1525,7 +1525,7 @@ public class VM {
         long callGas = GasCost.CALL;
 
         //check to see if account does not exist and is not a precompiled contract
-        if (op == OpCode.CALL && !program.getStorage().isExist(new RskAddress(codeAddress))) {
+        if (op == OpCode.CALL && !program.getStorage().isExist(new Address(codeAddress))) {
             callGas += GasCost.NEW_ACCT_CALL;
         }
 
@@ -1592,7 +1592,7 @@ public class VM {
         if (computeGas) {
             gasCost = GasCost.SUICIDE;
             DataWord suicideAddressWord = stack.get(stack.size() - 1);
-            if (!program.getStorage().isExist(new RskAddress(suicideAddressWord))) {
+            if (!program.getStorage().isExist(new Address(suicideAddressWord))) {
                 gasCost += GasCost.NEW_ACCT_SUICIDE;
             }
             spendOpCodeGas();
@@ -2036,7 +2036,7 @@ public class VM {
      */
     private void dumpLine(OpCode op, long gasBefore, long gasCost, long memWords, Program program) {
         Repository storage = program.getStorage();
-        RskAddress ownerAddress = new RskAddress(program.getOwnerAddress());
+        Address ownerAddress = new Address(program.getOwnerAddress());
         if ("standard+".equals(vmConfig.dumpStyle())) {
             switch (op) {
                 case STOP:

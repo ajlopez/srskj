@@ -18,7 +18,7 @@
 
 package co.rsk.metrics;
 
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.BlockDifficulty;
 import co.rsk.crypto.Keccak256;
 import co.rsk.util.RskCustomCache;
@@ -42,8 +42,8 @@ public class HashRateCalculatorTest {
     public static final BlockDifficulty TEST_DIFFICULTY = new BlockDifficulty(BigInteger.ONE);
     private final byte[] FAKE_GENERIC_HASH = TestUtils.randomBytes(32);
     private final byte[] OHTER_FAKE_GENERIC_HASH = TestUtils.randomBytes(32)        ;
-    private final RskAddress FAKE_COINBASE = TestUtils.randomAddress();
-    private final RskAddress NOT_MY_COINBASE = TestUtils.randomAddress();
+    private final Address FAKE_COINBASE = TestUtils.randomAddress();
+    private final Address NOT_MY_COINBASE = TestUtils.randomAddress();
 
 
 

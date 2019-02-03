@@ -19,7 +19,7 @@
 package co.rsk.rpc.modules.eth;
 
 import co.rsk.config.RskSystemProperties;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.Wallet;
 import org.bouncycastle.util.encoders.Hex;
 import org.ethereum.core.*;
@@ -51,7 +51,7 @@ public class EthModuleTransactionBase implements EthModuleTransaction {
 
     @Override
     public synchronized String sendTransaction(Web3.CallArguments args) {
-        Account account = this.wallet.getAccount(new RskAddress(args.from));
+        Account account = this.wallet.getAccount(new Address(args.from));
         String s = null;
         try {
             String toAddress = args.to != null ? Hex.toHexString(stringHexToByteArray(args.to)) : null;

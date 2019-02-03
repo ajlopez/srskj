@@ -24,7 +24,7 @@ import co.rsk.config.MiningConfig;
 import co.rsk.config.RskMiningConstants;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.crypto.Keccak256;
 import co.rsk.net.BlockProcessor;
@@ -95,7 +95,7 @@ public class MinerServerImpl implements MinerServer {
     private volatile MinerWork currentWork; // This variable can be read at anytime without the lock.
     private final Object lock = new Object();
 
-    private final RskAddress coinbaseAddress;
+    private final Address coinbaseAddress;
     private final BigDecimal minFeesNotifyInDollars;
     private final BigDecimal gasUnitInDollars;
 
@@ -323,7 +323,7 @@ public class MinerServerImpl implements MinerServer {
     }
 
     @Override
-    public RskAddress getCoinbaseAddress() {
+    public Address getCoinbaseAddress() {
         return coinbaseAddress;
     }
 

@@ -4,7 +4,7 @@ import co.rsk.blockchain.utils.BlockGenerator;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.config.TestSystemProperties;
 import co.rsk.core.Coin;
-import co.rsk.core.RskAddress;
+import co.rsk.core.Address;
 import co.rsk.core.bc.Blockchain;
 import co.rsk.test.builders.AccountBuilder;
 import co.rsk.test.builders.BlockBuilder;
@@ -60,7 +60,7 @@ public class ContractRunner {
                 .build();
     }
 
-    public RskAddress addContract(String runtimeBytecode) {
+    public Address addContract(String runtimeBytecode) {
         Account contractAccount = new AccountBuilder(blockchain)
                         .name(runtimeBytecode)
                         .balance(Coin.valueOf(10))
@@ -113,7 +113,7 @@ public class ContractRunner {
         TransactionExecutor executor = new TransactionExecutor(
                 transaction,
                 0,
-                RskAddress.nullAddress(),
+                Address.nullAddress(),
                 repository,
                 blockStore,
                 receiptStore,
