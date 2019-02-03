@@ -245,22 +245,6 @@ public class ContractDetailsImpl implements ContractDetails {
         return RLP.encodeList(rlpAddress, rlpIsExternalStorage, rlpStorage, rlpCode, rlpKeys);
     }
 
-    @VisibleForTesting
-    public byte[] getEncodedOldFormat() {
-        logger.trace("getting contract details as bytes, hash {}, address {}, storage size {}, has external storage {}", this.getStorageHashAsString(), this.getAddressAsString(), this.getStorageSize(), this.hasExternalStorage());
-
-        byte[] rlpAddress = RLP.encodeElement(address);
-        byte[] rlpIsExternalStorage = RLP.encodeByte((byte) 0);
-
-        // Serialize the full trie
-        byte[] rlpStorage = RLP.encodeElement(this.trie.serialize());
-
-        byte[] rlpCode = RLP.encodeElement(this.code);
-        byte[] rlpKeys = RLP.encodeSet(this.keys);
-
-        return RLP.encodeList(rlpAddress, rlpIsExternalStorage, rlpStorage, rlpCode, rlpKeys);
-    }
-
     @Override
     public synchronized int getStorageSize() {
         return keys.size();
