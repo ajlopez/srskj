@@ -66,7 +66,7 @@ public class BlockExecutorTest {
         BlockGenerator blockGenerator = new BlockGenerator();
         Block block = blockGenerator.createChildBlock(blockGenerator.getGenesisBlock());
 
-        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory());
 
         Repository track = repository.startTracking();
 
@@ -187,7 +187,7 @@ public class BlockExecutorTest {
 
     @Test
     public void executeBlockWithTwoTransactions() {
-        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory());
 
         Repository track = repository.startTracking();
 
@@ -317,7 +317,7 @@ public class BlockExecutorTest {
 
     @Test
     public void executeAndFillBlockWithTxToExcludeBecauseSenderHasNoBalance() {
-        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory());
 
         Repository track = repository.startTracking();
 
@@ -376,7 +376,7 @@ public class BlockExecutorTest {
 
     @Test
     public void executeBlockWithTxThatMakesBlockInvalidSenderHasNoBalance() {
-        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory());
 
         Repository track = repository.startTracking();
 

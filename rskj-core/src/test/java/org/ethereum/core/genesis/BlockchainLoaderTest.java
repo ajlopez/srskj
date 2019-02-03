@@ -63,7 +63,7 @@ public class BlockchainLoaderTest {
 
         EthereumListener ethereumListener = Mockito.mock(EthereumListener.class);
 
-        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB().setClearOnClose(false)), true), new HashMapDB(), new TrieStorePoolOnMemory(), systemProperties.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB().setClearOnClose(false)), true), new HashMapDB(), new TrieStorePoolOnMemory());
 
         BlockChainLoader blockChainLoader = new BlockChainLoader(systemProperties, repository, blockStore, null, null, ethereumListener, null);
 

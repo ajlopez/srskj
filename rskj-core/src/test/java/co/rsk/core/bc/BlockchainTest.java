@@ -802,7 +802,7 @@ public class BlockchainTest {
 
     @Test
     public void addInvalidMGPBlock() {
-        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory());
 
         IndexedBlockStore blockStore = new IndexedBlockStore(new HashMap<>(), new HashMapDB(), null);
 
@@ -833,7 +833,7 @@ public class BlockchainTest {
 
     @Test
     public void addValidMGPBlock() {
-        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory());
 
         IndexedBlockStore blockStore = new IndexedBlockStore(new HashMap<>(), new HashMapDB(), (DB) null);
 

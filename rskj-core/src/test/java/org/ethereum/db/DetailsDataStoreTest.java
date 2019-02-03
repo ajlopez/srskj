@@ -44,7 +44,7 @@ public class DetailsDataStoreTest {
     public void test1(){
         HashMapDB db = new HashMapDB();
         TrieStorePoolOnMemory trieStorePool = new TrieStorePoolOnMemory();
-        DetailsDataStore dds = new DetailsDataStore(db, trieStorePool, config.detailsInMemoryStorageLimit());
+        DetailsDataStore dds = new DetailsDataStore(db, trieStorePool);
 
         Address c_key = new Address("0000000000000000000000000000000000001a2b");
         byte[] code = Hex.decode("60606060");
@@ -57,8 +57,7 @@ public class DetailsDataStoreTest {
             contractAddress,
             new Trie(trieStorePool.getInstanceFor(storeName), true),
             null,
-            trieStorePool,
-            config.detailsInMemoryStorageLimit()
+            trieStorePool
         );
         contractDetails.setCode(code);
         contractDetails.put(new DataWord(key), new DataWord(value));
@@ -84,7 +83,7 @@ public class DetailsDataStoreTest {
 
         HashMapDB db = new HashMapDB();
         TrieStore.Pool trieStorePool = new TrieStorePoolOnMemory();
-        DetailsDataStore dds = new DetailsDataStore(db, trieStorePool, config.detailsInMemoryStorageLimit());
+        DetailsDataStore dds = new DetailsDataStore(db, trieStorePool);
 
         Address c_key = new Address("0000000000000000000000000000000000001a2b");
         byte[] code = Hex.decode("60606060");
@@ -97,8 +96,7 @@ public class DetailsDataStoreTest {
             null,
             new Trie(trieStorePool.getInstanceFor(storeName), true),
             null,
-            trieStorePool,
-            config.detailsInMemoryStorageLimit()
+            trieStorePool
         );
         contractDetails.setCode(code);
         contractDetails.put(new DataWord(key), new DataWord(value));
@@ -129,7 +127,7 @@ public class DetailsDataStoreTest {
         HashMapDB store = new HashMapDB();
         HashMapDB db = new HashMapDB();
         TrieStore.Pool trieStorePool = new TrieStorePoolOnMemory();
-        DetailsDataStore dds = new DetailsDataStore(db, trieStorePool, config.detailsInMemoryStorageLimit());
+        DetailsDataStore dds = new DetailsDataStore(db, trieStorePool);
 
         Address c_key = new Address("0000000000000000000000000000000000001a2b");
         byte[] code = Hex.decode("60606060");
@@ -142,8 +140,7 @@ public class DetailsDataStoreTest {
             contractAddress,
             new Trie(trieStorePool.getInstanceFor(storeName), true),
             null,
-            trieStorePool,
-            config.detailsInMemoryStorageLimit()
+            trieStorePool
         );
         contractDetails.setCode(code);
         contractDetails.put(new DataWord(key), new DataWord(value));
@@ -174,7 +171,7 @@ public class DetailsDataStoreTest {
     @Test
     public void test4() {
         HashMapDB db = new HashMapDB();
-        DetailsDataStore dds = new DetailsDataStore(db, new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        DetailsDataStore dds = new DetailsDataStore(db, new TrieStorePoolOnMemory());
 
         Address c_key = new Address("0000000000000000000000000000000000001a2b");
 

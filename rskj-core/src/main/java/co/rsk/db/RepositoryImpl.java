@@ -53,26 +53,22 @@ public class RepositoryImpl implements Repository {
     private Trie trie;
     protected DetailsDataStore detailsDataStore;
     private TrieStore.Pool trieStorePool;
-    private int memoryStorageLimit;
 
     public RepositoryImpl(
             Trie trie,
             KeyValueDataSource detailsDS,
-            TrieStore.Pool trieStorePool,
-            int memoryStorageLimit) {
-        this(trie, new DetailsDataStore(detailsDS, trieStorePool, memoryStorageLimit),
-             trieStorePool, memoryStorageLimit);
+            TrieStore.Pool trieStorePool) {
+        this(trie, new DetailsDataStore(detailsDS, trieStorePool),
+             trieStorePool);
     }
 
     private RepositoryImpl(
             Trie trie,
             DetailsDataStore detailsDataStore,
-            TrieStore.Pool trieStorePool,
-            int memoryStorageLimit) {
+            TrieStore.Pool trieStorePool) {
         this.trie = trie;
         this.detailsDataStore = detailsDataStore;
         this.trieStorePool = trieStorePool;
-        this.memoryStorageLimit = memoryStorageLimit;
     }
 
     @Override
@@ -83,8 +79,7 @@ public class RepositoryImpl implements Repository {
                 addr.getBytes(),
                 null,
                 null,
-                trieStorePool,
-                memoryStorageLimit
+                trieStorePool
         ));
         return accountState;
     }
@@ -352,8 +347,7 @@ public class RepositoryImpl implements Repository {
                             addr.getBytes(),
                             null,
                             null,
-                            trieStorePool,
-                            memoryStorageLimit
+                            trieStorePool
                     );
                     originalContractDetails.setAddress(addr.getBytes());
                     contractDetailsCache.setOriginalContractDetails(originalContractDetails);
@@ -408,7 +402,7 @@ public class RepositoryImpl implements Repository {
     @Override
     public synchronized Repository getSnapshotTo(byte[] root) {
         Trie snapshotTrie = this.trie.getSnapshotTo(new Keccak256(root));
-        return new RepositoryImpl(snapshotTrie, this.detailsDataStore, this.trieStorePool, this.memoryStorageLimit);
+        return new RepositoryImpl(snapshotTrie, this.detailsDataStore, this.trieStorePool);
     }
 
     @Override

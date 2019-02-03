@@ -133,7 +133,7 @@ public class TrieCopierTest {
     public void copyBlockchainHeightTwoStates() {
         TrieStore store = new TrieStore(new HashMapDB().setClearOnClose(false));
         TrieStore store2 = new TrieStore(new HashMapDB().setClearOnClose(false));
-        Repository repository = new RepositoryImpl(new Trie(store, true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(store, true), new HashMapDB(), new TrieStorePoolOnMemory());
         World world = new World(repository);
 
         Blockchain blockchain = createBlockchain(world);
@@ -146,7 +146,7 @@ public class TrieCopierTest {
         TrieCopier.trieStateCopy(store, store2, blockchain, 9);
 
         Repository repository91 = repository.getSnapshotTo(state9);
-        Repository repository92 = new RepositoryImpl(new Trie(store2, true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit()).getSnapshotTo(state9);
+        Repository repository92 = new RepositoryImpl(new Trie(store2, true), new HashMapDB(), new TrieStorePoolOnMemory()).getSnapshotTo(state9);
 
         Assert.assertNotNull(repository91);
         Assert.assertNotNull(repository92);

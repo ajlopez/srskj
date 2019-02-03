@@ -45,13 +45,11 @@ public class DetailsDataStore {
     private final Set<Address> removes = new HashSet<>();
 
     private final KeyValueDataSource db;
-    private final int memoryStorageLimit;
     private TrieStore.Pool trieStorePool;
 
-    public DetailsDataStore(KeyValueDataSource db, TrieStore.Pool trieStorePool, int memoryStorageLimit) {
+    public DetailsDataStore(KeyValueDataSource db, TrieStore.Pool trieStorePool) {
         this.db = db;
         this.trieStorePool = trieStorePool;
-        this.memoryStorageLimit = memoryStorageLimit;
     }
 
     public synchronized ContractDetails get(Address addr, byte[] codeHash) {
@@ -68,7 +66,7 @@ public class DetailsDataStore {
                 return null;
             }
 
-            details = createContractDetails(data, trieStorePool, memoryStorageLimit);
+            details = createContractDetails(data, trieStorePool);
             cache.put(addr, details);
 
             float out = ((float) data.length) / 1048576;
@@ -96,9 +94,8 @@ public class DetailsDataStore {
 
     private ContractDetails createContractDetails(
             byte[] data,
-            TrieStore.Pool trieStorePool,
-            int memoryStorageLimit) {
-        return new ContractDetailsImpl(data, trieStorePool, memoryStorageLimit);
+            TrieStore.Pool trieStorePool) {
+        return new ContractDetailsImpl(data, trieStorePool);
     }
 
     public synchronized void update(Address addr, ContractDetails contractDetails) {

@@ -126,7 +126,7 @@ public class RepositoryTest {
 
     @Test
     public void test16() {
-        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        Repository repository = new RepositoryImpl(new Trie(new TrieStore(new HashMapDB()), true), new HashMapDB(), new TrieStorePoolOnMemory());
 
         byte[] cow = Hex.decode("CD2A3D9F938E13CD947EC05ABC7FE734DF8DD826");
         byte[] horse = Hex.decode("13978AEE95F38490E9769C39B2773ED763D9CD5F");
@@ -440,8 +440,7 @@ public class RepositoryTest {
         final Repository repository = new RepositoryImpl(
                 new Trie(new TrieStore(store), true),
                 new HashMapDB(),
-                new TrieStorePoolOnMemory(() -> store),
-                config.detailsInMemoryStorageLimit()
+                new TrieStorePoolOnMemory(() -> store)
         );
 
         final DataWord cowKey1 = new DataWord("c1");
@@ -506,6 +505,6 @@ public class RepositoryTest {
     }
 
     private static RepositoryImpl createRepositoryImpl(RskSystemProperties config) {
-        return new RepositoryImpl(new Trie(null, true), new HashMapDB(), new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
+        return new RepositoryImpl(new Trie(null, true), new HashMapDB(), new TrieStorePoolOnMemory());
     }
 }
