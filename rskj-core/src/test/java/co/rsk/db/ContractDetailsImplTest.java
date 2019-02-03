@@ -57,37 +57,6 @@ public class ContractDetailsImplTest {
     }
 
     @Test
-    public void hasExternalStorage() {
-        ContractDetailsImpl details = buildContractDetails(new HashMapDB());
-
-        Assert.assertTrue(details.hasExternalStorage());
-    }
-
-    @Test
-    public void hasExternalStorageIfHasEnoughtKeys() {
-        ContractDetailsImpl details = buildContractDetails(new HashMapDB());
-
-        int nkeys = IN_MEMORY_STORAGE_LIMIT;
-
-        for (int k = 1; k <= nkeys + 1; k++)
-            details.put(new DataWord(k), new DataWord(k * 2));
-
-        Assert.assertTrue(details.hasExternalStorage());
-    }
-
-    @Test
-    public void hasExternalStorageIfHasEnoughtBytesKeys() {
-        ContractDetailsImpl details = buildContractDetails(new HashMapDB());
-
-        int nkeys = IN_MEMORY_STORAGE_LIMIT;
-
-        for (int k = 1; k <= nkeys + 1; k++)
-            details.putBytes(new DataWord(k), randomData());
-
-        Assert.assertTrue(details.hasExternalStorage());
-    }
-
-    @Test
     public void setDirty() {
         ContractDetailsImpl details = buildContractDetails(new HashMapDB());
 
@@ -494,17 +463,12 @@ public class ContractDetailsImplTest {
         for (int k = 1; k <= nkeys + 1; k++)
             details.put(new DataWord(k), new DataWord(k * 2));
 
-        Assert.assertTrue(details.hasExternalStorage());
-
         details.syncStorage();
 
         TrieStore.Pool pool = new TrieStorePoolOnMemory(() -> store);
 
         ContractDetailsImpl details1 = new ContractDetailsImpl(details.getEncoded(), pool, config.detailsInMemoryStorageLimit());
         ContractDetailsImpl details2 = new ContractDetailsImpl(details.getEncoded(), pool, config.detailsInMemoryStorageLimit());
-
-        Assert.assertTrue(details1.hasExternalStorage());
-        Assert.assertTrue(details2.hasExternalStorage());
 
         for (int k = 1; k <= nkeys + 1; k++)
             Assert.assertNotNull(details1.get(new DataWord(k)));
@@ -516,19 +480,17 @@ public class ContractDetailsImplTest {
     }
 
     @Test
-    public void syncStorageWithExternalStorage() {
+    public void syncStorage() {
         TrieStorePoolOnMemory trieStorePool = new TrieStorePoolOnMemory();
         byte[] accountAddress = randomAddress();
-        String storeName = "details-storage/" + toHexString(accountAddress);
-        Trie trie = new Trie(trieStorePool.getInstanceFor(storeName), false);
-        ContractDetailsImpl details = new ContractDetailsImpl(accountAddress, trie, null, trieStorePool, config.detailsInMemoryStorageLimit());
+        HashMapDB store = new HashMapDB();
+        Trie trie = new Trie(new TrieStore(store), false);
+        ContractDetailsImpl details = new ContractDetailsImpl(accountAddress, trie, null, new TrieStorePoolOnMemory(), config.detailsInMemoryStorageLimit());
 
         int nkeys = IN_MEMORY_STORAGE_LIMIT;
 
         for (int k = 1; k <= nkeys + 1; k++)
             details.put(new DataWord(k), new DataWord(k * 2));
-
-        Assert.assertTrue(details.hasExternalStorage());
 
         details.syncStorage();
 
@@ -544,7 +506,6 @@ public class ContractDetailsImplTest {
         ContractDetailsImpl clone = new ContractDetailsImpl(details.getEncoded(), trieStorePool, config.detailsInMemoryStorageLimit());
 
         Assert.assertNotNull(clone);
-        Assert.assertTrue(clone.hasExternalStorage());
         Assert.assertEquals(details.getStorageSize(), clone.getStorageSize());
 
         for (int k = 1; k <= nkeys + 1; k++)
@@ -553,11 +514,9 @@ public class ContractDetailsImplTest {
         for (int k = 1; k <= nkeys + 1; k++)
             clone.put(new DataWord(k), new DataWord(k * 3));
 
-        Assert.assertTrue(clone.hasExternalStorage());
         Assert.assertEquals(details.getStorageSize(), clone.getStorageSize());
 
         ContractDetailsImpl snapshot = (ContractDetailsImpl)clone.getSnapshotTo(clone.getStorageHash());
-        Assert.assertTrue(snapshot.hasExternalStorage());
         Assert.assertEquals(clone.getStorageSize(), snapshot.getStorageSize());
     }
 
@@ -573,8 +532,6 @@ public class ContractDetailsImplTest {
         for (int k = 1; k <= nkeys + 1; k++)
             details.put(new DataWord(k), new DataWord(k * 2));
 
-        Assert.assertTrue(details.hasExternalStorage());
-
         details.syncStorage();
 
         for (int k = 1; k <= nkeys + 1; k++)
@@ -583,7 +540,6 @@ public class ContractDetailsImplTest {
         ContractDetailsImpl clone = new ContractDetailsImpl(details.getEncoded(), new TrieStorePoolOnMemory(() -> store), config.detailsInMemoryStorageLimit());
 
         Assert.assertNotNull(clone);
-        Assert.assertTrue(clone.hasExternalStorage());
         Assert.assertEquals(details.getStorageSize(), clone.getStorageSize());
 
         for (int k = 1; k <= nkeys + 1; k++)
@@ -592,11 +548,9 @@ public class ContractDetailsImplTest {
         for (int k = 1; k <= nkeys + 1; k++)
             clone.put(new DataWord(k), new DataWord(k * 3));
 
-        Assert.assertTrue(clone.hasExternalStorage());
         Assert.assertEquals(details.getStorageSize(), clone.getStorageSize());
 
         ContractDetailsImpl snapshot = (ContractDetailsImpl)clone.getSnapshotTo(clone.getStorageHash());
-        Assert.assertTrue(snapshot.hasExternalStorage());
         Assert.assertEquals(clone.getStorageSize(), snapshot.getStorageSize());
     }
 

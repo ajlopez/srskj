@@ -206,7 +206,7 @@ public class ContractDetailsImpl implements ContractDetails {
             addKey(key.getRLPData());
         }
 
-        logger.trace("decoding contract details from bytes, hash {}, address {}, storage size {}, has external storage {}", this.getStorageHashAsString(), this.getAddressAsString(), this.getStorageSize(), this.hasExternalStorage());
+        logger.trace("decoding contract details from bytes, hash {}, address {}, storage size {}", this.getStorageHashAsString(), this.getAddressAsString(), this.getStorageSize());
     }
 
     @Override
@@ -231,7 +231,7 @@ public class ContractDetailsImpl implements ContractDetails {
 
     @Override
     public byte[] getEncoded() {
-        logger.trace("getting contract details as bytes, hash {}, address {}, storage size {}, has external storage {}", this.getStorageHashAsString(), this.getAddressAsString(), this.getStorageSize(), this.hasExternalStorage());
+        logger.trace("getting contract details as bytes, hash {}, address {}, storage size {}", this.getStorageHashAsString(), this.getAddressAsString(), this.getStorageSize());
 
         byte[] rlpAddress = RLP.encodeElement(address);
         byte[] rlpIsExternalStorage = RLP.encodeByte((byte) 1);
@@ -342,7 +342,7 @@ public class ContractDetailsImpl implements ContractDetails {
 
         DataSourcePool.reserve(getDataSourceName());
 
-        logger.trace("getting contract details snapshot hash {}, address {}, storage size {}, has external storage {}", details.getStorageHashAsString(), details.getAddressAsString(), details.getStorageSize(), details.hasExternalStorage());
+        logger.trace("getting contract details snapshot hash {}, address {}, storage size {}", details.getStorageHashAsString(), details.getAddressAsString(), details.getStorageSize());
 
         return details;
     }
@@ -359,10 +359,6 @@ public class ContractDetailsImpl implements ContractDetails {
 
     public Trie getTrie() {
         return this.trie;
-    }
-
-    public boolean hasExternalStorage() {
-        return true;
     }
 
     private void addKey(byte[] key) {
