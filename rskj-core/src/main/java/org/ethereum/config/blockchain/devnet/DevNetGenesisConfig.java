@@ -19,8 +19,8 @@
 
 package org.ethereum.config.blockchain.devnet;
 
-import co.rsk.config.BridgeConstants;
-import co.rsk.config.BridgeDevNetConstants;
+import co.rsk.config.BitcoinConstants;
+import co.rsk.config.BitcoinDevNetConstants;
 import co.rsk.core.BlockDifficulty;
 import org.ethereum.config.blockchain.GenesisConfig;
 
@@ -38,8 +38,8 @@ public class DevNetGenesisConfig extends GenesisConfig {
         private final BlockDifficulty minimumDifficulty = new BlockDifficulty(BigInteger.valueOf(131072));
 
         @Override
-        public BridgeConstants getBridgeConstants() {
-            return BridgeDevNetConstants.getInstance();
+        public BitcoinConstants getBridgeConstants() {
+            return BitcoinDevNetConstants.getInstance();
         }
 
         @Override

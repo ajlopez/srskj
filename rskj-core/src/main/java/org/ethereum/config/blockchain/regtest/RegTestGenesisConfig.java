@@ -19,8 +19,8 @@
 
 package org.ethereum.config.blockchain.regtest;
 
-import co.rsk.config.BridgeConstants;
-import co.rsk.config.BridgeRegTestConstants;
+import co.rsk.config.BitcoinConstants;
+import co.rsk.config.BitcoinRegTestConstants;
 import co.rsk.core.BlockDifficulty;
 import org.ethereum.config.blockchain.GenesisConfig;
 
@@ -37,8 +37,8 @@ public class RegTestGenesisConfig extends GenesisConfig {
         public BlockDifficulty getFallbackMiningDifficulty() { return BlockDifficulty.ZERO; }
 
         @Override
-        public BridgeConstants getBridgeConstants() {
-            return BridgeRegTestConstants.getInstance();
+        public BitcoinConstants getBridgeConstants() {
+            return BitcoinRegTestConstants.getInstance();
         }
 
         @Override

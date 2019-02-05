@@ -18,26 +18,16 @@
 
 package co.rsk.config;
 
-import co.rsk.bitcoinj.core.BtcECKey;
-import co.rsk.bitcoinj.core.Coin;
 import co.rsk.bitcoinj.core.NetworkParameters;
-import com.google.common.collect.Lists;
-import org.ethereum.crypto.ECKey;
-import org.bouncycastle.util.encoders.Hex;
 
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+public class BitcoinTestNetConstants extends BitcoinConstants {
+    private static BitcoinTestNetConstants instance = new BitcoinTestNetConstants();
 
-public class BridgeDevNetConstants extends BridgeConstants {
-    private static BridgeDevNetConstants instance = new BridgeDevNetConstants();
-
-    BridgeDevNetConstants() {
+    BitcoinTestNetConstants() {
         btcParamsString = NetworkParameters.ID_TESTNET;
     }
 
-    public static BridgeDevNetConstants getInstance() {
+    public static BitcoinTestNetConstants getInstance() {
         return instance;
     }
 }

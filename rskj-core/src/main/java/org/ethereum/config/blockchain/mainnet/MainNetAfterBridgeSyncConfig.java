@@ -1,7 +1,7 @@
 package org.ethereum.config.blockchain.mainnet;
 
-import co.rsk.config.BridgeConstants;
-import co.rsk.config.BridgeMainNetConstants;
+import co.rsk.config.BitcoinConstants;
+import co.rsk.config.BitcoinMainNetConstants;
 import co.rsk.core.BlockDifficulty;
 import org.ethereum.config.Constants;
 import org.ethereum.config.blockchain.GenesisConfig;
@@ -16,8 +16,8 @@ public class MainNetAfterBridgeSyncConfig extends GenesisConfig {
         private static final byte CHAIN_ID = 30;
 
         @Override
-        public BridgeConstants getBridgeConstants() {
-            return BridgeMainNetConstants.getInstance();
+        public BitcoinConstants getBridgeConstants() {
+            return BitcoinMainNetConstants.getInstance();
         }
 
         @Override

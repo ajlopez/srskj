@@ -19,8 +19,8 @@
 
 package org.ethereum.config;
 
-import co.rsk.config.BridgeConstants;
-import co.rsk.config.BridgeTestNetConstants;
+import co.rsk.config.BitcoinConstants;
+import co.rsk.config.BitcoinTestNetConstants;
 import co.rsk.core.BlockDifficulty;
 import co.rsk.core.Address;
 import org.bouncycastle.util.encoders.Hex;
@@ -147,7 +147,7 @@ public class Constants {
         return SECP256K1N;
     }
 
-    public BridgeConstants getBridgeConstants() { return BridgeTestNetConstants.getInstance(); }
+    public BitcoinConstants getBridgeConstants() { return BitcoinTestNetConstants.getInstance(); }
 
     public int getNewBlockMaxSecondsInTheFuture() {
         return this.newBlockMaxSecondsInTheFuture;

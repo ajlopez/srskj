@@ -21,7 +21,7 @@ package co.rsk.config;
 import co.rsk.bitcoinj.core.Coin;
 import co.rsk.bitcoinj.core.NetworkParameters;
 
-public class BridgeConstants {
+public class BitcoinConstants {
     protected String btcParamsString;
 
     public NetworkParameters getBtcParams() {

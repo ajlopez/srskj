@@ -21,7 +21,7 @@ package co.rsk.validators;
 
 import co.rsk.bitcoinj.core.BtcBlock;
 import co.rsk.bitcoinj.core.Sha256Hash;
-import co.rsk.config.BridgeConstants;
+import co.rsk.config.BitcoinConstants;
 import co.rsk.config.RskMiningConstants;
 import co.rsk.config.RskSystemProperties;
 import co.rsk.util.DifficultyUtils;
@@ -58,7 +58,7 @@ public class ProofOfWorkRule implements BlockHeaderValidationRule, BlockValidati
 
     private final RskSystemProperties config;
     private final BlockchainNetConfig blockchainConfig;
-    private final BridgeConstants bridgeConstants;
+    private final BitcoinConstants bridgeConstants;
     private final Constants constants;
     private boolean fallbackMiningEnabled = true;
 

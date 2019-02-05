@@ -20,8 +20,8 @@
 package org.ethereum.config.blockchain.testnet;
 
 
-import co.rsk.config.BridgeConstants;
-import co.rsk.config.BridgeTestNetConstants;
+import co.rsk.config.BitcoinConstants;
+import co.rsk.config.BitcoinTestNetConstants;
 import co.rsk.core.BlockDifficulty;
 import org.ethereum.config.blockchain.GenesisConfig;
 import org.ethereum.core.BlockHeader;
@@ -37,8 +37,8 @@ public class TestNetBeforeBridgeSyncConfig extends GenesisConfig {
         private final BlockDifficulty minimumDifficulty = new BlockDifficulty(BigInteger.valueOf(131072));
 
         @Override
-        public BridgeConstants getBridgeConstants() {
-            return BridgeTestNetConstants.getInstance();
+        public BitcoinConstants getBridgeConstants() {
+            return BitcoinTestNetConstants.getInstance();
         }
 
         @Override
