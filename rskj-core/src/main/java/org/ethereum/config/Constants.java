@@ -127,10 +127,6 @@ public class Constants {
         return difficultyBoundDivisor;
     }
 
-    public int getExpDifficultyPeriod() {
-        return expDifficultyPeriod;
-    }
-
     public int getUncleGenerationLimit() {
         return uncleGenerationLimit;
     }
@@ -139,32 +135,18 @@ public class Constants {
         return uncleListLimit;
     }
 
-    public int getBestNumberDiffLimit() {
-        return bestNumberDiffLimit;
-    }
-
     public static BigInteger getSECP256K1N() {
         return SECP256K1N;
     }
 
-    public BitcoinConstants getBridgeConstants() { return BitcoinTestNetConstants.getInstance(); }
+    public BitcoinConstants getBitcoinConstants() { return BitcoinTestNetConstants.getInstance(); }
 
     public int getNewBlockMaxSecondsInTheFuture() {
         return this.newBlockMaxSecondsInTheFuture;
     }
 
-    public Address getBurnAddress() { return Constants.BURN_ADDRESS; }
-
     /**
      * EIP155: https://github.com/ethereum/EIPs/issues/155
      */
     public byte getChainId() { return Constants.CHAIN_ID; }
-
-    public BigInteger getMinimumPayableGas() {
-        return minimumPayableGas;
-    }
-
-    public BigInteger getFederatorMinimumPayableGas() {
-        return federatorMinimumPayableGas;
-    }
 }

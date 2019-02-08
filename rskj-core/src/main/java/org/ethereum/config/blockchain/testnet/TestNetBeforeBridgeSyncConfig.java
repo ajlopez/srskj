@@ -37,7 +37,7 @@ public class TestNetBeforeBridgeSyncConfig extends GenesisConfig {
         private final BlockDifficulty minimumDifficulty = new BlockDifficulty(BigInteger.valueOf(131072));
 
         @Override
-        public BitcoinConstants getBridgeConstants() {
+        public BitcoinConstants getBitcoinConstants() {
             return BitcoinTestNetConstants.getInstance();
         }
 

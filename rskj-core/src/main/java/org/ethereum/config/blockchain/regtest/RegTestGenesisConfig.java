@@ -37,7 +37,7 @@ public class RegTestGenesisConfig extends GenesisConfig {
         public BlockDifficulty getFallbackMiningDifficulty() { return BlockDifficulty.ZERO; }
 
         @Override
-        public BitcoinConstants getBridgeConstants() {
+        public BitcoinConstants getBitcoinConstants() {
             return BitcoinRegTestConstants.getInstance();
         }
 

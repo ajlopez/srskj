@@ -16,7 +16,7 @@ public class MainNetAfterBridgeSyncConfig extends GenesisConfig {
         private static final byte CHAIN_ID = 30;
 
         @Override
-        public BitcoinConstants getBridgeConstants() {
+        public BitcoinConstants getBitcoinConstants() {
             return BitcoinMainNetConstants.getInstance();
         }
 

@@ -58,7 +58,7 @@ public class ProofOfWorkRule implements BlockHeaderValidationRule, BlockValidati
 
     private final RskSystemProperties config;
     private final BlockchainNetConfig blockchainConfig;
-    private final BitcoinConstants bridgeConstants;
+    private final BitcoinConstants bitcoinConstants;
     private final Constants constants;
     private boolean fallbackMiningEnabled = true;
 
@@ -66,7 +66,7 @@ public class ProofOfWorkRule implements BlockHeaderValidationRule, BlockValidati
     public ProofOfWorkRule(RskSystemProperties config) {
         this.config = config;
         this.blockchainConfig = config.getBlockchainConfig();
-        this.bridgeConstants = blockchainConfig.getCommonConstants().getBridgeConstants();
+        this.bitcoinConstants = blockchainConfig.getCommonConstants().getBitcoinConstants();
         this.constants = blockchainConfig.getCommonConstants();
     }
 
@@ -130,7 +130,7 @@ public class ProofOfWorkRule implements BlockHeaderValidationRule, BlockValidati
             return isValidFallbackSignature;
         }
 
-        co.rsk.bitcoinj.core.NetworkParameters bitcoinNetworkParameters = bridgeConstants.getBtcParams();
+        co.rsk.bitcoinj.core.NetworkParameters bitcoinNetworkParameters = bitcoinConstants.getBtcParams();
         MerkleProofValidator mpValidator;
         try {
             if (blockchainConfig.getConfigForBlock(header.getNumber()).isRskip92()) {

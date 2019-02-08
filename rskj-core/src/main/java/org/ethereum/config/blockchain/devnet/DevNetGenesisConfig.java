@@ -38,7 +38,7 @@ public class DevNetGenesisConfig extends GenesisConfig {
         private final BlockDifficulty minimumDifficulty = new BlockDifficulty(BigInteger.valueOf(131072));
 
         @Override
-        public BitcoinConstants getBridgeConstants() {
+        public BitcoinConstants getBitcoinConstants() {
             return BitcoinDevNetConstants.getInstance();
         }
 
