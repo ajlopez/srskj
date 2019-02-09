@@ -37,10 +37,10 @@ public class Bloom {
     static final int _3LOW_BITS = 7;
     static final int ENSURE_BYTE = 255;
 
-    byte[] data = new byte[256];
-
+    private final byte[] data;
 
     public Bloom() {
+        this.data = new byte[256];
     }
 
     public Bloom(byte[] data) {
