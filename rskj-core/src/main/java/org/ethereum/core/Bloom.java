@@ -69,10 +69,12 @@ public class Bloom {
         }
     }
 
-    public boolean matches(Bloom topicBloom) {
-        Bloom copy = copy();
-        copy.or(topicBloom);
-        return this.equals(copy);
+    public boolean matches(Bloom bloom) {
+        for (int i = 0; i < data.length; ++i)
+            if (data[i] != (data[i] | bloom.data[i]))
+                return false;
+
+        return true;
     }
 
     public byte[] getData() {
