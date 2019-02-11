@@ -35,16 +35,14 @@ import static org.mockito.Mockito.*;
 public class ExecutionBlockRetrieverTest {
 
     private Blockchain blockchain;
-    private MinerServer minerServer;
     private BlockToMineBuilder builder;
     private ExecutionBlockRetriever retriever;
 
     @Before
     public void setUp() {
         blockchain = mock(Blockchain.class);
-        minerServer = mock(MinerServer.class);
         builder = mock(BlockToMineBuilder.class);
-        retriever = new ExecutionBlockRetriever(blockchain, minerServer, builder);
+        retriever = new ExecutionBlockRetriever(blockchain, builder);
     }
 
     @Test
@@ -69,31 +67,7 @@ public class ExecutionBlockRetrieverTest {
     }
 
     @Test
-    public void getPendingUsesMinerServerLatestBlock() {
-        Block latest = mock(Block.class);
-        when(minerServer.getLatestBlock())
-                .thenReturn(Optional.of(latest));
-
-        assertThat(retriever.getExecutionBlock("pending"), is(latest));
-    }
-
-    @Test
-    public void getPendingUsesMinerServerAndIsUpToDate() {
-        Block latest1 = mock(Block.class);
-        Block latest2 = mock(Block.class);
-        when(minerServer.getLatestBlock())
-                .thenReturn(Optional.of(latest1))
-                .thenReturn(Optional.of(latest2));
-
-        assertThat(retriever.getExecutionBlock("pending"), is(latest1));
-        assertThat(retriever.getExecutionBlock("pending"), is(latest2));
-    }
-
-    @Test
     public void getPendingBuildsPendingBlockIfMinerServerHasNoWork() {
-        when(minerServer.getLatestBlock())
-                .thenReturn(Optional.empty());
-
         Block bestBlock = mock(Block.class);
         when(blockchain.getBestBlock())
                 .thenReturn(bestBlock);
@@ -103,36 +77,10 @@ public class ExecutionBlockRetrieverTest {
                 .thenReturn(builtBlock);
 
         assertThat(retriever.getExecutionBlock("pending"), is(builtBlock));
-    }
-
-    @Test
-    public void getPendingReturnsCachedBlockIfMinerServerHasNoWork() {
-        when(minerServer.getLatestBlock())
-                .thenReturn(Optional.empty())
-                .thenReturn(Optional.empty());
-
-        Block bestBlock = mock(Block.class);
-        when(blockchain.getBestBlock())
-                .thenReturn(bestBlock)
-                .thenReturn(bestBlock);
-
-        Block builtBlock = mock(Block.class);
-        when(bestBlock.isParentOf(builtBlock))
-                .thenReturn(true);
-        when(builder.build(bestBlock, null))
-                .thenReturn(builtBlock);
-
-        assertThat(retriever.getExecutionBlock("pending"), is(builtBlock));
-        assertThat(retriever.getExecutionBlock("pending"), is(builtBlock));
-        verify(builder, times(1)).build(bestBlock, null);
     }
 
     @Test
     public void getPendingDoesntUseCacheIfBestBlockHasChanged() {
-        when(minerServer.getLatestBlock())
-                .thenReturn(Optional.empty())
-                .thenReturn(Optional.empty());
-
         Block bestBlock1 = mock(Block.class);
         Block bestBlock2 = mock(Block.class);
         when(blockchain.getBestBlock())

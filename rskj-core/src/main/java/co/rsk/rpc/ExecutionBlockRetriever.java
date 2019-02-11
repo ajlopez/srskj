@@ -20,14 +20,12 @@ package co.rsk.rpc;
 
 import co.rsk.core.bc.Blockchain;
 import co.rsk.mine.BlockToMineBuilder;
-import co.rsk.mine.MinerServer;
 import org.ethereum.core.Block;
 import org.ethereum.rpc.exception.JsonRpcInvalidParamException;
 import org.ethereum.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -40,16 +38,11 @@ public class ExecutionBlockRetriever {
     private static final String PENDING_ID = "pending";
 
     private final Blockchain blockchain;
-    private final MinerServer minerServer;
     private final BlockToMineBuilder builder;
 
-    @Nullable
-    private Block cachedBlock;
-
     @Autowired
-    public ExecutionBlockRetriever(Blockchain blockchain, MinerServer minerServer, BlockToMineBuilder builder) {
+    public ExecutionBlockRetriever(Blockchain blockchain, BlockToMineBuilder builder) {
         this.blockchain = blockchain;
-        this.minerServer = minerServer;
         this.builder = builder;
     }
 
@@ -59,17 +52,8 @@ public class ExecutionBlockRetriever {
         }
 
         if (PENDING_ID.equals(bnOrId)) {
-            Optional<Block> latestBlock = minerServer.getLatestBlock();
-            if (latestBlock.isPresent()) {
-                return latestBlock.get();
-            }
-
             Block bestBlock = blockchain.getBestBlock();
-            if (cachedBlock == null || !bestBlock.isParentOf(cachedBlock)) {
-                cachedBlock = builder.build(bestBlock, null);
-            }
-
-            return cachedBlock;
+            return builder.build(bestBlock, null);
         }
 
         // Is the block specifier either a hexadecimal or decimal number?
