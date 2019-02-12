@@ -143,9 +143,8 @@ public class BlockChainBuilder {
         TransactionPoolImpl transactionPool = new TransactionPoolImpl(config, this.repository, this.blockStore, receiptStore, new ProgramInvokeFactoryImpl(), new TestCompositeEthereumListener(), 10, 100);
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        Blockchain blockChain = new Blockchain(this.repository, this.blockStore, receiptStore, transactionPool, listener, blockValidator, false, 1, new BlockExecutor(this.repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        Blockchain blockChain = new Blockchain(this.repository, this.blockStore, receiptStore, transactionPool, listener, blockValidator, false, 1, new BlockExecutor(this.repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 this.blockStore,
@@ -187,9 +186,8 @@ public class BlockChainBuilder {
 
         if (this.blocks != null) {
             final ProgramInvokeFactoryImpl programInvokeFactory1 = new ProgramInvokeFactoryImpl();
-            BlockExecutor blockExecutor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+            BlockExecutor blockExecutor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                     tx1,
-                    txindex1,
                     block1.getCoinbase(),
                     track1,
                     blockStore,

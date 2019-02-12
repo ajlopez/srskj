@@ -112,7 +112,6 @@ public class ContractRunner {
         RskSystemProperties config = new TestSystemProperties();
         TransactionExecutor executor = new TransactionExecutor(
                 transaction,
-                0,
                 Address.nullAddress(),
                 repository,
                 blockStore,

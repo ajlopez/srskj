@@ -21,12 +21,15 @@ Copy of RskJ from commit 755d1e2adee83df0955b0f5ed2c21dc4e997e103
 - Remove god objects
 - Remove mock library and its mock objects
 - Remove interfaces that have only one implementation
+- Remove DUPN, SWAPN opcodes
 
 ## Done
 
 - Remove Bridge logic
 - Remove Remasc logic
 - Remove original JSON test suite
+- Remove TXINDEX opcode
+- Remove CODE_REPLACE opcode
 
 ## Original About
 

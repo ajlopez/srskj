@@ -61,7 +61,6 @@ public class TransactionExecutor {
     private static final PanicProcessor panicProcessor = new PanicProcessor();
 
     private final Transaction tx;
-    private final int txindex;
     private final Repository track;
     private final Repository cacheTrack;
     private final BlockStore blockStore;
@@ -99,12 +98,11 @@ public class TransactionExecutor {
 
     private boolean localCall = false;
 
-    public TransactionExecutor(Transaction tx, int txindex, Address coinbase, Repository track, BlockStore blockStore, ReceiptStore receiptStore,
+    public TransactionExecutor(Transaction tx, Address coinbase, Repository track, BlockStore blockStore, ReceiptStore receiptStore,
                                ProgramInvokeFactory programInvokeFactory, Block executionBlock, EthereumListener listener, long gasUsedInTheBlock,
                                VmConfig vmConfig, BlockchainNetConfig blockchainConfig, boolean playVm,
                                boolean vmTrace, PrecompiledContracts precompiledContracts, String databaseDir, String vmTraceDir, boolean vmTraceCompressed) {
         this.tx = tx;
-        this.txindex = txindex;
         this.coinbase = coinbase;
         this.track = track;
         this.cacheTrack = track.startTracking();
@@ -293,7 +291,7 @@ public class TransactionExecutor {
                 result.spendGas(basicTxCost);
             } else {
                 ProgramInvoke programInvoke =
-                        programInvokeFactory.createProgramInvoke(tx, txindex, executionBlock, cacheTrack, blockStore);
+                        programInvokeFactory.createProgramInvoke(tx, executionBlock, cacheTrack, blockStore);
 
                 this.vm = new VM(vmConfig, precompiledContracts);
                 BlockchainConfig configForBlock = netConfig.getConfigForBlock(executionBlock.getNumber());
@@ -313,7 +311,7 @@ public class TransactionExecutor {
             mEndGas = toBI(tx.getGasLimit()).subtract(BigInteger.valueOf(basicTxCost));
             cacheTrack.createAccount(newContractAddress);
         } else {
-            ProgramInvoke programInvoke = programInvokeFactory.createProgramInvoke(tx, txindex, executionBlock, cacheTrack, blockStore);
+            ProgramInvoke programInvoke = programInvokeFactory.createProgramInvoke(tx, executionBlock, cacheTrack, blockStore);
 
             this.vm = new VM(vmConfig, precompiledContracts);
             BlockchainConfig configForBlock = netConfig.getConfigForBlock(executionBlock.getNumber());

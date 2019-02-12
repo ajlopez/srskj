@@ -482,7 +482,6 @@ public class TransactionTest {
         Repository track = blockchain.getRepository().startTracking();
         TransactionExecutor executor = new TransactionExecutor(
                 tx,
-                0,
                 Address.nullAddress(),
                 blockchain.getRepository(),
                 blockchain.getBlockStore(),

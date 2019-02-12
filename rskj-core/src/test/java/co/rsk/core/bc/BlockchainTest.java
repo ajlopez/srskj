@@ -862,9 +862,8 @@ public class BlockchainTest {
                 .parent(genesis).build();
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -919,9 +918,8 @@ public class BlockchainTest {
 
         TransactionPoolImpl transactionPool = new TransactionPoolImpl(config, repository, blockStore, receiptStore, null, listener, 10, 100);
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        return new Blockchain(repository, blockStore, receiptStore, transactionPool, listener, blockValidator, false, 1, new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        return new Blockchain(repository, blockStore, receiptStore, transactionPool, listener, blockValidator, false, 1, new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 blockStore,
@@ -959,9 +957,8 @@ public class BlockchainTest {
 
     private static BlockExecutor createExecutor(Blockchain blockChain, BlockExecutorTest.SimpleEthereumListener listener) {
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        return new BlockExecutor(blockChain.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        return new BlockExecutor(blockChain.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 blockChain.getBlockStore(),

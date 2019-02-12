@@ -185,14 +185,11 @@ public class BlockExecutor {
         List<TransactionReceipt> receipts = new ArrayList<>();
         List<Transaction> executedTransactions = new ArrayList<>();
 
-        int txindex = 0;
-
         for (Transaction tx : block.getTransactionsList()) {
             logger.trace("apply block: [{}] tx: [{}] ", block.getNumber(), i);
 
             TransactionExecutor txExecutor = transactionExecutorFactory.newInstance(
                     tx,
-                    txindex++,
                     block.getCoinbase(),
                     track,
                     block,
@@ -254,6 +251,6 @@ public class BlockExecutor {
     }
 
     public interface TransactionExecutorFactory {
-        TransactionExecutor newInstance(Transaction tx, int txindex, Address coinbase, Repository track, Block block, long totalGasUsed);
+        TransactionExecutor newInstance(Transaction tx, Address coinbase, Repository track, Block block, long totalGasUsed);
     }
 }

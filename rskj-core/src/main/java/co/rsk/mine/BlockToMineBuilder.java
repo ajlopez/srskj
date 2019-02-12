@@ -89,9 +89,8 @@ public class BlockToMineBuilder {
         this.minimumGasPriceCalculator = new MinimumGasPriceCalculator();
         this.minerUtils = new MinerUtils();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        this.executor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        this.executor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 blockStore,

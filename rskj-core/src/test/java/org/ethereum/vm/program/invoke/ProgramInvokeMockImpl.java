@@ -208,11 +208,6 @@ public class ProgramInvokeMockImpl implements ProgramInvoke {
         return new DataWord(number);
     }
 
-    @Override
-    public DataWord getTransactionIndex() {
-        return this.txindex;
-    }
-
     public void setTransactionIndex(DataWord txindex) {
         this.txindex = txindex;
     }

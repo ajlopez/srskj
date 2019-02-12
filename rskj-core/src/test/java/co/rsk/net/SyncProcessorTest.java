@@ -665,9 +665,8 @@ public class SyncProcessorTest {
         Block block = new BlockGenerator().createChildBlock(genesis, txs, blockchain.getRepository().getRoot());
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor blockExecutor = new BlockExecutor(blockchain.getRepository(), (tx1, txindex, coinbase, repository, block1, totalGasUsed) -> new TransactionExecutor(
+        BlockExecutor blockExecutor = new BlockExecutor(blockchain.getRepository(), (tx1, coinbase, repository, block1, totalGasUsed) -> new TransactionExecutor(
                 tx1,
-                txindex,
                 block1.getCoinbase(),
                 repository,
                 blockchain.getBlockStore(),

@@ -67,7 +67,6 @@ public class CallContractTest {
         try {
             org.ethereum.core.TransactionExecutor executor = new TransactionExecutor(
                     tx,
-                    0,
                     bestBlock.getCoinbase(),
                     repository,
                     null,

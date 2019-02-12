@@ -83,13 +83,10 @@ public class MinerHelper {
             panicProcessor.panic("minerserver", String.format("Strange state in block %d %s", block.getNumber(), block.getHash()));
         }
 
-        int txindex = 0;
-
         for (Transaction tx : block.getTransactionsList()) {
 
             TransactionExecutor executor = new TransactionExecutor(
                     tx,
-                    txindex++,
                     block.getCoinbase(),
                     track,
                     null,

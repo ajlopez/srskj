@@ -106,9 +106,8 @@ public class BlockBuilder {
         if (blockChain != null) {
             final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
             final TestSystemProperties config = new TestSystemProperties();
-            BlockExecutor executor = new BlockExecutor(blockChain.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+            BlockExecutor executor = new BlockExecutor(blockChain.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                     tx1,
-                    txindex1,
                     block1.getCoinbase(),
                     track1,
                     blockChain.getBlockStore(),

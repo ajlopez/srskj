@@ -585,11 +585,6 @@ public enum OpCode {
      */
     SWAPN(0xa9, 3, 2, VERY_LOW_TIER),
 
-    /**
-     * TXINDEX
-     */
-    TXINDEX(0xaa, 0, 1, BASE_TIER),
-
     /*  System operations   */
 
     /**

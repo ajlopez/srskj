@@ -153,7 +153,6 @@ public class TransactionPoolImpl implements TransactionPool {
             (repository, tx) ->
                 new TransactionExecutor(
                     tx,
-                    0,
                     bestBlock.getCoinbase(),
                     repository,
                     blockStore,

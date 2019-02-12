@@ -98,7 +98,6 @@ public class RskTestFactory {
         Repository track = getRepository().startTracking();
         TransactionExecutor executor = new TransactionExecutor(
                 transaction,
-                0,
                 Address.nullAddress(),
                 getRepository(),
                 getBlockStore(),
@@ -144,9 +143,8 @@ public class RskTestFactory {
                     new DummyBlockValidator(),
                     false,
                     1,
-                    new BlockExecutor(getRepository(), (tx, txindex, coinbase, repository, block, totalGasUsed) -> new TransactionExecutor(
+                    new BlockExecutor(getRepository(), (tx, coinbase, repository, block, totalGasUsed) -> new TransactionExecutor(
                             tx,
-                            txindex,
                             block.getCoinbase(),
                             repository,
                             getBlockStore(),

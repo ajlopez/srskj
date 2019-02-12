@@ -92,9 +92,8 @@ public class BlockChainLoader {
                 config.flushNumberOfBlocks(),
                 new BlockExecutor(
                     repository,
-                        (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+                        (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                             tx1,
-                            txindex1,
                             block1.getCoinbase(),
                             track1,
                             blockStore,

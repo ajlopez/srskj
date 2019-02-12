@@ -77,9 +77,8 @@ public class BlockExecutorTest {
         Assert.assertFalse(Arrays.equals(EMPTY_TRIE_HASH, repository.getRoot()));
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -118,9 +117,8 @@ public class BlockExecutorTest {
         TestObjects objects = generateBlockWithOneTransaction();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -199,9 +197,8 @@ public class BlockExecutorTest {
         Assert.assertFalse(Arrays.equals(EMPTY_TRIE_HASH, repository.getRoot()));
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -282,9 +279,8 @@ public class BlockExecutorTest {
         Block parent = objects.getParent();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -330,9 +326,8 @@ public class BlockExecutorTest {
         Assert.assertFalse(Arrays.equals(EMPTY_TRIE_HASH, repository.getRoot()));
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -389,9 +384,8 @@ public class BlockExecutorTest {
         Assert.assertFalse(Arrays.equals(EMPTY_TRIE_HASH, repository.getRoot()));
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -434,9 +428,8 @@ public class BlockExecutorTest {
         Block parent = objects.getParent();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -464,9 +457,8 @@ public class BlockExecutorTest {
         Block parent = objects.getParent();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -497,9 +489,8 @@ public class BlockExecutorTest {
         Block parent = objects.getParent();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -530,9 +521,8 @@ public class BlockExecutorTest {
         Block parent = objects.getParent();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -562,9 +552,8 @@ public class BlockExecutorTest {
         Block parent = objects.getParent();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -594,9 +583,8 @@ public class BlockExecutorTest {
         Block parent = objects.getParent();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -635,9 +623,8 @@ public class BlockExecutorTest {
         Assert.assertFalse(Arrays.equals(EMPTY_TRIE_HASH, repository.getRoot()));
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -718,9 +705,8 @@ public class BlockExecutorTest {
         SimpleEthereumListener listener = new SimpleEthereumListener();
         Block block = objects.getBlock();
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(objects.getRepository(), (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
@@ -813,9 +799,8 @@ public class BlockExecutorTest {
         Assert.assertFalse(Arrays.equals(EMPTY_TRIE_HASH, repository.getRoot()));
 
         final ProgramInvokeFactoryImpl programInvokeFactory = new ProgramInvokeFactoryImpl();
-        BlockExecutor executor = new BlockExecutor(repository, (tx1, txindex1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
+        BlockExecutor executor = new BlockExecutor(repository, (tx1, coinbase, track1, block1, totalGasUsed1) -> new TransactionExecutor(
                 tx1,
-                txindex1,
                 block1.getCoinbase(),
                 track1,
                 null,
