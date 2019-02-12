@@ -1028,39 +1028,10 @@ public class VM {
         program.step();
     }
 
-    protected void doDUPN() {
-        spendOpCodeGas();
-        // EXECUTION PHASE
-        program.step();
-
-        int n = stack.pop().intValueCheck() + 1;
-
-        program.verifyStackSize(n);
-        program.verifyStackOverflow(n, n + 1);
-
-        DataWord word1 = stack.get(stack.size() - n);
-        program.stackPush(program.newDataWord(word1));
-        program.step();
-    }
-
     protected void doSWAP(){
         spendOpCodeGas();
         // EXECUTION PHASE
         int n = op.val() - OpCode.SWAP1.val() + 2;
-
-        stack.swap(stack.size() - 1, stack.size() - n);
-        program.step();
-    }
-
-    protected void doSWAPN(){
-        spendOpCodeGas();
-        // EXECUTION PHASE
-        program.step();
-
-        int n = stack.pop().intValueCheck() + 2;
-
-        program.verifyStackSize(n);
-        program.verifyStackOverflow(n, n);
 
         stack.swap(stack.size() - 1, stack.size() - n);
         program.step();
@@ -1790,8 +1761,6 @@ public class VM {
             case OpCodes.OP_SWAP_15:
             case OpCodes.OP_SWAP_16: doSWAP();
             break;
-            case OpCodes.OP_SWAPN: doSWAPN();
-                break;
             case OpCodes.OP_LOG_0:
             case OpCodes.OP_LOG_1:
             case OpCodes.OP_LOG_2:
@@ -1873,8 +1842,6 @@ public class VM {
             break;
             case OpCodes.OP_SUICIDE: doSUICIDE();
             break;
-            case OpCodes.OP_DUPN: doDUPN();
-                break;
             case OpCodes.OP_HEADER:
                 //fallthrough to default case until implementation's ready
             default:

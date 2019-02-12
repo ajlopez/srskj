@@ -574,17 +574,6 @@ public enum OpCode {
     LOG3(0xa3, 5, 0, SPECIAL_TIER),
     LOG4(0xa4, 6, 0, SPECIAL_TIER),
 
-
-    /**
-     * DUPN
-     */
-    DUPN(0xa8, 2, 2, VERY_LOW_TIER),
-
-    /**
-     * SWAPN
-     */
-    SWAPN(0xa9, 3, 2, VERY_LOW_TIER),
-
     /*  System operations   */
 
     /**

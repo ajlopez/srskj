@@ -100,95 +100,6 @@ public class VMExecutionTest {
     }
 
     @Test
-    public void dupnFirstItem() {
-        Program program = executeCode("PUSH1 0x01 PUSH1 0x00 DUPN", 3);
-        Stack stack = program.getStack();
-
-        Assert.assertEquals(2, stack.size());
-        Assert.assertEquals(new DataWord(1), stack.peek());
-        Assert.assertEquals(new DataWord(1), stack.get(0));
-    }
-
-    @Test
-    public void dupnFourthItem() {
-        Program program = executeCode("PUSH1 0x01 PUSH1 0x02 PUSH1 0x03 PUSH1 0x04 PUSH1 0x03 DUPN", 6);
-        Stack stack = program.getStack();
-
-        Assert.assertEquals(5, stack.size());
-        Assert.assertEquals(new DataWord(1), stack.peek());
-
-        for (int k = 0; k < 4; k++)
-            Assert.assertEquals(new DataWord(k + 1), stack.get(k));
-    }
-
-    @Test
-    public void dupnTwentiethItem() {
-        Program program = executeCode("PUSH1 0x01 PUSH1 0x02 PUSH1 0x03 PUSH1 0x04 PUSH1 0x05 PUSH1 0x06 PUSH1 0x07 PUSH1 0x08 PUSH1 0x09 PUSH1 0x0a PUSH1 0x0b PUSH1 0x0c PUSH1 0x0d PUSH1 0x0e PUSH1 0x0f PUSH1 0x10 PUSH1 0x11 PUSH1 0x12 PUSH1 0x13 PUSH1 0x14 PUSH1 0x13 DUPN", 22);
-        Stack stack = program.getStack();
-
-        Assert.assertEquals(21, stack.size());
-        Assert.assertEquals(new DataWord(1), stack.peek());
-
-        for (int k = 0; k < 20; k++)
-            Assert.assertEquals(new DataWord(k + 1), stack.get(k));
-    }
-
-    @Test(expected = Program.StackTooSmallException.class)
-    public void dupnTwentiethItemWithoutEnoughItems() {
-        executeCode("PUSH1 0x01 PUSH1 0x02 PUSH1 0x03 PUSH1 0x04 PUSH1 0x05 PUSH1 0x06 PUSH1 0x07 PUSH1 0x08 PUSH1 0x09 PUSH1 0x0a PUSH1 0x0b PUSH1 0x0c PUSH1 0x0d PUSH1 0x0e PUSH1 0x0f PUSH1 0x10 PUSH1 0x11 PUSH1 0x12 PUSH1 0x13 PUSH1 0x13 DUPN", 21);
-    }
-
-    @Test(expected = Program.StackTooSmallException.class)
-    public void dupnTooManyItemsWithOverflow() {
-        executeCode("PUSH1 0x01 PUSH4 0x7f 0xff 0xff 0xff DUPN", 3);
-    }
-
-    @Test
-    public void swapnSecondItem() {
-        Program program = executeCode("PUSH1 0x01 PUSH1 0x02 PUSH1 0x00 SWAPN", 4);
-        Stack stack = program.getStack();
-
-        Assert.assertEquals(2, stack.size());
-        Assert.assertEquals(new DataWord(1), stack.peek());
-        Assert.assertEquals(new DataWord(2), stack.get(0));
-    }
-
-    @Test
-    public void swapnFourthItem() {
-        Program program = executeCode("PUSH1 0x01 PUSH1 0x02 PUSH1 0x03 PUSH1 0x04 PUSH1 0x02 SWAPN", 6);
-        Stack stack = program.getStack();
-
-        Assert.assertEquals(4, stack.size());
-        Assert.assertEquals(new DataWord(1), stack.peek());
-        Assert.assertEquals(new DataWord(4), stack.get(0));
-        Assert.assertEquals(new DataWord(2), stack.get(1));
-        Assert.assertEquals(new DataWord(3), stack.get(2));
-    }
-
-    @Test
-    public void swapnTwentiethItem() {
-        Program program = executeCode("PUSH1 0x01 PUSH1 0x02 PUSH1 0x03 PUSH1 0x04 PUSH1 0x05 PUSH1 0x06 PUSH1 0x07 PUSH1 0x08 PUSH1 0x09 PUSH1 0x0a PUSH1 0x0b PUSH1 0x0c PUSH1 0x0d PUSH1 0x0e PUSH1 0x0f PUSH1 0x10 PUSH1 0x11 PUSH1 0x12 PUSH1 0x13 PUSH1 0x14 PUSH1 0x12 SWAPN", 22);
-        Stack stack = program.getStack();
-
-        Assert.assertEquals(20, stack.size());
-        Assert.assertEquals(new DataWord(1), stack.peek());
-        Assert.assertEquals(new DataWord(20), stack.get(0));
-
-        for (int k = 1; k < 19; k++)
-            Assert.assertEquals(new DataWord(k + 1), stack.get(k));
-    }
-
-    @Test(expected = Program.StackTooSmallException.class)
-    public void swapnTooManyItemsWithOverflow() {
-        executeCode("PUSH1 0x01 PUSH1 0x01 PUSH4 0x7f 0xff 0xff 0xff SWAPN", 4);
-    }
-
-    @Test(expected = Program.StackTooSmallException.class)
-    public void swapnTwentiethItemWithoutEnoughItems() {
-        executeCode("PUSH1 0x01 PUSH1 0x02 PUSH1 0x03 PUSH1 0x04 PUSH1 0x05 PUSH1 0x06 PUSH1 0x07 PUSH1 0x08 PUSH1 0x09 PUSH1 0x0a PUSH1 0x0b PUSH1 0x0c PUSH1 0x0d PUSH1 0x0e PUSH1 0x0f PUSH1 0x10 PUSH1 0x11 PUSH1 0x12 PUSH1 0x13 PUSH1 0x12 SWAPN", 22);
-    }
-
-    @Test
     public void invalidJustAfterEndOfCode() {
         try {
             executeCode("PUSH1 0x03 JUMP", 2);
@@ -230,36 +141,6 @@ public class VMExecutionTest {
         catch (Program.BadJumpDestinationException ex) {
             Assert.assertEquals("Operation with pc isn't 'JUMPDEST': PC[255];", ex.getMessage());
         }
-    }
-
-    @Test
-    public void dupnArgumentIsNotJumpdest() {
-        byte[] code = compiler.compile("JUMPDEST DUPN 0x5b 0x5b");
-        Program program = new Program(vmConfig, precompiledContracts, mock(BlockchainConfig.class), code, invoke, null);
-
-        BitSet jumpdestSet = program.getJumpdestSet();
-
-        Assert.assertNotNull(jumpdestSet);
-        Assert.assertEquals(4, jumpdestSet.size());
-        Assert.assertTrue(jumpdestSet.get(0));
-        Assert.assertFalse(jumpdestSet.get(1));
-        Assert.assertTrue(jumpdestSet.get(2));
-        Assert.assertTrue(jumpdestSet.get(3));
-    }
-
-    @Test
-    public void swapnArgumentIsNotJumpdest() {
-        byte[] code = compiler.compile("JUMPDEST SWAPN 0x5b 0x5b");
-        Program program = new Program(vmConfig, precompiledContracts, mock(BlockchainConfig.class), code, invoke, null);
-
-        BitSet jumpdestSet = program.getJumpdestSet();
-
-        Assert.assertNotNull(jumpdestSet);
-        Assert.assertEquals(4, jumpdestSet.size());
-        Assert.assertTrue(jumpdestSet.get(0));
-        Assert.assertFalse(jumpdestSet.get(1));
-        Assert.assertTrue(jumpdestSet.get(2));
-        Assert.assertTrue(jumpdestSet.get(3));
     }
 
     @Test

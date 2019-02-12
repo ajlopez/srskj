@@ -569,10 +569,6 @@ public class OpCodes {
     static final byte OP_LOG_3 =(byte)0xa3 ;
     static final byte OP_LOG_4 =(byte)0xa4  ;
 
-    /*  System operations   */
-    static final byte OP_DUPN = (byte)0xa8;
-    static final byte OP_SWAPN = (byte)0xa9;
-
     /**
      * (0xf0) Create a new account with associated code
      */
