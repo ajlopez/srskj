@@ -51,7 +51,6 @@ import org.ethereum.net.client.ConfigCapabilities;
 import org.ethereum.net.server.Channel;
 import org.ethereum.net.server.ChannelManager;
 import org.ethereum.net.server.PeerServer;
-import org.ethereum.rpc.dto.CompilationResultDTO;
 import org.ethereum.rpc.dto.TransactionReceiptDTO;
 import org.ethereum.rpc.dto.TransactionResultDTO;
 import org.ethereum.rpc.exception.JsonRpcInvalidParamException;
@@ -819,22 +818,12 @@ public class Web3Impl implements Web3 {
     public String[] eth_getCompilers() {
         String[] s = null;
         try {
-            return s = new String[]{"solidity"};
+            return s = new String[0];
         } finally {
             if (logger.isDebugEnabled()) {
                 logger.debug("eth_getCompilers(): {}", Arrays.toString(s));
             }
         }
-    }
-
-    @Override
-    public Map<String, CompilationResultDTO> eth_compileLLL(String contract) {
-        throw new UnsupportedOperationException("LLL compiler not supported");
-    }
-
-    @Override
-    public Map<String, CompilationResultDTO> eth_compileSerpent(String contract) {
-        throw new UnsupportedOperationException("Serpent compiler not supported");
     }
 
     @Override

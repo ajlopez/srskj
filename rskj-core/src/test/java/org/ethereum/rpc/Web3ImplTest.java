@@ -42,7 +42,6 @@ import co.rsk.test.builders.AccountBuilder;
 import co.rsk.test.builders.BlockBuilder;
 import co.rsk.test.builders.TransactionBuilder;
 import co.rsk.util.TestContract;
-import org.ethereum.config.SystemProperties;
 import org.ethereum.core.*;
 import org.ethereum.crypto.ECKey;
 import org.ethereum.crypto.Keccak256Helper;
@@ -55,20 +54,16 @@ import org.ethereum.net.client.ConfigCapabilities;
 import org.ethereum.net.server.ChannelManager;
 import org.ethereum.net.server.PeerServer;
 import org.ethereum.rpc.Simples.*;
-import org.ethereum.rpc.dto.CompilationResultDTO;
 import org.ethereum.rpc.dto.TransactionReceiptDTO;
 import org.ethereum.rpc.dto.TransactionResultDTO;
 import org.ethereum.rpc.exception.JsonRpcInvalidParamException;
-import org.ethereum.solidity.compiler.SolidityCompiler;
 import org.ethereum.util.BuildInfo;
 import org.ethereum.vm.program.ProgramResult;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.bouncycastle.util.encoders.Hex;
-import org.springframework.util.StringUtils;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -1247,7 +1242,7 @@ public class Web3ImplTest {
         Blockchain blockchain = Web3Mocks.getMockBlockchain();
         TransactionPool transactionPool = Web3Mocks.getMockTransactionPool();
         PersonalModuleWalletEnabled personalModule = new PersonalModuleWalletEnabled(config, eth, wallet, null);
-        EthModule ethModule = new EthModule(config, blockchain, null, new ExecutionBlockRetriever(blockchain, null), new EthModuleSolidityDisabled(), new EthModuleWalletEnabled(wallet), null);
+        EthModule ethModule = new EthModule(config, blockchain, null, new ExecutionBlockRetriever(blockchain, null), new EthModuleWalletEnabled(wallet), null);
         TxPoolModule txPoolModule = new TxPoolModuleImpl(Web3Mocks.getMockTransactionPool());
         DebugModule debugModule = new DebugModuleImpl(Web3Mocks.getMockMessageHandler());
         MinerClient minerClient = new SimpleMinerClient();
@@ -1302,7 +1297,7 @@ public class Web3ImplTest {
         ProgramResult res = new ProgramResult();
         res.setHReturn(TypeConverter.stringHexToByteArray("0x0000000000000000000000000000000000000000000000000000000064617665"));
         Mockito.when(executor.executeTransaction(Matchers.any(), Matchers.any(), Matchers.any(), Matchers.any(), Matchers.any(), Matchers.any(), Matchers.any(), Matchers.any())).thenReturn(res);
-        EthModule ethModule = new EthModule(config, blockchain, executor, new ExecutionBlockRetriever(blockchain, null), new EthModuleSolidityDisabled(), new EthModuleWalletEnabled(wallet), new EthModuleTransactionBase(config, wallet, transactionPool));
+        EthModule ethModule = new EthModule(config, blockchain, executor, new ExecutionBlockRetriever(blockchain, null), new EthModuleWalletEnabled(wallet), new EthModuleTransactionBase(config, wallet, transactionPool));
         TxPoolModule txPoolModule = new TxPoolModuleImpl(transactionPool);
         DebugModule debugModule = new DebugModuleImpl(Web3Mocks.getMockMessageHandler());
         MinerClient minerClient = new SimpleMinerClient();
@@ -1333,108 +1328,4 @@ public class Web3ImplTest {
                 new BuildInfo("test", "test")
         );
     }
-
-    @Test
-    @Ignore
-    public void eth_compileSolidity() throws Exception {
-        RskSystemProperties systemProperties = Mockito.mock(RskSystemProperties.class);
-        String solc = System.getProperty("solc");
-        if(StringUtils.isEmpty(solc))
-            solc = "/usr/bin/solc";
-
-        Mockito.when(systemProperties.customSolcPath()).thenReturn(solc);
-        Ethereum eth = Mockito.mock(Ethereum.class);
-        EthModule ethModule = new EthModule(config, null, null, new ExecutionBlockRetriever(null, null), new EthModuleSolidityEnabled(new SolidityCompiler(systemProperties)), null, null);
-        PersonalModule personalModule = new PersonalModuleWalletDisabled();
-        TxPoolModule txPoolModule = new TxPoolModuleImpl(Web3Mocks.getMockTransactionPool());
-        DebugModule debugModule = new DebugModuleImpl(Web3Mocks.getMockMessageHandler());
-        Web3Impl web3 = new Web3RskImpl(
-                eth,
-                null,
-                null,
-                systemProperties,
-                null,
-                null,
-                personalModule,
-                ethModule,
-                null,
-                txPoolModule,
-                null,
-                debugModule,
-                Web3Mocks.getMockChannelManager(),
-                Web3Mocks.getMockRepository(),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-        String contract = "pragma solidity ^0.4.1; contract rsk { function multiply(uint a) returns(uint d) {   return a * 7;   } }";
-
-        Map<String, CompilationResultDTO> result = web3.eth_compileSolidity(contract);
-
-        org.junit.Assert.assertNotNull(result);
-
-        CompilationResultDTO dto = result.get("rsk");
-
-        if (dto == null)
-            dto = result.get("<stdin>:rsk");
-
-        org.junit.Assert.assertEquals(contract , dto.info.getSource());
-    }
-
-    @Test
-    public void eth_compileSolidityWithoutSolidity() throws Exception {
-        SystemProperties systemProperties = Mockito.mock(SystemProperties.class);
-        String solc = System.getProperty("solc");
-        if(StringUtils.isEmpty(solc))
-            solc = "/usr/bin/solc";
-
-        Mockito.when(systemProperties.customSolcPath()).thenReturn(solc);
-
-        Wallet wallet = WalletFactory.createWallet();
-        Ethereum eth = Web3Mocks.getMockEthereum();
-        Blockchain blockchain = Web3Mocks.getMockBlockchain();
-        TransactionPool transactionPool = Web3Mocks.getMockTransactionPool();
-        EthModule ethModule = new EthModule(config, blockchain, null, new ExecutionBlockRetriever(blockchain, null), new EthModuleSolidityDisabled(), new EthModuleWalletEnabled(wallet), null);
-        TxPoolModule txPoolModule = new TxPoolModuleImpl(Web3Mocks.getMockTransactionPool());
-        DebugModule debugModule = new DebugModuleImpl(Web3Mocks.getMockMessageHandler());
-        Web3Impl web3 = new Web3RskImpl(
-                eth,
-                blockchain,
-                transactionPool,
-                config,
-                null,
-                null,
-                new PersonalModuleWalletDisabled(),
-                ethModule,
-                null,
-                txPoolModule,
-                null,
-                debugModule,
-                Web3Mocks.getMockChannelManager(),
-                Web3Mocks.getMockRepository(),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        String contract = "pragma solidity ^0.4.1; contract rsk { function multiply(uint a) returns(uint d) {   return a * 7;   } }";
-
-        Map<String, CompilationResultDTO> result = web3.eth_compileSolidity(contract);
-
-        org.junit.Assert.assertNotNull(result);
-        org.junit.Assert.assertEquals(0, result.size());
-    }
-
 }

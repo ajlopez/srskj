@@ -20,12 +20,10 @@ package co.rsk.rpc;
 
 import co.rsk.rpc.modules.eth.EthModule;
 import org.ethereum.rpc.Web3;
-import org.ethereum.rpc.dto.CompilationResultDTO;
 import org.ethereum.rpc.dto.TransactionReceiptDTO;
 import org.ethereum.rpc.dto.TransactionResultDTO;
 
 import java.math.BigInteger;
-import java.util.Map;
 
 public interface Web3EthModule {
     default String[] eth_accounts() {
@@ -42,10 +40,6 @@ public interface Web3EthModule {
 
     default String eth_estimateGas(Web3.CallArguments args) {
         return getEthModule().estimateGas(args);
-    }
-
-    default Map<String, CompilationResultDTO> eth_compileSolidity(String contract) throws Exception {
-        return getEthModule().compileSolidity(contract);
     }
 
     EthModule getEthModule();
@@ -107,10 +101,6 @@ public interface Web3EthModule {
     Web3.BlockResult eth_getUncleByBlockNumberAndIndex(String blockId, String uncleIdx) throws Exception;
 
     String[] eth_getCompilers();
-
-    Map<String, CompilationResultDTO> eth_compileLLL(String contract);
-
-    Map<String, CompilationResultDTO> eth_compileSerpent(String contract);
 
     String eth_newFilter(Web3.FilterRequest fr) throws Exception;
 

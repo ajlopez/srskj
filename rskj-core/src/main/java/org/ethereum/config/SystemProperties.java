@@ -690,10 +690,6 @@ public abstract class SystemProperties {
                 configFromFiles.getString("blocks.loader") : DEFAULT_BLOCKS_LOADER;
     }
 
-    public String customSolcPath() {
-        return configFromFiles.hasPath("solc.path") ? configFromFiles.getString("solc.path"): null;
-    }
-
     public String netName() {
         return configFromFiles.getString(PROPERTY_BC_CONFIG_NAME);
     }

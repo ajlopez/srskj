@@ -57,7 +57,6 @@ public class EthModuleTest {
                 executor,
                 retriever,
                 null,
-                null,
                 null
         );
 

@@ -63,7 +63,6 @@ import org.ethereum.net.server.EthereumChannelInitializer;
 import org.ethereum.net.server.PeerServer;
 import org.ethereum.net.server.PeerServerImpl;
 import org.ethereum.rpc.Web3;
-import org.ethereum.solidity.compiler.SolidityCompiler;
 import org.ethereum.sync.SyncPool;
 import org.ethereum.util.BuildInfo;
 import org.ethereum.vm.program.invoke.ProgramInvokeFactory;
@@ -339,17 +338,6 @@ public class RskFactory {
         }
 
         return new EthModuleWalletEnabled(wallet);
-    }
-
-    @Bean
-    public EthModuleSolidity getEthModuleSolidity(RskSystemProperties config) {
-        try {
-            return new EthModuleSolidityEnabled(new SolidityCompiler(config));
-        } catch (RuntimeException e) {
-            // the only way we currently have to check if Solidity is available is catching this exception
-            logger.debug("Solidity compiler unavailable", e);
-            return new EthModuleSolidityDisabled();
-        }
     }
 
     @Bean

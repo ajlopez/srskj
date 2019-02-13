@@ -25,7 +25,6 @@ import co.rsk.rpc.ExecutionBlockRetriever;
 import org.ethereum.core.Block;
 import org.ethereum.rpc.Web3;
 import org.ethereum.rpc.converters.CallArgumentsToByteArray;
-import org.ethereum.rpc.dto.CompilationResultDTO;
 import org.ethereum.rpc.exception.RskJsonRpcRequestException;
 import org.ethereum.vm.program.ProgramResult;
 import org.slf4j.Logger;
@@ -33,14 +32,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 import static org.ethereum.rpc.TypeConverter.toJsonHex;
 
 // TODO add all RPC methods
 @Component
 public class EthModule
-    implements EthModuleSolidity, EthModuleWallet, EthModuleTransaction {
+    implements EthModuleWallet, EthModuleTransaction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("web3");
 
@@ -48,7 +45,6 @@ public class EthModule
     private final Blockchain blockchain;
     private final ReversibleTransactionExecutor reversibleTransactionExecutor;
     private final ExecutionBlockRetriever executionBlockRetriever;
-    private final EthModuleSolidity ethModuleSolidity;
     private final EthModuleWallet ethModuleWallet;
     private final EthModuleTransaction ethModuleTransaction;
 
@@ -58,14 +54,12 @@ public class EthModule
             Blockchain blockchain,
             ReversibleTransactionExecutor reversibleTransactionExecutor,
             ExecutionBlockRetriever executionBlockRetriever,
-            EthModuleSolidity ethModuleSolidity,
             EthModuleWallet ethModuleWallet,
             EthModuleTransaction ethModuleTransaction) {
         this.config = config;
         this.blockchain = blockchain;
         this.reversibleTransactionExecutor = reversibleTransactionExecutor;
         this.executionBlockRetriever = executionBlockRetriever;
-        this.ethModuleSolidity = ethModuleSolidity;
         this.ethModuleWallet = ethModuleWallet;
         this.ethModuleTransaction = ethModuleTransaction;
     }
@@ -88,11 +82,6 @@ public class EthModule
         } finally {
             LOGGER.debug("eth_call(): {}", s);
         }
-    }
-
-    @Override
-    public Map<String, CompilationResultDTO> compileSolidity(String contract) throws Exception {
-        return ethModuleSolidity.compileSolidity(contract);
     }
 
     public String estimateGas(Web3.CallArguments args) {
