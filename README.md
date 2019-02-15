@@ -6,6 +6,7 @@ Copy of RskJ from commit 755d1e2adee83df0955b0f5ed2c21dc4e997e103
 
 - Rewrite Repository and Transaction execution
 - Remove ContractDetails
+- Remove prune logic
 - One trie for contract states
 - Allow alternative Proof of Work, not only merge mining
 - Remove Spring Framework
