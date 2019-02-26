@@ -43,8 +43,7 @@ public class Keccak256 implements Serializable, Comparable<Keccak256> {
     }
 
     public Keccak256(String hexString) {
-        checkArgument(hexString.length() == 64);
-        this.bytes = Utils.HEX.decode(hexString);
+        this(Utils.HEX.decode(hexString));
     }
 
     public String toJsonString() {
