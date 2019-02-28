@@ -168,27 +168,6 @@ public class RepositoryTrack implements Repository {
         }
     }
 
-    public BigInteger setNonce(Address addr, BigInteger bigInteger) {
-        synchronized (repository) {
-            AccountState accountState = getAccountState(addr);
-
-            if (accountState == null) {
-                accountState = createAccount(addr);
-            }
-
-            getContractDetails(addr).setDirty(true);
-
-            BigInteger saveNonce = accountState.getNonce();
-            accountState.setNonce(bigInteger);
-
-            logger.trace("increase nonce addr: [{}], from: [{}], to: [{}]", addr,
-                    saveNonce, accountState.getNonce());
-
-            return accountState.getNonce();
-        }
-    }
-
-
     @Override
     public BigInteger getNonce(Address addr) {
         AccountState accountState = getAccountState(addr);

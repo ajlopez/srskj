@@ -31,6 +31,7 @@ Copy of RskJ from commit 755d1e2adee83df0955b0f5ed2c21dc4e997e103
 - Remove CODE_REPLACE opcode
 - Remove DUPN, SWAPN opcodes
 - Remove prune logic
+- Remove account hibernate code
 
 ## Original About
 
