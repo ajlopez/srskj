@@ -66,13 +66,6 @@ public interface Repository extends AccountInformationProvider {
      */
     void delete(Address addr);
 
-    /**
-     * Hibernates the account
-     *
-     * @param addr of the account
-     */
-    void hibernate(Address addr);
-
         /**
      * Increase the account nonce of the given account by one
      *

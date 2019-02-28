@@ -168,23 +168,6 @@ public class RepositoryTrack implements Repository {
         }
     }
 
-    @Override
-    public void hibernate(Address addr) {
-
-        synchronized (repository) {
-            AccountState accountState = getAccountState(addr);
-
-            if (accountState == null) {
-                accountState = createAccount(addr);
-            }
-
-            getContractDetails(addr).setDirty(true);
-
-            accountState.hibernate();
-        }
-        logger.trace("hibernate addr: [{}]", addr);
-    }
-
     public BigInteger setNonce(Address addr, BigInteger bigInteger) {
         synchronized (repository) {
             AccountState accountState = getAccountState(addr);

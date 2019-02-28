@@ -47,28 +47,5 @@ public class AccountStateTest {
 
         assertEquals(BigInteger.ZERO, result.getNonce());
         assertEquals(BigInteger.valueOf(2).pow(200), result.getBalance().asBigInteger());
-        assertEquals(0, result.getStateFlags());
-    }
-
-    @Test
-    public void encodeDecodeStateWith128InStateFlags() {
-        AccountState acct = new AccountState(BigInteger.ZERO, new Coin(BigInteger.valueOf(2).pow(200)));
-        acct.setStateFlags(128);
-        AccountState result = new AccountState(acct.getEncoded());
-
-        assertEquals(BigInteger.ZERO, result.getNonce());
-        assertEquals(BigInteger.valueOf(2).pow(200), result.getBalance().asBigInteger());
-        assertEquals(128, result.getStateFlags());
-    }
-
-    @Test
-    public void encodeDecodeStateWith238InStateFlags() {
-        AccountState acct = new AccountState(BigInteger.ZERO, new Coin(BigInteger.valueOf(2).pow(200)));
-        acct.setStateFlags(238);
-        AccountState result = new AccountState(acct.getEncoded());
-
-        assertEquals(BigInteger.ZERO, result.getNonce());
-        assertEquals(BigInteger.valueOf(2).pow(200), result.getBalance().asBigInteger());
-        assertEquals(238, result.getStateFlags());
     }
 }

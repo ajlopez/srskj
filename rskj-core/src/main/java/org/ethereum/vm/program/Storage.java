@@ -80,11 +80,6 @@ public class Storage implements Repository, ProgramListenerAware {
     }
 
     @Override
-    public void hibernate(Address addr) {
-        repository.hibernate(addr);
-    }
-
-    @Override
     public BigInteger increaseNonce(Address addr) {
         return repository.increaseNonce(addr);
     }

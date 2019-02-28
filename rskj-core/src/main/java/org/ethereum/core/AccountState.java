@@ -65,9 +65,6 @@ public class AccountState {
      * retrieval */
     private byte[] codeHash = EMPTY_DATA_HASH;
 
-    /* Account state flags*/
-    private int stateFlags;
-
     private boolean deleted = false;
 
     public AccountState() {
@@ -88,12 +85,6 @@ public class AccountState {
         this.balance = RLP.parseCoin(items.get(1).getRLPData());
         this.stateRoot = items.get(2).getRLPData();
         this.codeHash = items.get(3).getRLPData();
-
-        if (items.size() > 4) {
-            byte[] data = items.get(4).getRLPData();
-
-            this.stateFlags = data == null ? 0 : BigIntegers.fromUnsignedByteArray(data).intValue();
-        }
     }
 
     public BigInteger getNonce() {
@@ -147,14 +138,7 @@ public class AccountState {
             byte[] balance = RLP.encodeCoin(this.balance);
             byte[] stateRoot = RLP.encodeElement(this.stateRoot);
             byte[] codeHash = RLP.encodeElement(this.codeHash);
-            if (stateFlags != 0) {
-                byte[] stateFlags = RLP.encodeInt(this.stateFlags);
-                this.rlpEncoded = RLP.encodeList(nonce, balance, stateRoot, codeHash, stateFlags);
-            } else
-                // do not serialize if zero to keep compatibility
-            {
-                this.rlpEncoded = RLP.encodeList(nonce, balance, stateRoot, codeHash);
-            }
+            this.rlpEncoded = RLP.encodeList(nonce, balance, stateRoot, codeHash);
         }
         return rlpEncoded;
     }
@@ -172,42 +156,14 @@ public class AccountState {
 
         accountState.setCodeHash(this.getCodeHash());
         accountState.setStateRoot(this.getStateRoot());
-        accountState.setStateFlags(this.stateFlags);
         return accountState;
     }
 
     public String toString() {
         String ret = "  Nonce: " + this.getNonce().toString() + "\n" +
                 "  Balance: " + getBalance().asBigInteger() + "\n" +
-                "  StateFlags: " + getStateFlags() + "\n" +
                 "  State Root: " + Hex.toHexString(this.getStateRoot()) + "\n" +
                 "  Code Hash: " + Hex.toHexString(this.getCodeHash());
         return ret;
-    }
-
-    /*
-     * Below are methods for hibernating an account that aren't used at the moment (only from tests).
-     * TODO(mc) we should decide whether to finish this feature or delete unused code
-     */
-
-    public int getStateFlags() {
-        return stateFlags;
-    }
-
-    public void setStateFlags(int s) {
-        stateFlags = s;
-    }
-
-    public Boolean isHibernated() {
-        return ((stateFlags & ACC_HIBERNATED_MASK) != 0);
-    }
-
-    public void hibernate() {
-        stateFlags = stateFlags | ACC_HIBERNATED_MASK;
-        rlpEncoded = null;
-    }
-
-    public void wakeUp() {
-        stateFlags = stateFlags & ~ACC_HIBERNATED_MASK;
     }
 }

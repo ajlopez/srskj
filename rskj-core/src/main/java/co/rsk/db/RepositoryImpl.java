@@ -114,14 +114,6 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public synchronized void hibernate(Address addr) {
-        AccountState account = getAccountStateOrCreateNew(addr);
-
-        account.hibernate();
-        updateAccountState(addr, account);
-    }
-
-    @Override
     public synchronized BigInteger increaseNonce(Address addr) {
         AccountState account = getAccountStateOrCreateNew(addr);
 
@@ -185,10 +177,6 @@ public class RepositoryImpl implements Repository {
         }
 
         AccountState  account = getAccountState(addr);
-
-        if (account.isHibernated()) {
-            return EMPTY_BYTE_ARRAY;
-        }
 
         byte[] codeHash = account.getCodeHash();
 

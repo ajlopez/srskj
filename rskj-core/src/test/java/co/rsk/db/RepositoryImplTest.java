@@ -250,39 +250,6 @@ public class RepositoryImplTest {
     }
 
     @Test
-    public void hibernateAccount() {
-        Address accAddress = randomAccountAddress();
-
-        RepositoryImpl repository = createRepositoryImpl(config);
-
-        repository.createAccount(accAddress);
-        repository.hibernate(accAddress);
-
-        AccountState accState = repository.getAccountState(accAddress);
-
-        Assert.assertNotNull(accState);
-        Assert.assertTrue(accState.isHibernated());
-    }
-
-    @Test
-    public void getCodeFromHibernatedAccount() {
-        Address accAddress = randomAccountAddress();
-        byte[] accCode = new byte[] { 0x01, 0x02, 0x03 };
-
-        RepositoryImpl repository = createRepositoryImpl(config);
-
-        repository.createAccount(accAddress);
-
-        repository.saveCode(accAddress, accCode);
-        repository.hibernate(accAddress);
-
-        byte[] code = repository.getCode(accAddress);
-
-        Assert.assertNotNull(code);
-        Assert.assertEquals(0, code.length);
-    }
-
-    @Test
     public void startTracking() {
         RepositoryImpl repository = createRepositoryImpl(config);
 
